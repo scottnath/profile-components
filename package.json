@@ -1,0 +1,31 @@
+{
+  "name": "profile-components",
+  "scripts": {
+    "cem": "custom-elements-manifest analyze --config 'lib/custom-elements-manifest.config.js'",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "test-storybook": "test-storybook --coverage",
+    "dist": "node lib/esbuild.config.js"
+  },
+  "type": "module",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scottnath/profile-components.git"
+  },
+  "author": "scottnath",
+  "license": "MIT",
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.8.4",
+    "@custom-elements-manifest/to-markdown": "^0.1.0",
+    "@primer/css": "^21.0.8",
+    "@primer/primitives": "^7.12.0",
+    "commander": "^11.0.0",
+    "esbuild": "^0.19.2",
+    "esbuild-plugin-inline-import": "^1.0.1",
+    "fs-extra": "^11.1.1",
+    "storydocker-storybook": "^0.0.16",
+    "storydocker-utilities": "^0.0.9"
+  },
+  "customElements": "custom-elements.json"
+}
