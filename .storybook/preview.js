@@ -1,5 +1,5 @@
 import { setCustomElementsManifest } from '@storybook/web-components';
-import customElements from '../src/custom-elements.json';
+import customElements from '../custom-elements.json';
 import { globalTypesPrimer, decoratorsPrimer } from './primer-preview';
 
 setCustomElementsManifest(customElements);
