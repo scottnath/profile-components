@@ -12,6 +12,3 @@ Web components which display profile information from various websites
 - [ ] stackblitz? webcomponents.dev?
 - [ ] put docs in storybook
 
-## Expanding @todo
-
-- [ ] graph contrib: https://github.com/enpitsuLin/wc-github-graph/blob/master/src/github-graph.ts
