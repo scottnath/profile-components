@@ -1,0 +1,47 @@
+/** styles for the GitHub repository web component */
+
+section[itemscope] {
+  padding: 1em;
+}
+
+[itemprop="codeRepository"] {
+  display: block;
+
+  > svg {
+    fill: var(--color-light);
+    vertical-align: text-bottom;
+  }
+  [itemprop="maintainer"], [itemprop="name"] {
+    color: var(--color-link);
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+[itemprop="about"] {
+  margin-top: .5em;
+  color: var(--color-light);
+}
+
+dl {
+  display: flex;
+  flex: 1 1 auto;
+  color: var(--color-light);
+  margin-top: .5em;
+
+  > dt {
+    margin-right: .2em;
+    > span {
+      display: none;
+    }
+    > svg {
+      vertical-align: text-bottom;
+    }
+  }
+  > dd {
+    margin-right: 1em;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}

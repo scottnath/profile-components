@@ -1,0 +1,123 @@
+/** styles for the GitHub user web component */
+
+section[itemscope] {
+  padding: auto;
+
+  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
+  overflow: hidden;
+  max-width: 30em;
+
+}
+:host header {
+  background-color: var(--bg-color-light);
+  padding: 1em;
+
+  & a {
+    flex: 1 1 auto;
+    display: flex;
+    gap: .5em;
+
+    :has(svg) {
+      width: 2em;
+      height: 2em;
+      outline-offset: 2px;
+  
+      > svg {
+        color: var(--color-normal);
+        width: 2em;
+        height: 2em;
+        vertical-align: middle;
+        fill: currentColor;
+      }
+    }
+
+    [itemprop="alternativeName"] {
+      color: var(--color-normal);
+      font-weight: var(--font-weight-bold);
+      padding-inline: .5em;
+      padding-block: .375em;
+    }
+  }
+}
+[part="main"] {
+  padding: 0 1em 1em;
+  margin-top: 2em;
+
+  [itemprop="url"] {
+    flex: 1 1 auto;
+    display: flex;
+    gap: .5em;
+    align-items: center;
+    margin-bottom: 1.5em;
+
+    [itemprop="image"] {
+      flex-shrink: 0;
+      margin-right: 1em;
+      width: 16.66666666%;
+      display: inline-block;
+
+      & img {
+        /* box-shadow: 0 0 0 1px var(--avatar-borderColor, var(--border-color)); */
+        border: var(--border-width) solid var(--border-color);
+        border-radius: 50%;
+        line-height: 1;
+        width: 100%;
+        height: auto;
+        vertical-align: middle;
+      }
+    }
+
+    [itemprop="creator"] {
+      width: 100%;
+      color: var(--color-normal);
+      padding-left: 2em;
+
+      & span {
+        display: block;
+        font-size: 24px;
+        line-height: 1.25;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: var(--font-weight-bold);
+      }
+
+      [itemprop="alternativeName"] {
+        color: var(--color-light);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: var(--font-weight-light);
+        line-height: 24px;
+      }
+    }
+  }
+
+  [itemprop="description"] {
+    margin-bottom: 1.5em;
+  }
+
+  & dl:has([itemprop="follows"]) {
+    direction: rtl;
+    text-align: left;
+    margin-bottom: 1.5em;    
+
+    & dt, & dd {
+      display: inline-block;
+    }
+    & dt {
+      color: var(--color-light);
+    }
+    :is([aria-hidden="true"]):has(svg) svg {
+      fill: var(--color-light);
+      vertical-align: text-bottom;
+    }
+  }
+  & dl:has(github-repository) {
+    margin-top: .5em;
+    
+    > dd {
+      padding: .5em .5em 0;
+    }
+  }
+}

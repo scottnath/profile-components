@@ -1,0 +1,61 @@
+/** global styles used by all GitHub web components */
+
+:host {
+  --font-family: var(--fontStack-system);
+  
+  --font-size-host: 16px;
+  --font-size-light: 0.875em;
+  --font-size-normal: 1em;
+  --font-size-bold: 1.25em;
+
+  --font-weight-light: var(--base-text-weight-light);
+  --font-weight-normal: var(--base-text-weight-normal);
+  --font-weight-bold: var(--base-text-weight-semibold);
+
+  --bg-color-light: var(--color-canvas-subtle);
+  --bg-color-normal: var(--color-canvas-default);
+
+  --border-color: var(--color-border-default);
+  --border-width: var(--borderWidth-thin);
+  --border-radius: var(--borderRadius-medium);
+
+  --color-light: var(--color-fg-subtle);
+  --color-normal: var(--color-fg-default);
+  --color-bold: var(--color-fg-onemphasis);
+
+  --color-link: var(--color-fg-accent);
+  --color-danger: var(--color-fg-danger);
+  
+  /* start of styles */
+  line-height: 1.5;
+  color: var(--color-normal);
+  font-family: var(--font-family);
+  font-size: var(--font-size-host);
+  font-weight: var(--font-weight-normal);
+}
+
+/** root elements cleanup */
+* {
+  padding: 0;
+  margin: 0;
+  margin-inline: 0;
+}
+a {
+  text-decoration: none;
+}
+address {
+  font-style: normal;
+}
+
+/** common container styles */
+section[itemscope] {
+  background-color: var(--bg-color-normal);
+  border-color: var(--border-color);
+  border-style: solid;
+  border-width: var(--border-width);
+  border-radius: var(--border-radius);
+
+  [itemprop="error"] {
+    color: var(--color-danger);
+  }
+}
