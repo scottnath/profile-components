@@ -1,0 +1,6 @@
+{
+  "css.customData": [
+      "./.vscode/custom-css.json"
+  ],
+  "prettier.enable": true,
+}

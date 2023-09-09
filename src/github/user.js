@@ -178,17 +178,16 @@ export class GitHubUser extends HTMLElement {
             </a>
           </address>
           ${this.bio ? `<p itemprop="description">${this.bio}</p>` : ''}
-          ${this.followers || this.following ? `
+          ${this.followers ? `
             <dl>
-              ${this.following ? `
-                <dt>Following</dt>
-                <dd itemprop="follows">${this.following}</dd>
-              ` : ''}
-              ${this.followers ? `
-                <dt>Followers</dt>
-                <dd itemprop="followee">${this.followers}</dd>
-              ` : ''}
-              <dd aria-hidden="true">${octiconPeople}</dd>
+              <dt><span>followers</span></dt>
+              <dd itemprop="followee">${octiconPeople} ${this.followers}</dd>
+            </dl>
+          ` : ''}
+          ${this.following ? `
+            <dl>
+              <dt><span>following</span></dt>
+              <dd itemprop="follows">${octiconPeople} ${this.following}</dd>
             </dl>
           ` : ''}
           ${Array.isArray(this.repositories) && this.repositories?.length ? `

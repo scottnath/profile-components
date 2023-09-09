@@ -25,6 +25,7 @@ export default {
 export const FullNameOnly = {
   args: {
     full_name: repoProfileComponents.full_name,
+    stargazers_count: '0'
   },
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);

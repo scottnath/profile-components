@@ -9,6 +9,7 @@
  * @returns string representing the number with big number suffixes
  */
 export const intToString = (num) => {
+  if (Math.abs(num) === 0) return 0;
   const map = [
     { suffix: 't', threshold: 1e12 },
     { suffix: 'b', threshold: 1e9 },

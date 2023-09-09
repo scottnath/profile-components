@@ -1,7 +1,17 @@
 /** styles for the GitHub repository web component */
 
+:host {
+  container-name: repository;
+}
+
 section[itemscope] {
-  padding: 1em;
+  padding: var(--row-spacing);
+}
+
+@container repository (min-width: 300px) {
+  section[itemscope] {
+    padding: calc(var(--row-spacing) * 2);
+  }
 }
 
 [itemprop="codeRepository"] {
@@ -18,18 +28,20 @@ section[itemscope] {
 }
 
 [itemprop="about"] {
-  margin-top: .5em;
+  margin-top: var(--row-spacing);
   color: var(--color-light);
 }
 
 dl {
   display: flex;
-  flex: 1 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--svg-gap);
   color: var(--color-light);
-  margin-top: .5em;
+  margin-top: var(--row-spacing);
 
   > dt {
-    margin-right: .2em;
+    flex: 0 0 var(--svg-size);
     > span {
       display: none;
     }
@@ -38,10 +50,23 @@ dl {
     }
   }
   > dd {
-    margin-right: 1em;
+    /* margin-right: 1em; */
+    flex: 0 0 calc(100% - calc(var(--svg-size) + var(--svg-gap)));
 
     &:last-of-type {
       margin-right: 0;
+    }
+  }
+
+  @container repository (min-width: 300px) {
+    > dd:not([itemprop="programmingLanguage"]) {
+      flex: 1 0 auto;
+    }
+  }
+
+  @container repository (min-width: 400px) {
+    > dd {
+      flex: 1 0 auto;
     }
   }
 }

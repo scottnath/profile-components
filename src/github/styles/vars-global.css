@@ -7,6 +7,7 @@
   --font-size-light: 0.875em;
   --font-size-normal: 1em;
   --font-size-bold: 1.25em;
+  --font-size-title: 1.5em;
 
   --font-weight-light: var(--base-text-weight-light);
   --font-weight-normal: var(--base-text-weight-normal);
@@ -25,6 +26,12 @@
 
   --color-link: var(--color-fg-accent);
   --color-danger: var(--color-fg-danger);
+
+  --logo-size: 1.5em;
+  --logo-outline-offset: 2px;
+  --svg-gap: 0.2em;
+  --svg-size: 1em;
+  --row-spacing: 0.3em;
   
   /* start of styles */
   line-height: 1.5;
@@ -32,6 +39,17 @@
   font-family: var(--font-family);
   font-size: var(--font-size-host);
   font-weight: var(--font-weight-normal);
+  /* set up container queries */
+  container-type: inline-size;
+  display: inline-block;
+  width: 100%;
+}
+
+@container (min-width: 300px) {
+  section[itemscope] {
+    --logo-size: 2em;
+    --row-spacing: 0.5em;
+  }
 }
 
 /** root elements cleanup */
