@@ -1,5 +1,6 @@
 {
   "name": "profile-components",
+  "author": "scottnath",
   "scripts": {
     "cem": "custom-elements-manifest analyze --config 'lib/custom-elements-manifest.config.js'",
     "storybook": "storybook dev -p 6006",
@@ -15,13 +16,23 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/scottnath/profile-components.git"
+  }, 
+  "publishConfig": {
+    "provenance": true
   },
-  "author": "scottnath",
+  "files": [
+    "dist",
+    "lib",
+    "custom-elements.json",
+    "README.md",
+    "LICENSE"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.8.4",
     "@custom-elements-manifest/to-markdown": "^0.1.0",
     "@primer/css": "^21.0.8",
+    "@primer/octicons": "^19.7.0",
     "@primer/primitives": "^7.12.0",
     "commander": "^11.0.0",
     "esbuild": "^0.19.2",
