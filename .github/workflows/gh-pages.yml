@@ -1,5 +1,10 @@
 name: GitHub Pages
 
+on:
+  push:
+    branches:
+      - release
+
 jobs:
   deploy:
     runs-on: ubuntu-22.04
