@@ -22,7 +22,7 @@ export const globalTypesPrimer = {
     defaultValue: 'light',
     toolbar: {
       icon: 'contrast',
-      items: [...primerThemes, {value: 'all', left: '', title: 'All'}],
+      items: [{value: '', left: '', title: 'None'}, ...primerThemes],
       showName: true,
       dynamicTitle: true,
     },
@@ -32,14 +32,15 @@ export const globalTypesPrimer = {
 
 export const decoratorsPrimer = [
   (Story, context) => {
-    document.body.setAttribute('data-color-mode', context.globals.theme.startsWith('light') ? 'light' : 'dark')
+    const theme = context.globals.theme;
+    document.body.setAttribute('data-color-mode', !theme ? '' : theme.startsWith('light') ? 'light' : 'dark')
     document.body.setAttribute(
       'data-light-theme',
-      context.globals.theme.startsWith('light') ? context.globals.theme : undefined,
+      context.globals.theme.startsWith('light') ? theme : undefined,
     )
     document.body.setAttribute(
       'data-dark-theme',
-      context.globals.theme.startsWith('dark') ? context.globals.theme : undefined,
+      context.globals.theme.startsWith('dark') ? theme : undefined,
     )
     return Story();
   },
