@@ -12,7 +12,9 @@
     "dist": "node lib/esbuild.config.js",
     "prerelease": "npm run dist",
     "release": "semantic-release --debug=true",
-    "generate:primer": "node lib/cli.js generate-vars-primer"
+    "generate:primer": "node lib/cli.js generate-vars-primer",
+    "generate:fixtures": "node lib/cli.js generate-fixtures-github",
+    "generate": "npm run generate:primer && npm run generate:fixtures && npm run cem"
   },
   "type": "module",
   "version": "0.0.0",
@@ -32,10 +34,11 @@
     "LICENSE"
   ],
   "exports": {
-    "github": {
-      "github-user.js": "./dist/github-user.js",
-      "github-repository.js": "./dist/github-repository.js",
-      "utils": "./src/github/utils/github.js"
+    "./*.js": {
+      "import": "./dist/*.js"
+    },
+    "./utils/github/*.js" : {
+      "import": "./src/github/utils/*.js"
     }
   },
   "license": "MIT",

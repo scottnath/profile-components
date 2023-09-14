@@ -2,7 +2,6 @@
  * @fileoverview Utility functions
  */
 
-
 /**
  * Convert integer to string with big number suffixes
  * @param {number} num 
