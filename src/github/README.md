@@ -7,15 +7,16 @@ Includes two web components:
 
 ## User
 
-### @todo
+### Usage
 
-- [ ] container queries
+```html
+<github-user username="scottnath" fetch="true"></github-user>
+```
 
 ## Repository
 
 ### @todo
 
-- [ ] container queries
 - [ ] repo language colors 
   - need to expand on the `getCircle` function to include the top X languages on GH
   - need a way to expand the available colors

@@ -72,11 +72,12 @@ const getThemeColors = (colors) => {
  * @param {string} theme - name of primer theme
  * @returns {string} primer theme color variables
  */
-const getTheme = (theme) => {
+const getTheme = (theme, isDefault = false) => {
   const colorMode = theme.value.startsWith('dark') ? 'dark' : 'light';
   const dataTheme = `[data-${colorMode}-theme="${theme.value}"]`;
-  let output = `\n/* ${theme.title} THEME */`
-  output += `:host-context([data-color-mode="${colorMode}"]${dataTheme}) {`;
+  const title = isDefault ? `Default Theme (${theme.title})` : `${theme.title} Theme`;
+  let output = `\n/* ${title} */`
+  output += isDefault ? ':host-context(body) {' : `:host-context([data-color-mode="${colorMode}"]${dataTheme}) {`;
   output += getThemeColors(colors.default[theme.value]);
   output += '}';
   return output;
@@ -90,6 +91,7 @@ export const getPrimerCss = () => {
   let css = '/** This file is auto-generated, do not edit **/\n';
   
   css += globalStyles();
+  css += getTheme(primerThemes.find(t => t.value === 'dark'), true);
   primerThemes.forEach((theme) => {
     css += getTheme(theme);
   });

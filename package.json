@@ -1,6 +1,8 @@
 {
   "name": "profile-components",
   "author": "scottnath",
+  "description": "A collection of web components for displaying profile information from various websites.",
+  "homepage": "https://scottnath.github.io/profile-components",
   "scripts": {
     "cem": "custom-elements-manifest analyze --config 'lib/custom-elements-manifest.config.js'",
     "storybook": "storybook dev -p 6006",
@@ -9,7 +11,10 @@
     "predist": "npm run cem && npm run build-storybook",
     "dist": "node lib/esbuild.config.js",
     "prerelease": "npm run dist",
-    "release": "semantic-release --debug=true"
+    "release": "semantic-release --debug=true",
+    "generate:primer": "node lib/cli.js generate-vars-primer",
+    "generate:fixtures": "node lib/cli.js generate-fixtures-github",
+    "generate": "npm run generate:primer && npm run generate:fixtures && npm run cem"
   },
   "type": "module",
   "version": "0.0.0",
@@ -23,17 +28,26 @@
   "files": [
     "dist",
     "lib",
+    "src",
     "custom-elements.json",
     "README.md",
     "LICENSE"
   ],
+  "exports": {
+    "./*.js": {
+      "import": "./dist/*.js"
+    },
+    "./utils/github/*.js" : {
+      "import": "./src/github/utils/*.js"
+    }
+  },
   "license": "MIT",
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.8.4",
     "@custom-elements-manifest/to-markdown": "^0.1.0",
-    "@primer/css": "^21.0.8",
+    "@primer/css": "^21.0.9",
     "@primer/octicons": "^19.7.0",
-    "@primer/primitives": "^7.12.0",
+    "@primer/primitives": "^7.13.0",
     "commander": "^11.0.0",
     "esbuild": "^0.19.2",
     "esbuild-plugin-inline-import": "^1.0.1",
