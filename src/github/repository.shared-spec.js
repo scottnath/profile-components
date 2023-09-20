@@ -6,7 +6,7 @@ import { within as shadowWithin } from 'shadow-dom-testing-library';
  */
 export const getElements = async (canvasElement) => {
   const screen = shadowWithin(canvasElement);
-  const container = await screen.findByShadowRole('complementary');
+  const container = await screen.queryByShadowLabelText(/GitHub repository/i);
   const link = await screen.queryByShadowRole('link');
   const langDetails = await container?.querySelector('[itemprop="programmingLanguage"]');
   const langTerm = await langDetails?.previousElementSibling;

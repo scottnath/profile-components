@@ -73,11 +73,10 @@ const getThemeColors = (colors) => {
  * @returns {string} primer theme color variables
  */
 const getTheme = (theme, isDefault = false) => {
-  const colorMode = theme.value.startsWith('dark') ? 'dark' : 'light';
-  const dataTheme = `[data-${colorMode}-theme="${theme.value}"]`;
+  const dataTheme = `[data-theme="${theme.value}"]`;
   const title = isDefault ? `Default Theme (${theme.title})` : `${theme.title} Theme`;
   let output = `\n/* ${title} */`
-  output += isDefault ? ':host-context(body) {' : `:host-context([data-color-mode="${colorMode}"]${dataTheme}) {`;
+  output += isDefault ? ':host {' : `:host(${dataTheme}) {`;
   output += getThemeColors(colors.default[theme.value]);
   output += '}';
   return output;

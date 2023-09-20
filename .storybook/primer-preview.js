@@ -33,15 +33,7 @@ export const globalTypesPrimer = {
 export const decoratorsPrimer = [
   (Story, context) => {
     const theme = context.globals.theme;
-    document.body.setAttribute('data-color-mode', !theme ? '' : theme.startsWith('light') ? 'light' : 'dark')
-    document.body.setAttribute(
-      'data-light-theme',
-      context.globals.theme.startsWith('light') ? theme : undefined,
-    )
-    document.body.setAttribute(
-      'data-dark-theme',
-      context.globals.theme.startsWith('dark') ? theme : undefined,
-    )
+    context.args['data-theme'] = theme;
     return Story();
   },
 ]

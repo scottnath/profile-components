@@ -66,6 +66,8 @@ export const Fetch = {
     ]
   },
   play: async ({ args, canvasElement, step }) => {
+    /** wait for fetch to complete */
+    await new Promise(resolve => setTimeout(resolve, 0));
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
       ...parseFetchedRepo(repoProfileComponents),
@@ -95,6 +97,8 @@ export const FetchError = {
     ]
   },
   play: async ({ args, canvasElement, step }) => {
+    /** wait for fetch to complete */
+    await new Promise(resolve => setTimeout(resolve, 0));
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
       ...args,

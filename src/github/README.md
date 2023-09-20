@@ -5,10 +5,24 @@ Includes two web components:
 * `<github-repository>` - displays information about a GitHub repository
 * `<github-user>` - displays information about a GitHub user, includes `<github-repository>`
 
+## @todo
+
+- [ ] add process.env option to include github token for local development
+
 ## User
+
+### Demo
+
+https://stackblitz.com/edit/profile-components
 
 ### Usage
 
+#### import the component from unpkg
+```html
+<script type="module" src="https://unpkg.com/@scottnath/profile-components"></script>
+```
+
+#### use the component
 ```html
 <github-user username="scottnath" fetch="true"></github-user>
 ```

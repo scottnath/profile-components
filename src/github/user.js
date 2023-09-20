@@ -147,29 +147,27 @@ export class GitHubUser extends HTMLElement {
   _render() {
     if (this.error) {
       return `
-        <section role="complementary" itemscope itemtype="http://schema.org/Action">
+        <section aria-label="GitHub user profile" itemscope itemtype="http://schema.org/Action">
           <p itemprop="error">${this.error}</p>
         </section>
       `
     }
     
     return `
-      <section role="complementary" itemscope itemtype="http://schema.org/Person">
+      <section aria-label="GitHub user profile" itemscope itemtype="http://schema.org/Person">
         <header>
-          <address>
-            <a href="https://github.com/${this.login}" itemprop="url">
-              <span>
-                ${githubLogoSvg}
-              </span>
-              <span itemprop="alternativeName">${this.login}</span>
-            </a>
-          </address>
+          <span>
+            ${githubLogoSvg}
+          </span>
+          
+          <span class="sr-only"><span itemprop="memberOf">GitHub</span> user</span> 
+          <span itemprop="alternativeName">${this.login}</span>
         </header>
         <div part="main">
           <address>
-            <a href="https://github.com/${this.login}" itemprop="url">
+            <a href="https://github.com/${this.login}" aria-label="View @${this.login}'s profile on GitHub" itemprop="url">
               <span class="avatar" itemprop="image">
-                <img src="${this.avatar_url}" alt="Avatar for ${this.name}" loading="lazy" />
+                <img src="${this.avatar_url}" alt="Avatar for ${this.name | this.login}" loading="lazy" />
               </span>
               <span itemprop="creator">
                 <span itemprop="name">${this.name}</span>

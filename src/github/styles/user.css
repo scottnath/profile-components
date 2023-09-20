@@ -14,33 +14,31 @@ section[itemscope] {
   background-color: var(--bg-color-light);
   padding: var(--row-spacing);
 
-  & a {
-    display: flex;
-    gap: var(--svg-gap);
-    height: calc(var(--logo-size) + var(--logo-outline-offset) * 2);
+  display: flex;
+  gap: var(--svg-gap);
+  height: calc(var(--logo-size) + var(--logo-outline-offset) * 2);
 
-    :has(svg) {
-      flex: 0 0 var(--logo-size);
-      display: inline-block;
+  :has(svg) {
+    flex: 0 0 var(--logo-size);
+    display: inline-block;
+    width: var(--logo-size);
+    height: var(--logo-size);
+    outline-offset: var(--logo-outline-offset);
+
+    > svg {
+      color: var(--color-normal);
       width: var(--logo-size);
       height: var(--logo-size);
-      outline-offset: var(--logo-outline-offset);
-  
-      > svg {
-        color: var(--color-normal);
-        width: var(--logo-size);
-        height: var(--logo-size);
-        vertical-align: middle;
-        fill: currentColor;
-      }
+      vertical-align: middle;
+      fill: currentColor;
     }
+  }
 
-    [itemprop="alternativeName"] {
-      flex: 1 0 auto;
-      color: var(--color-normal);
-      font-weight: var(--font-weight-bold);
-      padding-inline: var(--row-spacing);
-    }
+  [itemprop="alternativeName"] {
+    flex: 1 0 auto;
+    color: var(--color-normal);
+    font-weight: var(--font-weight-bold);
+    padding-inline: var(--row-spacing);
   }
 }
 [part="main"] {
