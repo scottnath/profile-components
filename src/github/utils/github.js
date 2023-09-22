@@ -1,8 +1,10 @@
 /**
- * @fileoverview Utility functions for fetching and parsing GitHub data
+ * @name GitHub-Utilities
+ * @module
+ * @typicalname githubUtils
+ * @description Utility functions for fetching and parsing GitHub data
+ * @author @scottnath
  */
-
-export { intToString } from "../../utils/index.js";
 
 const githubApi = 'https://api.github.com';
 
@@ -25,6 +27,7 @@ const githubApi = 'https://api.github.com';
  * @see https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#get-a-user
  * @param {string} username 
  * @returns response status 200: {Object} user; else {Object} error
+ * @function
  */
 export const fetchUser = async (username) => {
   const response = await fetch(`${githubApi}/users/${username}`);
@@ -36,7 +39,8 @@ export const fetchUser = async (username) => {
  * Parse a GitHub user from the `user` endpoint response down to 
  *  only the data required for the user component
  * @param {Object} user
- * @returns {GitHubUser}
+ * @returns {GitHubUser} component-ready user object
+ * @function
  */
 export const parseFetchedUser = (user = {}) => {
   return {
@@ -65,11 +69,13 @@ export const parseFetchedUser = (user = {}) => {
  * @property {string} [subscribers_count] - number of watchers
  */
 
+
 /**
  * Fetch a GitHub repository's content from the GitHub api
  * @see https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#get-a-repository
  * @param {string} full_name
  * @returns response status 200: {Object} repo; else {Object} error
+ * @function
  */
 export const fetchRepo = async (full_name) => {
   const response = await fetch(`${githubApi}/repos/${full_name}`);
@@ -82,6 +88,7 @@ export const fetchRepo = async (full_name) => {
  *  only the data required for the repository component
  * @param {Object} repo
  * @returns {GitHubRepository}
+ * @function
  */
 export const parseFetchedRepo = (repo = {}) => {
   return {
@@ -93,42 +100,5 @@ export const parseFetchedRepo = (repo = {}) => {
     stargazers_count: repo.stargazers_count,
     forks_count: repo.forks_count,
     subscribers_count: repo.subscribers_count,
-  }
-}
-
-/**
- * Generate a mock github api response
- * @param {(GitHubRepository | GitHubUser)} content - mock return data
- * @param {string} type - 'users' or 'repos'
- * @param {number} status - 200 or 404
- * @returns 
- */
-export const generateMockResponse = (content, type='users', status=200) => {
-  let url = `${githubApi}/${type}/`;
-
-  if (type === 'users') {
-    url += content.login;
-  } else if (type === 'repos') {
-    url += content.full_name;
-  }
-
-  if (status === 404) {
-    return {
-      url,
-      method: 'GET',
-      status: 404,
-      delay: 0,
-      response: {
-        documentation_url: `https://docs.github.com/rest/${type}/${type}`,
-        message: "Not Found"
-      },
-    }
-  }
-  return {
-    url,
-    method: 'GET',
-    status: 200,
-    delay: 0,
-    response: content,
   }
 }

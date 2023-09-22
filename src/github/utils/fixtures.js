@@ -1,5 +1,9 @@
 /**
- * @fileoverview Utility functions for fetching and parsing GitHub data
+ * @name Fixtures
+ * @module
+ * @typicalname fixtures
+ * @description Utility functions for generating fixtures for GitHub data
+ * @author @scottnath
  */
 
 import { outputFile } from 'fs-extra';

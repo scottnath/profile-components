@@ -1,5 +1,6 @@
 import { repoScottnathdotcom, repoStorydocker, userScottnath, userSindresorhus } from './fixtures';
-import { generateMockResponse, parseFetchedRepo, parseFetchedUser } from './utils/github';
+import { generateMockResponse } from './utils/testing';
+import { parseFetchedRepo, parseFetchedUser } from './utils/github';
 import { getElements, ensureElements } from './user.shared-spec';
 import { repoProfileComponents, repoFreeCodeCamp } from './fixtures';
 
@@ -21,25 +22,12 @@ export default {
   }
 };
 
-export const OnlyRequired = {
-  args: {
-    login: userScottnath.login,
-    name: userScottnath.name,
-  },
+export const User  = {
+  args: parseFetchedUser(userScottnath),
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
     await ensureElements(elements, args);
   }
-}
-
-export const User  = {
-  args: parseFetchedUser(userScottnath),
-  play: OnlyRequired.play,
-}
-
-export const PopularUser  = {
-  args: parseFetchedUser(userSindresorhus),
-  play: OnlyRequired.play,
 }
 
 export const UserRepos = {
@@ -47,7 +35,20 @@ export const UserRepos = {
     ...User.args,
     repos: JSON.stringify([parseFetchedRepo(repoStorydocker), { ...parseFetchedRepo(repoScottnathdotcom), user_login: userScottnath.login }]).replace(/"/g, "&quot;"),
   },
-  play: OnlyRequired.play,
+  play: User.play,
+}
+
+export const PopularUser  = {
+  args: parseFetchedUser(userSindresorhus),
+  play: User.play,
+}
+
+export const OnlyRequired = {
+  args: {
+    login: userScottnath.login,
+    name: userScottnath.name,
+  },
+  play: User.play,
 }
 
 export const ReposFetch = {
@@ -55,7 +56,7 @@ export const ReposFetch = {
     ...User.args,
     repos: JSON.stringify([repoScottnathdotcom.name, repoStorydocker.full_name]).replace(/"/g, "&quot;"),
   },
-  play: OnlyRequired.play,
+  play: User.play,
 }
 
 export const Fetch = {

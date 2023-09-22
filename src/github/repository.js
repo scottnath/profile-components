@@ -1,4 +1,5 @@
-import { intToString, fetchRepo, parseFetchedRepo } from './utils/github';
+import { intToString } from '../utils/index.js';
+import { fetchRepo, parseFetchedRepo } from './utils/github';
 import stylesPrimer from './styles/vars-primer.css?inline';
 import stylesGlobal from './styles/vars-global.css?inline';
 import styles from './styles/repository.css?inline';

@@ -1,5 +1,5 @@
-
-import { intToString, fetchUser, parseFetchedUser } from './utils/github';
+import { intToString } from '../utils/index.js';
+import { fetchUser, parseFetchedUser } from './utils/github';
 import stylesPrimer from './styles/vars-primer.css?inline';
 import stylesGlobal from './styles/vars-global.css?inline';
 import styles from './styles/user.css?inline';

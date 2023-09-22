@@ -1,5 +1,8 @@
 /**
- * @fileoverview Primer design system utilities for GitHub web components
+ * @module Primer-Utilities
+ * @typicalname primerUtils
+ * @description Primer design system utilities for GitHub web components
+ * @author @scottnath
  */
 
 import { outputFile } from 'fs-extra';

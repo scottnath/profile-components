@@ -1,5 +1,6 @@
 
-import { generateMockResponse, parseFetchedRepo } from './utils/github';
+import { generateMockResponse } from './utils/testing';
+import { parseFetchedRepo } from './utils/github';
 import { getElements, ensureElements } from './repository.shared-spec';
 import { repoProfileComponents, repoFreeCodeCamp } from './fixtures';
 

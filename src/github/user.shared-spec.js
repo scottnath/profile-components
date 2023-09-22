@@ -2,7 +2,7 @@
 import { expect } from '@storybook/jest';
 import { within as shadowWithin } from 'shadow-dom-testing-library';
 
-import { intToString } from './utils/github';
+import { intToString } from '../utils/index.js';
 
 /**
  * Extract elements from an shadow DOM element
