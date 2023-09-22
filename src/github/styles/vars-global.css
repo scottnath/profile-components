@@ -77,7 +77,6 @@ address {
   position: absolute;
 }
 
-/** common container styles */
 section[itemscope],
 div[itemscope] {
   background-color: var(--bg-color-normal);

@@ -6,7 +6,7 @@ import { repoProfileComponents, repoFreeCodeCamp } from './fixtures';
 import './repository';
 
 export default {
-  title: 'GitHub Repository',
+  title: 'GitHub/github-repository',
   component: 'github-repository',
   tags: ['autodocs'],
   render: (args) => {
@@ -44,6 +44,13 @@ export const WithOrgName = {
   args: {
     full_name: repoProfileComponents.full_name,
     org: 'different-org-name'
+  },
+  play: FullNameOnly.play,
+}
+export const LanguageCircle = {
+  args: {
+    full_name: 'just-another/c-plus-plus-repo',
+    language: 'C++',
   },
   play: FullNameOnly.play,
 }

@@ -18,6 +18,18 @@ section[itemscope] {
   gap: var(--svg-gap);
   height: calc(var(--logo-size) + var(--logo-outline-offset) * 2);
 
+  > span:has([itemprop="memberOf"]) {
+    background-color: var(--color-normal);
+    width: var(--logo-size);
+    height: var(--logo-size);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: var(--svg-mark-github);
+    mask-image: var(--svg-mark-github);
+  }
+
   :has(svg) {
     flex: 0 0 var(--logo-size);
     display: inline-block;
@@ -108,36 +120,52 @@ section[itemscope] {
 
   & dl:has([itemprop="follows"]),
   & dl:has([itemprop="followee"]) {
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
-    gap: var(--svg-gap);
 
-    > dt {
-      flex: 1 0 auto;
-      color: var(--color-light);
+    &::before,
+    [itemprop="follows"]::before {
+      content: " ";
+      display: inline-block;
+      vertical-align: text-top;
+      height: var(--svg-size);
+      width: var(--svg-size);
+      background-color: var(--color-light);
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      -webkit-mask-image: var(--svg-people);
+      mask-image: var(--svg-people);
     }
 
-    > dd {
-      flex: 0 0 auto;
-      > svg {
-        fill: var(--color-light);
-        vertical-align: text-bottom;
+    > span {
+      display: inline-flex;
+      flex-direction: row-reverse;
+      flex-wrap: nowrap;
+      gap: var(--svg-gap);
+
+      > dt {
+        flex: 1 0 auto;
+        color: var(--color-light);
       }
+
+      > dd {
+        flex: 0 0 auto;
+      }
+    }
+    [itemprop="follows"]::before {
+      margin-right: .3em;
     }
   }
   @container user (min-width: 300px) {
-    :is(dl:has([itemprop="followee"])) {
-      display: inline-flex;
-    }
-    & dl:has([itemprop="followee"]) + dl:has([itemprop="follows"]) {
-      display: inline-flex;
-
-      > dd::before {
+    & dl:has([itemprop="followee"]) {
+      [itemprop="follows"]::before {
         content: ' · ';
-      }
-      > dd svg {
-        display: none;
+        margin-right: 0;
+        -webkit-mask-image: none;
+        mask-image: none;
+        background-color: transparent;
+        text-align: center;
+        vertical-align: unset;
       }
     }
   }

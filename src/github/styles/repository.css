@@ -17,6 +17,20 @@ div[itemscope] {
 [itemprop="codeRepository"] {
   display: block;
 
+  &::before {
+    content: " ";
+    display: inline-block;
+    vertical-align: text-bottom;
+    height: var(--svg-size);
+    width: var(--svg-size);
+    background-color: var(--color-light);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-image: var(--svg-repo);
+    mask-image: var(--svg-repo);
+  }
   > svg {
     fill: var(--color-light);
     vertical-align: text-bottom;
@@ -42,8 +56,30 @@ dl {
 
   > dt {
     flex: 0 0 var(--svg-size);
-    > svg {
-      vertical-align: text-bottom;
+    background-color: var(--color-light);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+
+    &[data-detail="language"] {
+      -webkit-mask-image: var(--svg-circle);
+      mask-image: var(--svg-circle);
+    }
+
+    &[data-detail="stars"] {
+      -webkit-mask-image: var(--svg-star);
+      mask-image: var(--svg-star);
+    }
+
+    &[data-detail="watchers"] {
+      -webkit-mask-image: var(--svg-eye);
+      mask-image: var(--svg-eye);
+    }
+
+    &[data-detail="forks"] {
+      -webkit-mask-image: var(--svg-repo-forked);
+      mask-image: var(--svg-repo-forked);
     }
   }
   > dd {

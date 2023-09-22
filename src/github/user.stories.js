@@ -6,7 +6,7 @@ import { repoProfileComponents, repoFreeCodeCamp } from './fixtures';
 import './user';
 
 export default {
-  title: 'GitHub User',
+  title: 'GitHub/github-user',
   component: 'github-user',
   tags: ['autodocs'],
   render: (args) => {

@@ -19,7 +19,7 @@ https://stackblitz.com/edit/profile-components
 
 #### import the component from unpkg
 ```html
-<script type="module" src="https://unpkg.com/@scottnath/profile-components"></script>
+<script type="module" src="https://unpkg.com/profile-components/dist/github-user.js"></script>
 ```
 
 #### use the component
@@ -29,21 +29,50 @@ https://stackblitz.com/edit/profile-components
 
 ## Repository
 
-### @todo
+### Usage
 
-- [ ] repo language colors 
-  - need to expand on the `getCircle` function to include the top X languages on GH
-  - need a way to expand the available colors
-  - @see https://github.com/github/personal-website/blob/ec99147d789ea3332274857d38aba8c3b5063ae5/_data/colors.json#L1199
-- octicons 
-  - create script to generate local svgs with aria-label
-  - should be added into .js by esbuild
-  - @see https://github.com/primer/octicons/blob/main/package.json
+#### import the component from unpkg
+```html
+<script type="module" src="https://unpkg.com/@scottnath/profile-components/dist/github-repository.js"></script>
+```
 
-## @futureFeatures
+#### use the component
+```html
+<github-repository full_name="scottnath/profile-components" fetch="true"></github-repository>
+```
 
-### GitHub contribution graph
+## Style Source
 
-Might could incorporate into `<github-user>` component
+The best way to have the look n feel of an external site is to integrate their design language as much as possible. 
 
-- [ ] graph contrib: https://github.com/enpitsuLin/wc-github-graph/blob/master/src/github-graph.ts
+### Primer Design System
+
+https://primer.style/design/
+
+"`Primer is a set of guidelines, principles, and patterns for designing and building UI at GitHub.`"
+
+Primer is the source for all of GitHub's root UI foundations (color text, and border-styles), iconography and basic UI patterns.
+
+### Color themes
+
+GitHub (from Primer) has two sets of light themes and two sets of dark themes. Check out [Primer's Storybook docs for colors](https://primer.style/design/foundations/css-utilities/colors) to play around with the colors and see the different themes.
+
+* light: 'Light'
+* light_colorblind: 'Light Protanopia & Deuteranopia'
+* light_tritanopia: 'Light Tritanopia'
+* light_high_contrast: 'Light High Contrast'
+* dark: 'Dark'
+* dark_dimmed: 'Dark Dimmed'
+* dark_colorblind: 'Dark Protanopia & Deuteranopia'
+* dark_tritanopia: 'Dark Tritanopia'
+* dark_high_contrast: 'Dark High Contrast'
+
+#### Primatives and iconography
+These components are styled with variables generated from Primer's npm packages.
+
+* [primer/primatives](https://github.com/primer/primitives) for colors, borders, and typography
+* [primer/octicons](https://github.com/primer/octicons) is the source for all icons used on GitHub. [storybook docs for Octicons](https://primer.style/design/foundations/icons)
+
+#### Auto-generated styles
+
+CSS variables and svg icons are pulled from Primer's npm packages. The generated variables are used to style the components.
