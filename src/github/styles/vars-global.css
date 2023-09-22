@@ -46,7 +46,8 @@
 }
 
 @container (min-width: 300px) {
-  section[itemscope] {
+  section[itemscope],
+  div[itemscope] {
     --logo-size: 2em;
     --row-spacing: 0.5em;
   }
@@ -65,8 +66,19 @@ address {
   font-style: normal;
 }
 
-/** common container styles */
-section[itemscope] {
+.sr-only {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+
+section[itemscope],
+div[itemscope] {
   background-color: var(--bg-color-normal);
   border-color: var(--border-color);
   border-style: solid;

@@ -6,7 +6,7 @@ import { repoProfileComponents, repoFreeCodeCamp } from './fixtures';
 import './user';
 
 export default {
-  title: 'GitHub User',
+  title: 'GitHub/github-user',
   component: 'github-user',
   tags: ['autodocs'],
   render: (args) => {
@@ -16,7 +16,7 @@ export default {
       .join(' ');
   
     return `
-      <github-user ${attributes}></github-user>
+      <github-user ${attributes} class="meow"></github-user>
     `;
   }
 };
@@ -28,7 +28,6 @@ export const OnlyRequired = {
   },
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
-    console.log(elements);
     await ensureElements(elements, args);
   }
 }
@@ -55,7 +54,8 @@ export const ReposFetch = {
   args: {
     ...User.args,
     repos: JSON.stringify([repoScottnathdotcom.name, repoStorydocker.full_name]).replace(/"/g, "&quot;"),
-  }
+  },
+  play: OnlyRequired.play,
 }
 
 export const Fetch = {
@@ -68,6 +68,16 @@ export const Fetch = {
       generateMockResponse(userScottnath, 'users'),
     ]
   },
+  play: async ({ args, canvasElement, step }) => {
+    /** wait for fetch to complete */
+    await new Promise(resolve => setTimeout(resolve, 0));
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedUser(userScottnath),
+      ...args,
+    };
+    await ensureElements(elements, argsAfterFetch);
+  }
 };
 
 export const FetchError = {
@@ -81,6 +91,8 @@ export const FetchError = {
     ]
   },
   play: async ({ args, canvasElement, step }) => {
+    /** wait for fetch to complete */
+    await new Promise(resolve => setTimeout(resolve, 0));
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
       ...args,

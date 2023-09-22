@@ -6,7 +6,7 @@ import { repoProfileComponents, repoFreeCodeCamp } from './fixtures';
 import './repository';
 
 export default {
-  title: 'GitHub Repository',
+  title: 'GitHub/github-repository',
   component: 'github-repository',
   tags: ['autodocs'],
   render: (args) => {
@@ -47,6 +47,13 @@ export const WithOrgName = {
   },
   play: FullNameOnly.play,
 }
+export const LanguageCircle = {
+  args: {
+    full_name: 'just-another/c-plus-plus-repo',
+    language: 'C++',
+  },
+  play: FullNameOnly.play,
+}
 
 export const AllRepoContent = {
   args: {
@@ -66,6 +73,8 @@ export const Fetch = {
     ]
   },
   play: async ({ args, canvasElement, step }) => {
+    /** wait for fetch to complete */
+    await new Promise(resolve => setTimeout(resolve, 0));
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
       ...parseFetchedRepo(repoProfileComponents),
@@ -95,6 +104,8 @@ export const FetchError = {
     ]
   },
   play: async ({ args, canvasElement, step }) => {
+    /** wait for fetch to complete */
+    await new Promise(resolve => setTimeout(resolve, 0));
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
       ...args,

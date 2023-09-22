@@ -9,8 +9,9 @@ import { intToString } from './utils/github';
  */
 export const getElements = async (canvasElement) => {
   const screen = shadowWithin(canvasElement);
-  const [container] = await screen.findAllByShadowRole('complementary');
-  const [ headerLink, mainLink ] = await screen.queryAllByShadowRole('link');
+  const container = await screen.queryByShadowLabelText(/GitHub user profile/i);
+  const [headerName] = await container?.querySelectorAll('[itemprop="alternativeName"]');
+  const [mainLink] = await screen.queryAllByShadowRole('link');
   const [ avatar ] = await screen.queryAllByShadowRole('img');
   const [ bio ] = await container?.querySelectorAll('[itemprop="description"]');
   return { 
@@ -18,7 +19,7 @@ export const getElements = async (canvasElement) => {
     canvasElement,
     container,
     error: await container?.querySelector('[itemprop="error"]'),
-    headerLink,
+    headerName,
     mainLink,
     avatar,
     name: await mainLink?.querySelector('[itemprop="name"]'),
@@ -34,6 +35,7 @@ export const getElements = async (canvasElement) => {
  * Ensure elements are present and have the correct content
  */
 export const ensureElements = async (elements, args) => {
+  console.log('elements', elements);
   if (args.error) {
     await expect(elements.mainLink).toBeFalsy();
     await expect(elements.container).toBeTruthy();
@@ -44,9 +46,8 @@ export const ensureElements = async (elements, args) => {
 
   await expect(elements.error).toBeFalsy();
   await expect(elements.container).toBeTruthy();
-  await expect(elements.headerLink).toBeTruthy();
-  await expect(elements.headerLink).toHaveAttribute('href', expect.stringContaining(args.login));
-  await expect(elements.headerLink).toHaveTextContent(args.login);
+  await expect(elements.headerName).toBeTruthy();
+  await expect(elements.headerName).toHaveTextContent(args.login);
   await expect(elements.mainLink).toBeTruthy();
   await expect(elements.avatar).toBeTruthy();
   await expect(elements.name).toBeTruthy();
