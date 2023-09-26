@@ -1,11 +1,11 @@
-import { intToString } from '../utils/index.js';
-import { fetchUser, parseFetchedUser } from './utils/github';
-import { generateRepoContent } from './repository/content.js';
-import repositoryHTML from './repository/html.js';
-import stylesPrimer from './styles/vars-primer.css?inline';
-import stylesGlobal from './styles/vars-global.css?inline';
-import stylesRepo from './styles/repository.css?inline';
-import styles from './styles/user.css?inline';
+import { intToString } from '../../utils/index.js';
+import { fetchUser, parseFetchedUser } from './content.js';
+import userHTML from './html.js';
+import { generateRepoContent } from '../repository/content.js';
+import stylesPrimer from '../styles/vars-primer.css?inline';
+import stylesGlobal from '../styles/vars-global.css?inline';
+import stylesRepo from '../styles/repository.css?inline';
+import styles from '../styles/user.css?inline';
 
 /**
  * Styles for the component, imported during development, inlined during build
@@ -31,15 +31,15 @@ const blankPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1
  * @element github-user
  * @name GitHubUser
  * 
- * @attribute {string} login - User's GitHub login
- * @attribute {string} avatar_url - URL to user's avatar
- * @attribute {string} name - User's name
- * @attribute {boolean} [fetch] - when true, fetches user from GitHub api
- * @attribute {string} [username] - alias for `login`
- * @attribute {string} [bio] - User's biography content
- * @attribute {string} [following] - number of people user is following
- * @attribute {string} [followers] - number of followers
- * @attribute {string} [repos] - JSON stringified array of repositories
+ * @property {string} login - User's GitHub login
+ * @property {string} avatar_url - URL to user's avatar
+ * @property {string} name - User's name
+ * @property {boolean} [fetch] - when true, fetches user from GitHub api
+ * @property {string} [username] - alias for `login`
+ * @property {string} [bio] - User's biography content
+ * @property {string} [following] - number of people user is following
+ * @property {string} [followers] - number of followers
+ * @property {string} [repos] - JSON stringified array of repositories
  */
 export class GitHubUser extends HTMLElement {
   constructor() {
@@ -146,61 +146,8 @@ export class GitHubUser extends HTMLElement {
       this.repositories = await Promise.all(this.repositories.map(async (repo) => await generateRepoContent(repo, repo.fetch, repo.no_org)));
       
     }
-    view += this._render();
+    view += userHTML(this);
     this.shadowRoot.innerHTML = view;
-  }
-  
-  _render() {
-    if (this.error) {
-      return `
-        <section aria-label="GitHub user profile" itemscope itemtype="http://schema.org/Action">
-          <p itemprop="error">${this.error}</p>
-        </section>
-      `
-    }
-    
-    return `
-      <section aria-label="GitHub user profile" itemscope itemtype="http://schema.org/Person">
-        <header>
-          <span><span itemprop="memberOf">GitHub</span> user</span> 
-          <span itemprop="alternativeName">${this.login}</span>
-        </header>
-        <div part="main">
-          <address>
-            <a href="https://github.com/${this.login}" aria-label="View @${this.login}'s profile on GitHub" itemprop="url">
-              <span class="avatar" itemprop="image">
-                <img src="${this.avatar_url}" alt="Avatar for ${this.name | this.login}" loading="lazy" />
-              </span>
-              <span itemprop="creator">
-                <span itemprop="name">${this.name}</span>
-                <span itemprop="alternativeName">${this.login}</span>
-              </span>
-            </a>
-          </address>
-          ${this.bio ? `<p itemprop="description">${this.bio}</p>` : ''}
-          ${this.following || this.followers ? `
-            <dl>
-            ${this.followers ? `
-              <span><dt>followers</dt>
-              <dd itemprop="followee">${this.followers}</dd></span>
-            ` : ''}
-            ${this.following ? `
-              <span><dt>following</dt>
-              <dd itemprop="follows">${this.following}</dd></span>
-            ` : ''}
-            </dl>
-          ` : ''}
-          ${Array.isArray(this.repositories) && this.repositories?.length ? `
-            <dl>
-              <dt>Pinned repositories</dt>
-              ${this.repositories.map((repo) => `
-                <dd>${repositoryHTML(repo)}</dd>
-              `).join('')}
-            </dl>
-          ` : ''}
-        </div>
-      </section>
-    `;
   }
 }
 

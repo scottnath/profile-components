@@ -40,7 +40,7 @@ export const parseFetchedRepo = (repo = {}) => {
   return {
     full_name: repo.full_name,
     name: repo.name,
-    org: repo.org || repo.organization?.login,
+    org: repo.org || repo.organization?.login || repo.owner?.login,
     description: repo.description,
     language: repo.language,
     stargazers_count: repo.stargazers_count,

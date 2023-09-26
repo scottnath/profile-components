@@ -10,7 +10,7 @@ import { intToString } from '../../utils/index.js';
 function repository(content) {
   if (content.error) {
     return `
-      <div aria-label="GitHub repository" itemscope itemtype="http://schema.org/Action">
+      <div aria-label="GitHub repository" class="repo" itemscope itemtype="http://schema.org/Action">
         <p itemprop="error">${content.error}</p>
       </div>
     `

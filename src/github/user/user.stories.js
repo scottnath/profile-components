@@ -1,11 +1,10 @@
-import { repoScottnathdotcom, repoStorydocker, userScottnath, userSindresorhus } from './fixtures';
-import { generateMockResponse } from './utils/testing';
-import { parseFetchedUser } from './utils/github';
-import { parseFetchedRepo } from './repository/content.js';
+import { repoScottnathdotcom, repoStorydocker, userScottnath, userSindresorhus } from '../fixtures';
+import { generateMockResponse } from '../utils/testing';
+import { parseFetchedUser } from './content';
+import { parseFetchedRepo } from '../repository/content.js';
 import { getElements, ensureElements } from './user.shared-spec';
-import { repoProfileComponents, repoFreeCodeCamp } from './fixtures';
 
-import './user';
+import '.';
 
 export default {
   title: 'GitHub/github-user',
@@ -18,7 +17,7 @@ export default {
       .join(' ');
   
     return `
-      <github-user ${attributes} class="meow"></github-user>
+      <github-user ${attributes}></github-user>
     `;
   }
 };
