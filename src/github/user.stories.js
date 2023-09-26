@@ -1,6 +1,7 @@
 import { repoScottnathdotcom, repoStorydocker, userScottnath, userSindresorhus } from './fixtures';
 import { generateMockResponse } from './utils/testing';
-import { parseFetchedRepo, parseFetchedUser } from './utils/github';
+import { parseFetchedUser } from './utils/github';
+import { parseFetchedRepo } from './repository/content.js';
 import { getElements, ensureElements } from './user.shared-spec';
 import { repoProfileComponents, repoFreeCodeCamp } from './fixtures';
 

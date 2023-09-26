@@ -8,7 +8,6 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test-storybook": "test-storybook --coverage",
-    "predist": "npm run cem && npm run build-storybook",
     "dist": "node lib/esbuild.config.js",
     "prerelease": "npm run dist",
     "release": "semantic-release --debug=true",

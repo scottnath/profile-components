@@ -54,8 +54,8 @@ export const ensureElements = async (elements, args) => {
   }
 
   /** org from args or derived from full_nameSplit */
-  const org = args?.org ? args.org : full_nameSplit[1] ? full_nameSplit[0] : null;
-  if (!org || (org && org === args.user_login)) {
+  const org = args?.org ? args.org : full_nameSplit[0];
+  if (args.no_org) {
     await expect(elements.org).toBeFalsy();
   } else {
     await expect(elements.org).toBeTruthy();

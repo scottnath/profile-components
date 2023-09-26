@@ -121,9 +121,6 @@ const octiconSvg = (name) => {
     .replace(' class=""', '')
     .replace(' aria-hidden="true"', '')
     .replace(' version="1.1"', '');
-  if (name === 'mark-github') {
-    console.log(svg);
-  }
 
   return svgUrlCss(name, svg)
 }

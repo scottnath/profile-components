@@ -1,10 +1,10 @@
 
-import { generateMockResponse } from './utils/testing';
-import { parseFetchedRepo } from './utils/github';
+import { generateMockResponse } from '../utils/testing';
+import { parseFetchedRepo } from './content';
 import { getElements, ensureElements } from './repository.shared-spec';
-import { repoProfileComponents, repoFreeCodeCamp } from './fixtures';
+import { repoProfileComponents, repoFreeCodeCamp } from '../fixtures';
 
-import './repository';
+import './index.js';
 
 export default {
   title: 'GitHub/github-repository',
@@ -37,7 +37,7 @@ export const FullNameOnly = {
 export const OrgIsUser = {
   args: {
     full_name: repoProfileComponents.full_name,
-    user_login: repoProfileComponents.owner?.login,
+    no_org: true,
   },
   play: FullNameOnly.play,
 }
@@ -110,7 +110,7 @@ export const FetchError = {
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
       ...args,
-      error: `Repo "${args.full_name}" not found`,
+      error: `Fetch Error: Repo "${args.full_name}" not found`,
     };
     await ensureElements(elements, argsAfterFetch);
   }

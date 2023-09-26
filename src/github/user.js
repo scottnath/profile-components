@@ -1,10 +1,11 @@
 import { intToString } from '../utils/index.js';
 import { fetchUser, parseFetchedUser } from './utils/github';
+import { generateRepoContent } from './repository/content.js';
+import repositoryHTML from './repository/html.js';
 import stylesPrimer from './styles/vars-primer.css?inline';
 import stylesGlobal from './styles/vars-global.css?inline';
+import stylesRepo from './styles/repository.css?inline';
 import styles from './styles/user.css?inline';
-
-import './repository';
 
 /**
  * Styles for the component, imported during development, inlined during build
@@ -12,6 +13,7 @@ import './repository';
 const componentStyles = `
 ${stylesPrimer}
 ${stylesGlobal}
+${stylesRepo}
 ${styles}
 `;
 
@@ -63,12 +65,23 @@ export class GitHubUser extends HTMLElement {
     }
     return repos.map((repo) => {
       if (typeof repo === 'string') {
-        return repo.split('/')[1] ? `full_name="${repo}" fetch="true"` : `full_name="${this.login}/${repo}" fetch="true"`;
+        if (repo.split('/')[1]) {
+          return {
+            full_name: repo,
+            fetch: true,
+          };
+        }
+        return {
+          full_name: `${this.login}/${repo}`,
+          fetch: true,
+          no_org: true,
+        };
       }
       repo.itemprop = repo.itemprop || 'maintainer';
-      return Object.entries(repo)
-        .map(([key, value]) => `${key}="${value}"`)
-        .join(' ');
+      return repo;
+      // return Object.entries(repo)
+      //   .map(([key, value]) => `${key}="${value}"`)
+      //   .join(' ');
     });
   }
 
@@ -81,7 +94,6 @@ export class GitHubUser extends HTMLElement {
         this[name] = this.getAttribute(name);
       }
     }
-    this.repositories = this.repos ? this._parseReposAttribute(this.repos) : [];
   }
 
   /**
@@ -104,6 +116,7 @@ export class GitHubUser extends HTMLElement {
     if (this.following) {
       this.following = intToString(this.following);
     }
+    this.repositories = this.repos ? this._parseReposAttribute(this.repos) : [];
   }
 
   /**
@@ -129,6 +142,10 @@ export class GitHubUser extends HTMLElement {
       await this._parseFetch();
     }
     this._checkAttributes();
+    if (this.repositories?.length) {
+      this.repositories = await Promise.all(this.repositories.map(async (repo) => await generateRepoContent(repo, repo.fetch, repo.no_org)));
+      
+    }
     view += this._render();
     this.shadowRoot.innerHTML = view;
   }
@@ -177,7 +194,7 @@ export class GitHubUser extends HTMLElement {
             <dl>
               <dt>Pinned repositories</dt>
               ${this.repositories.map((repo) => `
-                <dd><github-repository ${repo}></github-repository></dd>
+                <dd>${repositoryHTML(repo)}</dd>
               `).join('')}
             </dl>
           ` : ''}

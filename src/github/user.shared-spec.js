@@ -27,7 +27,7 @@ export const getElements = async (canvasElement) => {
     bio,
     followers: await container?.querySelector('[itemprop="followee"]'),
     following: await container?.querySelector('[itemprop="follows"]'),
-    repos: await Array.from(container?.querySelectorAll('github-repository')),
+    repos: await Array.from(container?.querySelectorAll('[itemscope].repo')),
   };
 }
 
@@ -35,7 +35,6 @@ export const getElements = async (canvasElement) => {
  * Ensure elements are present and have the correct content
  */
 export const ensureElements = async (elements, args) => {
-  console.log('elements', elements);
   if (args.error) {
     await expect(elements.mainLink).toBeFalsy();
     await expect(elements.container).toBeTruthy();

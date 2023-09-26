@@ -10,7 +10,8 @@ import { outputFile } from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { fetchRepo, fetchUser } from './github.js';
+import { fetchUser } from './github.js';
+import { fetchRepo } from '../repository/content.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
