@@ -6,7 +6,7 @@ import { within as shadowWithin } from 'shadow-dom-testing-library';
  */
 export const getElements = async (canvasElement) => {
   const screen = shadowWithin(canvasElement);
-  const container = await screen.queryByShadowLabelText(/GitHub repository/i);
+  const container = await screen.findByShadowLabelText(/GitHub repository/i);
   const link = await screen.queryByShadowRole('link');
   const langDetails = await container?.querySelector('[itemprop="programmingLanguage"]');
   const langTerm = await langDetails?.previousElementSibling;
@@ -54,8 +54,8 @@ export const ensureElements = async (elements, args) => {
   }
 
   /** org from args or derived from full_nameSplit */
-  const org = args?.org ? args.org : full_nameSplit[1] ? full_nameSplit[0] : null;
-  if (!org || (org && org === args.user_login)) {
+  const org = args?.org ? args.org : full_nameSplit[0];
+  if (args.no_org) {
     await expect(elements.org).toBeFalsy();
   } else {
     await expect(elements.org).toBeTruthy();

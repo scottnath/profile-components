@@ -2,14 +2,14 @@
 import { expect } from '@storybook/jest';
 import { within as shadowWithin } from 'shadow-dom-testing-library';
 
-import { intToString } from './utils/github';
+import { intToString } from '../../utils/index.js';
 
 /**
  * Extract elements from an shadow DOM element
  */
 export const getElements = async (canvasElement) => {
   const screen = shadowWithin(canvasElement);
-  const container = await screen.queryByShadowLabelText(/GitHub user profile/i);
+  const container = await screen.findByShadowLabelText(/GitHub user profile/i);
   const [headerName] = await container?.querySelectorAll('[itemprop="alternativeName"]');
   const [mainLink] = await screen.queryAllByShadowRole('link');
   const [ avatar ] = await screen.queryAllByShadowRole('img');
@@ -27,7 +27,7 @@ export const getElements = async (canvasElement) => {
     bio,
     followers: await container?.querySelector('[itemprop="followee"]'),
     following: await container?.querySelector('[itemprop="follows"]'),
-    repos: await Array.from(container?.querySelectorAll('github-repository')),
+    repos: await Array.from(container?.querySelectorAll('[itemscope].repo')),
   };
 }
 
@@ -35,7 +35,6 @@ export const getElements = async (canvasElement) => {
  * Ensure elements are present and have the correct content
  */
 export const ensureElements = async (elements, args) => {
-  console.log('elements', elements);
   if (args.error) {
     await expect(elements.mainLink).toBeFalsy();
     await expect(elements.container).toBeTruthy();

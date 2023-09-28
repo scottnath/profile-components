@@ -169,7 +169,7 @@ section[itemscope] {
       }
     }
   }
-  & dl:has(github-repository) {
+  & dl:has(.repo) {
     margin-top: .5em;
     
     > dd {

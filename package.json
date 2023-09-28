@@ -12,9 +12,11 @@
     "dist": "node lib/esbuild.config.js",
     "prerelease": "npm run dist",
     "release": "semantic-release --debug=true",
+    "test:unit": "node --test --experimental-test-coverage",
     "generate:primer": "node lib/cli.js generate-vars-primer",
     "generate:fixtures": "node lib/cli.js generate-fixtures-github",
-    "generate": "npm run generate:primer && npm run generate:fixtures && npm run cem"
+    "generate:docs": "node lib/cli.js generate-docs",
+    "generate": "npm run generate:docs && npm run generate:primer && npm run generate:fixtures && npm run cem"
   },
   "type": "module",
   "version": "0.0.0",
@@ -51,10 +53,10 @@
     "@primer/octicons": "^19.8.0",
     "@primer/primitives": "^7.13.0",
     "commander": "^11.0.0",
-    "documentation": "^14.0.2",
     "esbuild": "^0.19.3",
     "esbuild-plugin-inline-import": "^1.0.1",
     "fs-extra": "^11.1.1",
+    "jsdoc-to-markdown": "^8.0.0",
     "storydocker-storybook": "^0.0.16",
     "storydocker-utilities": "^0.0.11",
     "yaml": "^2.3.2"

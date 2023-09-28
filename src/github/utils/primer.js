@@ -1,5 +1,9 @@
 /**
- * @fileoverview Primer design system utilities for GitHub web components
+ * @name Primer-Utilities
+ * @module
+ * @typicalname primerUtils
+ * @description Primer design system utilities to generate assets for GitHub web components
+ * @author @scottnath
  */
 
 import { outputFile } from 'fs-extra';
@@ -118,9 +122,6 @@ const octiconSvg = (name) => {
     .replace(' class=""', '')
     .replace(' aria-hidden="true"', '')
     .replace(' version="1.1"', '');
-  if (name === 'mark-github') {
-    console.log(svg);
-  }
 
   return svgUrlCss(name, svg)
 }
