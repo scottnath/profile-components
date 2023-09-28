@@ -1,7 +1,8 @@
 /**
- * @module Primer-Utilities
+ * @name Primer-Utilities
+ * @module
  * @typicalname primerUtils
- * @description Primer design system utilities for GitHub web components
+ * @description Primer design system utilities to generate assets for GitHub web components
  * @author @scottnath
  */
 

@@ -6,11 +6,8 @@
 <dt><a href="#module_Fixtures">Fixtures</a></dt>
 <dd><p>Utility functions for generating fixtures for GitHub data</p>
 </dd>
-<dt><a href="#module_GitHub-Utilities">GitHub-Utilities</a></dt>
-<dd><p>Utility functions for fetching and parsing GitHub data</p>
-</dd>
 <dt><a href="#module_Primer-Utilities">Primer-Utilities</a></dt>
-<dd><p>Primer design system utilities for GitHub web components</p>
+<dd><p>Primer design system utilities to generate assets for GitHub web components</p>
 </dd>
 <dt><a href="#module_Testing">Testing</a></dt>
 <dd><p>Utility functions used for testing and prototyping components</p>
@@ -57,115 +54,10 @@ Generate a fixture for a GitHub user and write it to a JSON file
 Generate fixtures for a set of GitHub repositories and users
 
 **Kind**: static constant of [<code>Fixtures</code>](#module_Fixtures)  
-<a name="module_GitHub-Utilities"></a>
-
-## GitHub-Utilities
-Utility functions for fetching and parsing GitHub data
-
-**Author**: @scottnath  
-
-* [GitHub-Utilities](#module_GitHub-Utilities)
-    * [.fetchUser(username)](#module_GitHub-Utilities.fetchUser) ⇒ <code>Object</code>
-    * [.parseFetchedUser(user)](#module_GitHub-Utilities.parseFetchedUser) ⇒ <code>GitHubUser</code>
-    * [.fetchRepo(full_name)](#module_GitHub-Utilities.fetchRepo) ⇒ <code>Object</code>
-    * [.parseFetchedRepo(repo)](#module_GitHub-Utilities.parseFetchedRepo) ⇒ <code>GitHubRepository</code>
-    * [~GitHubUser](#module_GitHub-Utilities..GitHubUser) : <code>Object</code>
-    * [~GitHubRepository](#module_GitHub-Utilities..GitHubRepository) : <code>Object</code>
-
-<a name="module_GitHub-Utilities.fetchUser"></a>
-
-### githubUtils.fetchUser(username) ⇒ <code>Object</code>
-Fetch a user from
-
-**Kind**: static method of [<code>GitHub-Utilities</code>](#module_GitHub-Utilities)  
-**Returns**: <code>Object</code> - response status 200:  user; else {Object} error  
-**See**: https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#get-a-user  
-
-| Param | Type |
-| --- | --- |
-| username | <code>string</code> | 
-
-<a name="module_GitHub-Utilities.parseFetchedUser"></a>
-
-### githubUtils.parseFetchedUser(user) ⇒ <code>GitHubUser</code>
-Parse a GitHub user from the `user` endpoint response down to 
- only the data required for the user component
-
-**Kind**: static method of [<code>GitHub-Utilities</code>](#module_GitHub-Utilities)  
-**Returns**: <code>GitHubUser</code> - component-ready user object  
-
-| Param | Type |
-| --- | --- |
-| user | <code>Object</code> | 
-
-<a name="module_GitHub-Utilities.fetchRepo"></a>
-
-### githubUtils.fetchRepo(full_name) ⇒ <code>Object</code>
-Fetch a GitHub repository's content from the GitHub api
-
-**Kind**: static method of [<code>GitHub-Utilities</code>](#module_GitHub-Utilities)  
-**Returns**: <code>Object</code> - response status 200:  repo; else {Object} error  
-**See**: https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#get-a-repository  
-
-| Param | Type |
-| --- | --- |
-| full_name | <code>string</code> | 
-
-<a name="module_GitHub-Utilities.parseFetchedRepo"></a>
-
-### githubUtils.parseFetchedRepo(repo) ⇒ <code>GitHubRepository</code>
-Parse a GitHub repository from the `repos` endpoint response down to 
- only the data required for the repository component
-
-**Kind**: static method of [<code>GitHub-Utilities</code>](#module_GitHub-Utilities)  
-
-| Param | Type |
-| --- | --- |
-| repo | <code>Object</code> | 
-
-<a name="module_GitHub-Utilities..GitHubUser"></a>
-
-### GitHub-Utilities~GitHubUser : <code>Object</code>
-Content needed to render a GitHub user. This is a subset of the `users` endpoint response
-
-**Kind**: inner typedef of [<code>GitHub-Utilities</code>](#module_GitHub-Utilities)  
-**See**: https://docs.github.com/en/rest/users/users#get-a-user  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| login | <code>string</code> | User's GitHub login |
-| name | <code>string</code> | User's name |
-| [username] | <code>string</code> | alias for `login` |
-| [avatar_url] | <code>string</code> | URL to user's avatar |
-| [bio] | <code>string</code> | User's biography content |
-| [following] | <code>string</code> | number of people user is following |
-| [followers] | <code>string</code> | number of followers |
-
-<a name="module_GitHub-Utilities..GitHubRepository"></a>
-
-### GitHub-Utilities~GitHubRepository : <code>Object</code>
-Content needed to render a GitHub repository. This is a subset of the `repos` endpoint response
-
-**Kind**: inner typedef of [<code>GitHub-Utilities</code>](#module_GitHub-Utilities)  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| itemprop | <code>string</code> | Itemprop content to go on itemscope |
-| full_name | <code>string</code> | repository org and name, as in `scottnath/profile-components` |
-| [name] | <code>string</code> | repo name |
-| [org] | <code>string</code> | repo owner organization's login, found at `<REST_RESPONSE>.organization.login` |
-| [description] | <code>string</code> | repo description |
-| [language] | <code>string</code> | programming language used in repo |
-| [stargazers_count] | <code>string</code> | number of stars |
-| [forks_count] | <code>string</code> | number of forks |
-| [subscribers_count] | <code>string</code> | number of watchers |
-
 <a name="module_Primer-Utilities"></a>
 
 ## Primer-Utilities
-Primer design system utilities for GitHub web components
+Primer design system utilities to generate assets for GitHub web components
 
 **Author**: @scottnath  
 
@@ -309,10 +201,10 @@ Utility functions used for testing and prototyping components
 **Author**: @scottnath  
 <a name="module_Testing.generateMockResponse"></a>
 
-### testing.generateMockResponse ⇒
+### testing.generateMockResponse(content, type, status) ⇒
 Generate a mock github api response
 
-**Kind**: static constant of [<code>Testing</code>](#module_Testing)  
+**Kind**: static method of [<code>Testing</code>](#module_Testing)  
 **Returns**: mock response object  
 
 | Param | Type | Description |

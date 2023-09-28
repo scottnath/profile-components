@@ -12,6 +12,7 @@
  * @param {string} type - 'users' or 'repos'
  * @param {number} status - 200 or 404
  * @returns mock response object
+ * @function
  */
 export const generateMockResponse = (content, type='users', status=200) => {
   let url = `https://api.github.com/${type}/`;
