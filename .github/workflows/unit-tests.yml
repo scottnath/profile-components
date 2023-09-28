@@ -4,8 +4,8 @@ name: 'Unit Tests'
 on: push
 
 jobs:
-  # Run unit tests via vitest
-  vitest:
+  # Run unit tests via Node native test runner
+  unit-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
