@@ -1,4 +1,12 @@
+/**
+ * @name GitHub-Repo-Utilities
+ * @module
+ * @typicalname githubRepoUtils
+ * @description Utility functions for fetching and parsing GitHub Repository data
+ * @author @scottnath
+ */
 
+/** @ignore */
 const githubApi = 'https://api.github.com';
 
 /**
@@ -52,8 +60,9 @@ export const parseFetchedRepo = (repo = {}) => {
 /**
  * Parses and cleans repository content to match what is expected by the repository HTML
  * @param {GitHubRepositoryHTML} content - a content object either from component or GitHub API
- * @param {boolean} no_org - if true, remove the `org` attribute from the returned object
+ * @param {boolean} [no_org] - if true, remove the `org` attribute from the returned object
  * @returns {GitHubRepositoryHTML} ready for HTML content
+ * @function
  */
 export const cleanRepoContent = (content, no_org) => {
   const repo = parseFetchedRepo(content);
@@ -84,9 +93,10 @@ export const cleanRepoContent = (content, no_org) => {
 /**
  * Generates an object of content for the repository HTML
  * @param {GitHubRepositoryHTML} content 
- * @param {boolean} fetch 
- * @param {boolean} no_org 
+ * @param {boolean} [fetch] 
+ * @param {boolean} [no_org] 
  * @returns {GitHubRepositoryHTML} content ready for HTML, possibly includes fetched content
+ * @function
  */
 export const generateRepoContent = async (content, fetch = false, no_org = false) => {
   const repoFromContent = cleanRepoContent(content, no_org);

@@ -1,13 +1,14 @@
 /**
- * @name GitHub-Utilities
+ * @name GitHub-User-Utilities
  * @module
- * @typicalname githubUtils
- * @description Utility functions for fetching and parsing GitHub data
+ * @typicalname githubUserUtils
+ * @description Utility functions for fetching and parsing GitHub User data
  * @author @scottnath
  */
 
 import { generateRepoContent } from '../repository/content.js';
 
+/** @ignore */
 const githubApi = 'https://api.github.com';
 
 /**
@@ -29,6 +30,7 @@ const blankPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1
  * @property {string} [following] - number of people user is following
  * @property {string} [followers] - number of followers
  * @property {string} [error] - error message, if any
+ * @property {Array<GitHubRepositoryHTML>} [repositories] - array of repositories
  */
 
 /**
@@ -70,6 +72,7 @@ export const parseFetchedUser = (user = {}) => {
  * @param {string} reposStr - String of GitHubRepository data
  * @param {string} [owner] - GitHub user login, repository strings are not `full_name`s
  * @returns array of strings of attributes for each repository
+ * @function
  */
 export const parseReposString = (reposStr, owner) => {
   let repos = [];
@@ -103,6 +106,7 @@ export const parseReposString = (reposStr, owner) => {
  * Parses and cleans user content to match what is expected by the user HTML
  * @param {GitHubUserHTML} content - a content object representing a GitHub user
  * @returns {GitHubUserHTML} ready for HTML content
+ * @function
  */
 export const cleanUserContent = (content = {}) => {
   if (content.username && !content.login) {
@@ -132,8 +136,9 @@ export const cleanUserContent = (content = {}) => {
 /**
  * Generates an object of content for the repository HTML
  * @param {GitHubUserHTML} content 
- * @param {boolean} fetch 
+ * @param {boolean} [fetch] 
  * @returns {GitHubUserHTML} content ready for HTML, possibly includes fetched content
+ * @function
  */
 export const generateUserContent = async (content, fetch = false) => {
   const userFromContent = cleanUserContent(content);
