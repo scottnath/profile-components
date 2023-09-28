@@ -12,11 +12,6 @@
           "name": "GitHubRepository",
           "members": [
             {
-              "kind": "method",
-              "name": "_getAttributes",
-              "description": "Generate variables at `this.[attribute-name]` for each attribute on the element"
-            },
-            {
               "kind": "field",
               "name": "attrs",
               "type": {
@@ -31,6 +26,94 @@
                 "text": "object"
               },
               "default": "{}"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "repository org and name, as in `scottnath/profile-components`",
+              "name": "full_name",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "repo name",
+              "name": "name",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "repo owner organization's login, found at `<REST_RESPONSE>.organization.login`",
+              "name": "org",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "repo description",
+              "name": "description",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "programming language used in repo",
+              "name": "language",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "number of stars",
+              "name": "stargazers_count",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "number of forks",
+              "name": "forks_count",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "number of watchers",
+              "name": "subscribers_count",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "when true, fetches repo from GitHub api",
+              "name": "fetch",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Itemprop content to go with a containing component's itemscope",
+              "name": "itemprop",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Do not include the repo owner or organization",
+              "name": "no_org",
+              "kind": "field"
             }
           ],
           "superclass": {
@@ -62,121 +145,107 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/github/user.js",
+      "path": "src/github/user/index.js",
       "declarations": [
         {
           "kind": "class",
-          "description": "GitHub repository UI component\n All props are attributes and should be the same content as the GitHub API\n endpoint for getting a repository",
+          "description": "GitHub user profile web component",
           "name": "GitHubUser",
           "members": [
             {
-              "kind": "method",
-              "name": "_parseReposAttribute",
-              "parameters": [
-                {
-                  "name": "reposAttr",
-                  "description": "String of GitHubRepository data",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ],
-              "description": "Parses a string, which should be a JSON stringified array of GitHubRepository \n objects or strings. If a string, it should be the `full_name` of the repository\n and `fetch=true` will be an attribute on the repository component",
-              "return": {
-                "type": {
-                  "text": ""
-                }
-              }
+              "kind": "field",
+              "name": "attrs",
+              "type": {
+                "text": "object"
+              },
+              "default": "{}"
             },
             {
-              "kind": "method",
-              "name": "_getAttributes",
-              "description": "Generate variables at `this.[attribute-name]` for each attribute on the element"
+              "kind": "field",
+              "name": "content",
+              "type": {
+                "text": "object"
+              },
+              "default": "{}"
             },
-            {
-              "kind": "method",
-              "name": "_checkAttributes",
-              "description": "Check that required attributes are present, adjusts content as needed"
-            },
-            {
-              "kind": "method",
-              "name": "_parseFetch",
-              "description": "Fetch user data from GitHub API and parse out \n the content needed for this component. Either adds an error\n or adds the parsed content to the element's attributes"
-            },
-            {
-              "kind": "method",
-              "name": "_render"
-            }
-          ],
-          "attributes": [
             {
               "type": {
                 "text": "string"
               },
               "description": "User's GitHub login",
-              "name": "login"
+              "name": "login",
+              "kind": "field"
             },
             {
               "type": {
                 "text": "string"
               },
               "description": "URL to user's avatar",
-              "name": "avatar_url"
+              "name": "avatar_url",
+              "kind": "field"
             },
             {
               "type": {
                 "text": "string"
               },
               "description": "User's name",
-              "name": "name"
+              "name": "name",
+              "kind": "field"
             },
             {
               "type": {
                 "text": "boolean"
               },
               "description": "when true, fetches user from GitHub api",
-              "name": "fetch"
+              "name": "fetch",
+              "kind": "field"
             },
             {
               "type": {
                 "text": "string"
               },
               "description": "alias for `login`",
-              "name": "username"
+              "name": "username",
+              "kind": "field"
             },
             {
               "type": {
                 "text": "string"
               },
               "description": "User's biography content",
-              "name": "bio"
+              "name": "bio",
+              "kind": "field"
             },
             {
               "type": {
                 "text": "string"
               },
               "description": "number of people user is following",
-              "name": "following"
+              "name": "following",
+              "kind": "field"
             },
             {
               "type": {
                 "text": "string"
               },
               "description": "number of followers",
-              "name": "followers"
+              "name": "followers",
+              "kind": "field"
             },
             {
               "type": {
                 "text": "string"
               },
               "description": "JSON stringified array of repositories",
-              "name": "repos"
+              "name": "repos",
+              "kind": "field"
             }
           ],
           "superclass": {
             "name": "HTMLElement"
           },
           "tagName": "github-user",
+          "summary": "Native web component which shows a GitHub user's profile content. Can use local data, \nfetch data from the GitHub rest API, or use a combination of both.",
           "customElement": true
         }
       ],
@@ -186,7 +255,7 @@
           "name": "GitHubUser",
           "declaration": {
             "name": "GitHubUser",
-            "module": "src/github/user.js"
+            "module": "src/github/user/index.js"
           }
         },
         {
@@ -194,7 +263,7 @@
           "name": "github-user",
           "declaration": {
             "name": "GitHubUser",
-            "module": "src/github/user.js"
+            "module": "src/github/user/index.js"
           }
         }
       ]

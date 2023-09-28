@@ -16,9 +16,9 @@ ${styles}
 `;
 
 /**
- * GitHub repository UI component
- *  All props are attributes and should be the same content as the GitHub API
- *  endpoint for getting a repository
+ * GitHub user profile web component
+ * @summary Native web component which shows a GitHub user's profile content. Can use local data, 
+ *  fetch data from the GitHub rest API, or use a combination of both.
  * @see https://docs.github.com/en/rest/repos/repos#get-a-repository
  * @element github-user
  * @name GitHubUser
@@ -32,8 +32,14 @@ ${styles}
  * @property {string} [following] - number of people user is following
  * @property {string} [followers] - number of followers
  * @property {string} [repos] - JSON stringified array of repositories
+ * 
+ * @example
+ * <github-user login="scottnath" fetch="true"></github-user>
  */
 export class GitHubUser extends HTMLElement {
+  /**
+   * @ignore
+   */
   constructor() {
     super();
     this.attrs = {};
@@ -44,6 +50,7 @@ export class GitHubUser extends HTMLElement {
 
   /**
    * Generate variables at `this.[attribute-name]` for each attribute on the element
+   * @ignore
    */
   _getAttributes() {
     for (let name of this.getAttributeNames()) {
