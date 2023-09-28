@@ -35,11 +35,17 @@ function user(content) {
             <dl>
             ${content.followers ? `
               <span><dt>followers</dt>
-              <dd itemprop="followee">${content.followers}</dd></span>
+              <dd itemprop="followee">
+                <span aria-hidden="true">${intToString(content.followers)}</span>
+                <span class="sr-only">${content.followers}</span>
+              </dd></span>
             ` : ''}
             ${content.following ? `
               <span><dt>following</dt>
-              <dd itemprop="follows">${content.following}</dd></span>
+              <dd itemprop="follows">
+                <span aria-hidden="true">${intToString(content.following)}</span>
+                <span class="sr-only">${content.following}</span>
+              </dd></span>
             ` : ''}
             </dl>
           ` : ''}

@@ -56,7 +56,14 @@ export const ReposFetch = {
     ...User.args,
     repos: JSON.stringify([repoScottnathdotcom.name, repoStorydocker.full_name]).replace(/"/g, "&quot;"),
   },
-  play: User.play,
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedUser(userScottnath),
+      ...args,
+    };
+    await ensureElements(elements, args);
+  }
 }
 
 export const Fetch = {
@@ -70,8 +77,6 @@ export const Fetch = {
     ]
   },
   play: async ({ args, canvasElement, step }) => {
-    /** wait for fetch to complete */
-    await new Promise(resolve => setTimeout(resolve, 0));
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
       ...parseFetchedUser(userScottnath),
@@ -92,8 +97,6 @@ export const FetchError = {
     ]
   },
   play: async ({ args, canvasElement, step }) => {
-    /** wait for fetch to complete */
-    await new Promise(resolve => setTimeout(resolve, 0));
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
       ...args,

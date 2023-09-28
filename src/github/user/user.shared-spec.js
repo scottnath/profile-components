@@ -9,7 +9,7 @@ import { intToString } from '../../utils/index.js';
  */
 export const getElements = async (canvasElement) => {
   const screen = shadowWithin(canvasElement);
-  const container = await screen.queryByShadowLabelText(/GitHub user profile/i);
+  const container = await screen.findByShadowLabelText(/GitHub user profile/i);
   const [headerName] = await container?.querySelectorAll('[itemprop="alternativeName"]');
   const [mainLink] = await screen.queryAllByShadowRole('link');
   const [ avatar ] = await screen.queryAllByShadowRole('img');
