@@ -267,6 +267,216 @@
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/devto/user/index.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "dev.to user profile web component",
+          "name": "DevtoUser",
+          "members": [
+            {
+              "kind": "field",
+              "name": "attrs",
+              "type": {
+                "text": "object"
+              },
+              "default": "{}"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "User's dev.to username",
+              "name": "username",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "The name of the user",
+              "name": "name",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "The user's bio",
+              "name": "summary",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "The date the user joined",
+              "name": "joined_at",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "The URL of the user's profile image",
+              "name": "profile_image",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "when true, fetches user and posts from api",
+              "name": "fetch",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "number"
+              },
+              "description": "The number of posts the user has published",
+              "name": "post_count",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "User's latest post content, JSON stringified",
+              "name": "latest_post",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "User's most popular post content, JSON stringified",
+              "name": "popular_post",
+              "kind": "field"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "devto-user",
+          "summary": "Native web component which shows a dev.to user's profile content. \nCan use local data, or fetch data from the dev.to API, or use a combination of both.",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DevtoUser",
+          "declaration": {
+            "name": "DevtoUser",
+            "module": "src/devto/user/index.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "devto-user",
+          "declaration": {
+            "name": "DevtoUser",
+            "module": "src/devto/user/index.js"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/devto/post/index.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "dev.to (or forem.dev) post web component",
+          "name": "DevtoPost",
+          "members": [
+            {
+              "kind": "field",
+              "name": "attrs",
+              "type": {
+                "text": "object"
+              },
+              "default": "{}"
+            },
+            {
+              "type": {
+                "text": "number"
+              },
+              "description": "Post ID",
+              "name": "id",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Post title",
+              "name": "title",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Post URL",
+              "name": "url",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Post cover image URL",
+              "name": "cover_image",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "Post social image URL",
+              "name": "social_image",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "when true, fetches post from api",
+              "name": "fetch",
+              "kind": "field"
+            }
+          ],
+          "superclass": {
+            "name": "HTMLElement"
+          },
+          "tagName": "devto-post",
+          "summary": "Native web component which shows a dev.to (or forem.dev) post. Can use local data,\nfetch data from the dev.to API, or use a combination of both.",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DevtoPost",
+          "declaration": {
+            "name": "DevtoPost",
+            "module": "src/devto/post/index.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "devto-post",
+          "declaration": {
+            "name": "DevtoPost",
+            "module": "src/devto/post/index.js"
+          }
+        }
+      ]
     }
   ]
 }

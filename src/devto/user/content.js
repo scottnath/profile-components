@@ -1,8 +1,8 @@
 /**
- * @name Forem-Post-Utilities
+ * @name DEV-User-Utilities
  * @module
- * @typicalname foremPostUtils
- * @description Utility functions for fetching and parsing Forem post data
+ * @typicalname devUserUtils
+ * @description Utility functions for fetching and parsing user data
  * @author @scottnath
  */
 
@@ -33,15 +33,15 @@ const blankPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1
  * @typedef {ForemUser} ForemUserHTML
  * @property {string} [error] - An error message
  * @property {number} [post_count] - The number of posts the user has published
- * @property {import('../post/content.js').ForemPostHTML} [latest_post] - User's latest post
- * @property {import('../post/content.js').ForemPostHTML} [popular_post] - User's most popular post
+ * @property {ForemPostHTML} [latest_post] - User's latest post
+ * @property {ForemPostHTML} [popular_post] - User's most popular post
  */
 
 /**
  * Fetch a user's data from the Forem API
  * @param {string} username - The username of the user
  * @param {string} id - the id of the user
- * @returns {(ForemUser | import('../utils/index.js').ForemError)} response status 200: article; else status 404: error
+ * @returns {(ForemUser | ForemError)} response status 200: article; else status 404: error
  * @function
  */
 export const fetchUser = async (username, id) => {
@@ -93,7 +93,7 @@ export const parseFetchedUser = (user = {}) => {
 export const cleanUserContent = (content = {}) => {
   content.profile_image = content.profile_image || blankPng;
   content.name = content.name || `@${content.username}`;
-  if (content.post_count && Number(content.post_count) !== NaN) {
+  if (content.post_count && !Number(content.post_count)) {
     content.post_count = Number(content.post_count);
   } else {
     delete content.post_count;

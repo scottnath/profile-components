@@ -6,7 +6,8 @@ import { styles } from '../styles/index.js';
  * dev.to (or forem.dev) post web component
  * @summary Native web component which shows a dev.to (or forem.dev) post. Can use local data,
  *  fetch data from the dev.to API, or use a combination of both.
- * @element forem-post
+ * @element devto-post
+ * @name DevtoPost
  * 
  * @property {number} id - Post ID
  * @property {string} title - Post title

@@ -20,7 +20,8 @@ import { getApiUrl } from '../utils/index.js';
 
 /**
  * Forem post content, ready for HTML
- * @typedef {ForemPost & {error: string}} ForemPostHTML
+ * @typedef {ForemPost} ForemPostHTML
+ * @property {string} [error] - An error message
  */
 
 /**
@@ -88,7 +89,7 @@ export const parseFetchedPost = (post = {}) => {
 /**
  * Parses and confirms post content to match what is expected by the post HTML
  * @param {ForemPost} content 
- * @returns {(ForemPost | import('../utils/index.js').ForemError)} 
+ * @returns {(ForemPost | ForemError)} 
  */
 export const cleanPostContent = (content = {}) => {
   const post = parseFetchedPost(content);
@@ -102,7 +103,7 @@ export const cleanPostContent = (content = {}) => {
  * Generates an object of content for the post HTML
  * @param {ForemPost} content 
  * @param {boolean} [fetch] - whether to fetch post content from the API
- * @returns {(ForemPost | import('../utils/index.js').ForemError)} content ready for HTML, possibly includes fetched content
+ * @returns {(ForemPost | ForemError)} content ready for HTML, possibly includes fetched content
  * @function
  */
 export const generatePostContent = async (content, fetch = false) => {

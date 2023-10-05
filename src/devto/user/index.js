@@ -3,6 +3,26 @@ import { generateUserContent } from './content.js';
 import userHTML from './html.js';
 import { styles } from '../styles/index.js';
 
+/**
+ * dev.to user profile web component
+ * @summary Native web component which shows a dev.to user's profile content. 
+ *  Can use local data, or fetch data from the dev.to API, or use a combination of both.
+ * @element devto-user
+ * @name DevtoUser
+ * 
+ * @property {string} username - User's dev.to username
+ * @property {string} [name] - The name of the user
+ * @property {string} [summary] - The user's bio
+ * @property {string} [joined_at] - The date the user joined
+ * @property {string} [profile_image] - The URL of the user's profile image
+ * @property {boolean} [fetch] - when true, fetches user and posts from api
+ * @property {number} [post_count] - The number of posts the user has published
+ * @property {string} [latest_post] - User's latest post content, JSON stringified 
+ * @property {string} [popular_post] - User's most popular post content, JSON stringified 
+ * 
+ * @example
+ * <devto-user username="scottnath" fetch="true"></devto-user>
+ */
 export class DevtoUser extends HTMLElement {
   /**
    * @ignore

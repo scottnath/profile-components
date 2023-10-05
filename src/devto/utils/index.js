@@ -1,10 +1,3 @@
-/**
- * @name DevTo-Utilities
- * @module
- * @typicalname devToUtils
- * @description Multi-use utility functions
- * @author @scottnath
- */
 
 /**
  * Content in an error response from the dev.to (or Forem) API
@@ -17,7 +10,7 @@
  * Get the API url, whether dev.to or forem.dev
  * @function
  * @param {string} api - 'devto' or 'forem'
- * @returns {string} - url
+ * @returns {string} - url root for the API
  */
 export const getApiUrl = (api = 'devto') => {
   switch (api) {
@@ -32,7 +25,8 @@ export const getApiUrl = (api = 'devto') => {
 
 /**
  * Format a date for machine-readability
- * @param {string} dt 
+ * @function
+ * @param {string} dt - a date string
  * @returns {string} - the machine-readable value of the date
  */
 export const formatDate = (dt) => {

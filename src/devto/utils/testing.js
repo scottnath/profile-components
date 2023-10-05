@@ -8,7 +8,7 @@
 
 /**
  * Generate a mock github api response
- * @param {(import("../post/content").ForemPost | import("../user/content").ForemUser)} content - mock return data
+ * @param {(ForemPost|ForemUser)} content - mock return data
  * @param {string} type - 'users' or 'article'
  * @param {number} status - 200 or 404
  * @returns mock response object

@@ -1,8 +1,8 @@
 
 /**
  * dev.to (or forem.dev) post HTML generation
- * @param {import("./content").ForemPostHTML} content 
- * @returns 
+ * @param {ForemPostHTML} content 
+ * @returns {string} HTML string with added content
  */
 function post(content) {
   if (content.error) {

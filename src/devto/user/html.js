@@ -3,8 +3,8 @@ import postHTML from "../post/html.js";
 
 /**
  * dev.to (or forem.dev) user HTML generation
- * @param {import("./content").ForemUser} content 
- * @returns 
+ * @param {ForemUser} content 
+ * @returns {string} HTML string with added content
  */
 function post(content) {
   if (content.error) {
