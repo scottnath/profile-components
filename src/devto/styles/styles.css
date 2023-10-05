@@ -7,7 +7,6 @@ span[itemscope].post {
     display: flex;
     flex-direction: column;
     gap: var(--row-spacing);
-    color: var(--card-color-bold);
 
     & img {
       width: 100%;
@@ -35,15 +34,15 @@ section[itemscope] {
 
   position: relative;
   border-radius: var(--radius);
-  box-shadow: 0 0 0 1px var(--card-shadow-color);
+  box-shadow: 0 0 0 1px var(--color-shadow);
   background: var(--card-bg);
 
   & header {
     &::before {
       content: " ";
       display: block;
-      background-color: var(--profile-brand-color);
-      height: 2em;
+      background-color: var(--color-profile);
+      height: var(--heading-height);
     }
     & span:has([itemprop="memberOf"]) {
       display: inline-block;
@@ -57,8 +56,8 @@ section[itemscope] {
 
       margin: 0 auto;
       position: absolute;
-      right: 1em;
-      top: 1px;
+      right: var(--side-spacing);
+      top: calc(calc(var(--heading-height) - var(--logo-size)) / 2);
 
       & span {
         position: absolute;
@@ -100,9 +99,12 @@ section[itemscope] {
       [itemprop="name"] {
         display: inline-block;
         width: 100%;
-        color: var(--color-bold);
         font-size: var(--font-size-title);
         font-weight: var(--font-weight-bold);
+      }
+
+      &:hover, &:focus {
+        color: var(--color-link-hover);
       }
     }
 
@@ -138,19 +140,20 @@ section[itemscope] {
     display: flex;
     flex-direction: column;
     gap: var(--row-spacing);
-    padding: 1em 1em .5em;
+    padding: .5em var(--side-spacing);
 
     & p:has(time),
     & p.post_count {
       font-size: var(--font-size-light);
+      color: var(--color-light);
 
       &::before {
         content: " ";
         display: inline-block;
         vertical-align: text-bottom;
         margin-right: var(--svg-gap);
-        height: 1.3em;
-        width: 1.3em;
+        height: var(--svg-size);
+        width: var(--svg-size);
         background-color: var(--color-light);
         -webkit-mask-repeat: no-repeat;
         mask-repeat: no-repeat;
@@ -158,6 +161,8 @@ section[itemscope] {
         mask-position: center;
         -webkit-mask-image: var(--svg-cake-icon);
         mask-image: var(--svg-cake-icon);
+        -webkit-mask-size: contain;
+        mask-size: contain;
       }
     }
 
@@ -183,7 +188,7 @@ section[itemscope] {
   }
 
   & footer {
-    padding: var(--row-spacing) 1em;
+    padding: var(--row-spacing) var(--side-spacing);
 
     [itemprop="url"] {
       border: 1px solid;
@@ -194,15 +199,15 @@ section[itemscope] {
       overflow-wrap: normal;
       padding: .5em 1em;
     
-      border-color: var(--cta-border);
+      border-color: var(--btn-border);
       border-radius: var(--radius);
-      background-color: var(--cta-bg);
-      color: var(--cta-color);
+      background-color: var(--btn-bg);
+      color: var(--btn-color);
 
       &:hover, &:focus {
-        background-color: var(--cta-bg-hover);
-        border-color: var(--cta-border-hover);
-        color: var(--cta-color-hover);
+        background-color: var(--btn-bg-hover);
+        border-color: var(--btn-border-hover);
+        color: var(--btn-color-hover);
       }
         
     }

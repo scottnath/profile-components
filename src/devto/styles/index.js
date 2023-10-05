@@ -1,5 +1,5 @@
 
-import devStyles from './vars-dev.css?inline';
+import devStyles from './vars-devto.css?inline';
 import globalStyles from './global.css?inline';
 import style from './styles.css?inline';
 

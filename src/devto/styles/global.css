@@ -9,30 +9,39 @@
   --font-size-bold: 1.25em;
   --font-size-title: 1.5em;
 
-  --font-weight-light: var(--base-text-weight-light);
   --font-weight-normal: var(--fw-normal);
   --font-weight-bold: var(--fw-bold);
 
-  --bg-color-light: var(--color-canvas-subtle);
-  --bg-color-normal: var(--color-canvas-default);
+  --bg-color-normal: var(--card-bg);
 
-  --border-color: var(--color-border-default);
-  --border-width: var(--borderWidth-thin);
-  --border-radius: var(--borderRadius-medium);
+  --border-color: var(--card-border);
+  --border-width: 1px;
+  --border-radius: var(--radius);
 
-  --color-light: var(--color-mild);
-  --color-normal: var(--color-base);
-  --color-shadow: var(--card-shadow-color);
+  --color-light: var(--base-60);
+  --color-normal: var(--body-color);
+  --color-shadow: var(--card-border);
+  --color-profile: var(--profile-brand-color);
   /* --color-bold: var(--color-bold); */
 
-  --color-link: var(--color-fg-accent);
+  --color-link: var(--link-color);
+  --color-link-hover: var(--link-color-hover);
   --color-danger: var(--color-fg-danger);
 
+  --btn-bg: var(--cta-branded-bg);
+  --btn-border: var(--cta-branded-border);
+  --btn-color: var(--cta-branded-color);
+  --btn-bg-hover: var(--cta-branded-bg-hover);
+  --btn-border-hover: var(--cta-branded-border-hover);
+  --btn-color-hover: var(--cta-branded-color-hover);
+
+  --heading-height: 2em;
   --logo-size: 1.6em;
   --logo-outline-offset: 2px;
   --svg-gap: 0.2em;
-  --svg-size: 1em;
+  --svg-size: 1.2em;
   --row-spacing: 0.3em;
+  --side-spacing: 0.5em;
   
   /* start of styles */
   line-height: 1.5;
@@ -46,14 +55,6 @@
   width: 100%;
 }
 
-@container (min-width: 300px) {
-  section[itemscope],
-  div[itemscope] {
-    --logo-size: 2em;
-    --row-spacing: 0.5em;
-  }
-}
-
 /** root elements cleanup */
 * {
   padding: 0;
@@ -62,6 +63,10 @@
 }
 a {
   text-decoration: none;
+  color: var(--color-link);
+  &:hover, &:focus {
+    color: var(--color-link-hover);
+  }
 }
 address {
   font-style: normal;
@@ -84,5 +89,20 @@ span[itemscope] {
 
   [itemprop="error"] {
     color: var(--color-danger);
+  }
+}
+
+@container (min-width: 300px) {
+  section[itemscope] {
+    --logo-size: 1.8em;
+    --row-spacing: 0.5em;
+    --side-spacing: 0.75em;
+  }
+}
+
+@container (min-width: 400px) {
+  section[itemscope] {
+    --logo-size: 2em;
+    --side-spacing: 1em;
   }
 }
