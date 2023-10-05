@@ -104,8 +104,11 @@ export const generateRepoContent = async (content, fetch = false, no_org = false
   let fetched = {};
   if (fetch) {
     fetched = await fetchRepo(repoFromContent.full_name);
-    if (fetched.message && fetched.message === 'Not Found') {
-      return { error: `Fetch Error: Repo "${repoFromContent.full_name}" not found`};
+    if (fetched.message) {
+      if (fetched.message === 'Not Found') {
+        return { error: `Fetch Error: Repo "${repoFromContent.full_name}" not found`};
+      }
+      return { error: `Fetch Error: ${fetched.message}`};
     }
     fetched = cleanRepoContent(fetched, no_org);
   }
