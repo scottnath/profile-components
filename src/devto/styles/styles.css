@@ -21,6 +21,7 @@ span[itemscope].post {
       [itemprop="name"] {
         flex: 1 0 calc(100% - 9em);
         display: inline-block;
+        font-size: var(--font-size-light)
       }
     }
   }
@@ -61,7 +62,7 @@ section[itemscope] {
 
       & span {
         position: absolute;
-        right: 1000px;
+        top: calc(var(--logo-size) * -2);
       }
     }
 
@@ -197,7 +198,7 @@ section[itemscope] {
       display: block;
       position: relative;
       overflow-wrap: normal;
-      padding: .5em 1em;
+      padding: .5em;
     
       border-color: var(--btn-border);
       border-radius: var(--radius);

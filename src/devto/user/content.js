@@ -93,11 +93,6 @@ export const parseFetchedUser = (user = {}) => {
 export const cleanUserContent = (content = {}) => {
   content.profile_image = content.profile_image || blankPng;
   content.name = content.name || `@${content.username}`;
-  if (content.post_count && !Number(content.post_count)) {
-    content.post_count = Number(content.post_count);
-  } else {
-    delete content.post_count;
-  }
   if (content.latest_post) {
     if (content.popular_post) {
       if (content.popular_post === content.latest_post) {
