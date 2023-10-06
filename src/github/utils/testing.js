@@ -8,7 +8,7 @@
 
 /**
  * Generate a mock github api response
- * @param {(GitHubRepository | GitHubUser)} content - mock return data
+ * @param {(GitHubRepository|GitHubUser)} content - mock return data
  * @param {string} type - 'users' or 'repos'
  * @param {number} status - 200 or 404
  * @returns mock response object

@@ -3,6 +3,10 @@
  * @see https://github.com/primer/css/blob/main/docs/.storybook/preview.js
  */
 
+/**
+ * Primer themes
+ * 
+ */
 export const primerThemes = [
   {value: 'light', left: '☀️', title: 'Light'},
   {value: 'light_colorblind', left: '☀️', title: 'Light Protanopia & Deuteranopia'},
@@ -13,8 +17,11 @@ export const primerThemes = [
   {value: 'dark_colorblind', left: '🌗', title: 'Dark Protanopia & Deuteranopia'},
   {value: 'dark_tritanopia', left: '🌗', title: 'Dark Tritanopia'},
   {value: 'dark_high_contrast', left: '🌗', title: 'Dark High Contrast'},
-]
+];
 
+/**
+ * Toolbar configuration to add Primer themes to Storybook
+ */
 export const globalTypesPrimer = {
   theme: {
     name: 'Theme',
@@ -29,7 +36,9 @@ export const globalTypesPrimer = {
   },
 }
 
-
+/**
+ * Adds current theme to the `args` in Storybook
+ */
 export const decoratorsPrimer = [
   (Story, context) => {
     const theme = context.globals.theme;

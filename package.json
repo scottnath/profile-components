@@ -13,8 +13,9 @@
     "prerelease": "npm run dist",
     "release": "semantic-release --debug=true",
     "test:unit": "node --test --experimental-test-coverage",
+    "generate:devto": "node lib/cli.js generate-vars-devto",
     "generate:primer": "node lib/cli.js generate-vars-primer",
-    "generate:fixtures": "node lib/cli.js generate-fixtures-github",
+    "generate:fixtures": "node lib/cli.js generate-fixtures-devto && node lib/cli.js generate-fixtures-github",
     "generate:docs": "node lib/cli.js generate-docs",
     "generate": "npm run generate:docs && npm run generate:primer && npm run generate:fixtures && npm run cem"
   },

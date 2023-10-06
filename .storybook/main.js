@@ -1,7 +1,7 @@
 import path from 'path';
 /** @type { import('@storybook/web-components-vite').StorybookConfig } */
 const config = {
-  stories: ['../src/github/*.mdx', '../src/github/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/github/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',

@@ -146,8 +146,11 @@ export const generateUserContent = async (content, fetch = false) => {
   let fetched = {};
   if (fetch) {
     fetched = await fetchUser(userFromContent.login);
-    if (fetched.message && fetched.message === 'Not Found') {
-      return { error: `Fetch Error: User "${content.login}" not found`};
+    if (fetched.message) {
+      if (fetched.message === 'Not Found') {
+        return { error: `Fetch Error: User "${content.login}" not found`};
+      }
+      return { error: `Fetch Error: ${fetched.message}`};
     }
     fetched = cleanUserContent(fetched);
     delete fetched.repositories;
