@@ -1,7 +1,9 @@
 
 import { generateMockResponse } from '../utils/testing';
 import { parseFetchedUser } from './content';
+import { parseFetchedPost } from '../post/content';
 import { default as userScottnath } from '../fixtures/generated/user--scottnath.json';
+import { default as postDependabot } from '../fixtures/generated/post--dependabot.json';
 
 import './index.js';
 
@@ -27,11 +29,19 @@ export default {
 export const User = {
   args: {
     ...parseFetchedUser(userScottnath),
+    post_count: 123456,
   },
   // play: async ({ args, canvasElement, step }) => {
   //   const elements = await getElements(canvasElement);
   //   await ensureElements(elements, args);
   // }
+}
+
+export const UserPosts = {
+  args: {
+    ...User.args,
+    latest_post: stringify(parseFetchedPost(postDependabot)),
+  }
 }
 
 export const Fetch = {

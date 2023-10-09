@@ -52,6 +52,7 @@ export const OnlyRequired = {
   },
   play: User.play,
 }
+
 export const Fetch = {
   args: {
     login: userScottnath.login,
@@ -91,13 +92,18 @@ export const ReposFetch = {
     fetch: true,
     repos: stringify([repoScottnathdotcom.name, repoStorydocker.full_name]),
   },
+  parameters: {
+    mockData: [
+      generateMockResponse(userScottnath, 'users'),
+    ]
+  },
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
       ...parseFetchedUser(userScottnath),
       ...args,
     };
-    await ensureElements(elements, args);
+    await ensureElements(elements, argsAfterFetch);
   }
 }
 
