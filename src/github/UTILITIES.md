@@ -27,11 +27,18 @@ Utility functions for fetching and parsing GitHub api data, getting
 Utility functions for a repository
 
 **Kind**: static namespace of [<code>GitHubUtils</code>](#GitHubUtils)  
-**Example**  
+**Example** *(Server side rendering trick)*  
 ```js
+<github-repository>
+ <template id="github-repo" shadowrootmode="open"></template>
+</github-repository>
+
+<script type="module">
 import {repo} from 'profile-components/github-utils';
-const content = repo.content({full_name: 'scottnath/profile-components'}, true);
+const content = repo.generateContent({full_name: 'scottnath/profile-components'}, true);
 const html = repo.html(content);
+document.querySelector('#github-repo').innerHTML = `<style>${repo.style}</style>${html}`;
+</script>
 ```
 
 * [.repo](#GitHubUtils.repo) : <code>object</code>
@@ -98,11 +105,18 @@ Content needed to render a GitHub repository. This is a subset of the `repos` en
 Utility functions for a user
 
 **Kind**: static namespace of [<code>GitHubUtils</code>](#GitHubUtils)  
-**Example**  
+**Example** *(Server side rendering trick)*  
 ```js
+<github-user>
+ <template id="github-user" shadowrootmode="open"></template>
+</github-user>
+
+<script type="module">
 import {user} from 'profile-components/github-utils';
-const content = user.content({login: 'scottnath'}, true);
+const content = user.generateContent({login: 'scottnath'}, true);
 const html = user.html(content);
+document.querySelector('#github-user').innerHTML = `<style>${user.style}</style>${html}`;
+</script>
 ```
 
 * [.user](#GitHubUtils.user) : <code>object</code>

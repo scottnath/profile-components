@@ -5,8 +5,10 @@ import postHTML from "../post/html.js";
  * dev.to (or forem.dev) user HTML generation
  * @param {ForemUser} content 
  * @returns {string} HTML string with added content
+ * @function
+ * @memberof DEVUtils.user
  */
-function post(content) {
+function html(content) {
   if (content.error) {
     return `
       <section aria-label="dev.to user profile" itemscope itemtype="http://schema.org/Action">
@@ -54,4 +56,4 @@ function post(content) {
   `;
 }
 
-export default post;
+export default html;

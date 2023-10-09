@@ -5,6 +5,8 @@ import { default as userScottnath } from '../fixtures/generated/user--scottnath.
 
 import './index.js';
 
+const stringify = (obj) => JSON.stringify(obj).replace(/"/g, "&quot;");
+
 export default {
   title: 'DevTo/devto-user',
   component: 'devto-user',
@@ -32,9 +34,32 @@ export const User = {
   // }
 }
 
-export const UserFetch = {
+export const Fetch = {
   args: {
     username: userScottnath.username,
     fetch: true,
+  },
+}
+
+export const FetchWithoutPosts = {
+  args: {
+    username: userScottnath.username,
+    fetch: 'no-posts',
+  },
+}
+
+export const FetchOverides = {
+  args: {
+    username: userScottnath.username,
+    fetch: 'true',
+    name: "Meowy McMeowerstein",
+    summary: "Spending time purring and sleepin",
+    profile_image: 'multi-face-image.jpeg',
+    joined_at: 'Jan 1, 1979',
+    post_count: 1000000,
+    latest_post: stringify({
+      title: 'Meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow',
+      url: 'http://example.com'
+    }),
   },
 }

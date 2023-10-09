@@ -1,11 +1,3 @@
-/**
- * @name DevTo-Post-Utilities
- * @module
- * @typicalname devtoPostUtils
- * @description Utility functions for fetching and parsing post data
- * @author @scottnath
- */
-
 import { getApiUrl } from '../utils/index.js';
 
 /**
@@ -16,12 +8,15 @@ import { getApiUrl } from '../utils/index.js';
  * @property {string} url - The URL of the post
  * @property {string} cover_image - The URL of the post's full-size cover image
  * @property {string} social_image - The URL of the post's social image
+ * @property {number} id - The ID of the post
+ * @memberof DEVUtils.post
  */
 
 /**
  * Forem post content, ready for HTML
  * @typedef {ForemPost} ForemPostHTML
  * @property {string} [error] - An error message
+ * @memberof DEVUtils.post
  */
 
 /**
@@ -30,6 +25,7 @@ import { getApiUrl } from '../utils/index.js';
  * @param {string} id - unique post identifier
  * @returns {Object} response status 200: article; else status 404: error
  * @function
+ * @ignore
  */
 export const fetchPost = async (id) => {
   const response = await fetch(`${getApiUrl()}/articles/${id}`);
@@ -41,6 +37,7 @@ export const fetchPost = async (id) => {
  * @function Fetch a user's posts from the Forem API
  * @param {string} username 
  * @returns {ForemPost[]} - An array of posts
+ * @ignore
  */
 export const fetchUserPosts = async (username) => {
   const articles = await fetch(`${getApiUrl()}/articles/latest?per_page=1000&username=${username?.toLowerCase()}`);
@@ -53,6 +50,7 @@ export const fetchUserPosts = async (username) => {
  * @param {ForemPost[]} posts - array of posts
  * @param {string} [type='popular'] - type of post to find
  * @returns {ForemPost} - post
+ * @ignore
  */
 export const findPost = (posts, type='popular') => {
   if (!posts.length) return {};
@@ -76,6 +74,7 @@ export const findPost = (posts, type='popular') => {
  * @param {Object} post - post object
  * @returns {ForemPost}
  * @function
+ * @ignore
  */
 export const parseFetchedPost = (post = {}) => {
   return {
@@ -90,6 +89,7 @@ export const parseFetchedPost = (post = {}) => {
  * Parses and confirms post content to match what is expected by the post HTML
  * @param {ForemPost} content 
  * @returns {(ForemPost | ForemError)} 
+ * @ignore
  */
 export const cleanPostContent = (content = {}) => {
   const post = parseFetchedPost(content);
@@ -105,6 +105,8 @@ export const cleanPostContent = (content = {}) => {
  * @param {boolean} [fetch] - whether to fetch post content from the API
  * @returns {(ForemPost | ForemError)} content ready for HTML, possibly includes fetched content
  * @function
+ * @memberof DEVUtils.post
+ * @name generateContent
  */
 export const generatePostContent = async (content, fetch = false) => {
   if (fetch) {

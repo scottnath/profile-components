@@ -9,6 +9,7 @@ import { styles } from '../styles/index.js';
  *  Can use local data, or fetch data from the dev.to API, or use a combination of both.
  * @element devto-user
  * @name DevtoUser
+ * @module
  * 
  * @property {string} username - User's dev.to username
  * @property {string} [name] - The name of the user
@@ -21,6 +22,10 @@ import { styles } from '../styles/index.js';
  * @property {string} [popular_post] - User's most popular post content, JSON stringified 
  * 
  * @example
+ * <!-- import the web component -->
+ * <script type="module" src="https://unpkg.com/profile-components/dist/devto-user.js"></script>
+ * 
+ * <!-- use the custom element -->
  * <devto-user username="scottnath" fetch="true"></devto-user>
  */
 export class DevtoUser extends HTMLElement {

@@ -3,11 +3,12 @@ import postHTML from './html.js';
 import { styles } from '../styles/index.js';
 
 /**
- * dev.to (or forem.dev) post web component
+ * dev.to post web component
  * @summary Native web component which shows a dev.to (or forem.dev) post. Can use local data,
  *  fetch data from the dev.to API, or use a combination of both.
  * @element devto-post
  * @name DevtoPost
+ * @module
  * 
  * @property {number} id - Post ID
  * @property {string} title - Post title
@@ -17,6 +18,10 @@ import { styles } from '../styles/index.js';
  * @property {boolean} [fetch] - when true, fetches post from api
  * 
  * @example
+ * <!-- import the web component -->
+ * <script type="module" src="https://unpkg.com/profile-components/dist/devto-post.js"></script>
+ * 
+ * <!-- use the custom element -->
  * <devto-post id="123456" fetch="true"></devto-post>
  */
 export class DevtoPost extends HTMLElement {

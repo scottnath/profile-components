@@ -21,10 +21,17 @@ import repoHTML from './repository/html.js';
  * @memberof GitHubUtils
  * @description Utility functions for a repository
  * 
- * @example
+ * @example <caption>Server side rendering trick</caption>
+ * <github-repository>
+ *  <template id="github-repo" shadowrootmode="open"></template>
+ * </github-repository>
+ * 
+ * <script type="module">
  * import {repo} from 'profile-components/github-utils';
- * const content = repo.content({full_name: 'scottnath/profile-components'}, true);
+ * const content = repo.generateContent({full_name: 'scottnath/profile-components'}, true);
  * const html = repo.html(content);
+ * document.querySelector('#github-repo').innerHTML = `<style>${repo.style}</style>${html}`;
+ * </script>
  */
 const repo = {
   generateContent: generateRepoContent,
@@ -39,10 +46,17 @@ const repo = {
  * @memberof GitHubUtils
  * @description Utility functions for a user
  * 
- * @example
+ * @example <caption>Server side rendering trick</caption>
+ * <github-user>
+ *  <template id="github-user" shadowrootmode="open"></template>
+ * </github-user>
+ * 
+ * <script type="module">
  * import {user} from 'profile-components/github-utils';
- * const content = user.content({login: 'scottnath'}, true);
+ * const content = user.generateContent({login: 'scottnath'}, true);
  * const html = user.html(content);
+ * document.querySelector('#github-user').innerHTML = `<style>${user.style}</style>${html}`;
+ * </script>
  */
 const user = {
   generateContent: generateUserContent,
