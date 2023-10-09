@@ -70,9 +70,10 @@ section[itemscope] {
         border: var(--border-width) solid var(--border-color);
         border-radius: 50%;
         line-height: 1;
-        width: 70%;
-        height: auto;
+        width: 70cqw;
+        height: 70cqw;
         margin: 0 auto;
+        object-fit: cover;
       }
     }
 
@@ -106,6 +107,10 @@ section[itemscope] {
 
       [itemprop="image"] {
         flex: 1 1 30%;
+        & img {
+          width: 27cqw;
+          height: 27cqw;
+        }
       }
       [itemprop="creator"] {
         flex: 1 0 70%;

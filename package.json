@@ -37,14 +37,8 @@
     "LICENSE"
   ],
   "exports": {
-    "./*.js": {
+    "./*": {
       "import": "./dist/*.js"
-    },
-    "./github/*.js": {
-      "import": "./src/github/*.js"
-    },
-    "./github/utils/*.js": {
-      "import": "./src/github/utils/*.js"
     }
   },
   "license": "MIT",

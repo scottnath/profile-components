@@ -6,8 +6,10 @@ import { intToString } from '../../utils/index.js';
  * GitHub repository HTML generation
  * @param {GitHubRepositoryHTML} content - content needed to render a GitHub repository
  * @returns {string} HTML which represents a GitHub repository
+ * @function
+ * @memberof GitHubUtils.repo
  */
-function repository(content) {
+function html(content) {
   if (content.error) {
     return `
       <div aria-label="GitHub repository" class="repo" itemscope itemtype="http://schema.org/Action">
@@ -48,4 +50,4 @@ function repository(content) {
   `;
 }
 
-export default repository;
+export default html;

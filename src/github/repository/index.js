@@ -1,17 +1,6 @@
 import { generateRepoContent } from './content.js';
-import repositoryHTML from './html.js';
-import stylesPrimer from '../styles/vars-primer.css?inline';
-import stylesGlobal from '../styles/vars-global.css?inline';
-import styles from '../styles/repository.css?inline';
-
-/**
- * Styles for the component, imported during development, inlined during build
- */
-const componentStyles = `
-${stylesPrimer}
-${stylesGlobal}
-${styles}
-`;
+import html from './html.js';
+import { repository as styles } from '../styles/index.js';
 
 /**
  * GitHub repository web component
@@ -19,7 +8,7 @@ ${styles}
  *  fetch data from the GitHub rest API, or use a combination of both.
  * @element github-repository
  * @name GitHubRepository
- * @see https://docs.github.com/en/rest/repos/repos#get-a-repository
+ * @module
  * 
  * @property {string} full_name - repository org and name, as in `scottnath/profile-components`
  * @property {string} [name] - repo name
@@ -29,11 +18,15 @@ ${styles}
  * @property {string} [stargazers_count] - number of stars
  * @property {string} [forks_count] - number of forks
  * @property {string} [subscribers_count] - number of watchers
- * @property {boolean} [fetch] - when true, fetches repo from GitHub api
+ * @property {boolean} [fetch] - when true, fetches repo from [GitHub api](https://docs.github.com/en/rest/repos/repos#get-a-repository)
  * @property {string} [itemprop] - Itemprop content to go with a containing component's itemscope
  * @property {string} [no_org] - Do not include the repo owner or organization
  * 
  * @example
+ * <!-- import the web component -->
+ * <script type="module" src="https://unpkg.com/profile-components/dist/github-repository.js"></script>
+ * 
+ * <!-- use the custom element -->
  * <github-repository full_name="scottnath/profile-components" fetch="true"></github-repository>
  */
 export class GitHubRepository extends HTMLElement {
@@ -61,9 +54,9 @@ export class GitHubRepository extends HTMLElement {
   }
 
   async connectedCallback() {
-    let view = `<style>${componentStyles}</style>`;
+    let view = `<style>${styles}</style>`;
     this.repo = await generateRepoContent(this.attrs, this.attrs.fetch, this.attrs.no_org);
-    view += repositoryHTML(this.repo);
+    view += html(this.repo);
     this.shadowRoot.innerHTML = view;
     if (this.attrs.itemprop) {
       this.setAttribute('itemprop', this.attrs.itemprop);

@@ -6,6 +6,8 @@ import { getElements, ensureElements } from './user.shared-spec';
 
 import '.';
 
+const stringify = (obj) => JSON.stringify(obj).replace(/"/g, "&quot;");
+
 export default {
   title: 'GitHub/github-user',
   component: 'github-user',
@@ -33,7 +35,7 @@ export const User  = {
 export const UserRepos = {
   args: {
     ...User.args,
-    repos: JSON.stringify([parseFetchedRepo(repoStorydocker), { ...parseFetchedRepo(repoScottnathdotcom), user_login: userScottnath.login }]).replace(/"/g, "&quot;"),
+    repos: stringify([parseFetchedRepo(repoStorydocker), { ...parseFetchedRepo(repoScottnathdotcom), user_login: userScottnath.login }]),
   },
   play: User.play,
 }
@@ -50,22 +52,6 @@ export const OnlyRequired = {
   },
   play: User.play,
 }
-
-export const ReposFetch = {
-  args: {
-    ...User.args,
-    repos: JSON.stringify([repoScottnathdotcom.name, repoStorydocker.full_name]).replace(/"/g, "&quot;"),
-  },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...parseFetchedUser(userScottnath),
-      ...args,
-    };
-    await ensureElements(elements, args);
-  }
-}
-
 export const Fetch = {
   args: {
     login: userScottnath.login,
@@ -85,6 +71,36 @@ export const Fetch = {
     await ensureElements(elements, argsAfterFetch);
   }
 };
+
+export const FetchOverides = {
+  args: {
+    login: userScottnath.login,
+    fetch: true,
+    name: "Meowy McMeowerstein",
+    bio: "Spending time purring and sleepin",
+    avatar_url: 'multi-face-image.jpeg',
+    followers: "500000",
+    following: "2980",
+    repos: stringify([{"full_name":"scottnath/profile-components","description":"Cool thing, does stuff","language":"HTML"}])
+  },
+}
+
+export const ReposFetch = {
+  args: {
+    login: userScottnath.login,
+    fetch: true,
+    repos: stringify([repoScottnathdotcom.name, repoStorydocker.full_name]),
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedUser(userScottnath),
+      ...args,
+    };
+    await ensureElements(elements, args);
+  }
+}
+
 
 export const FetchError = {
   args: {
