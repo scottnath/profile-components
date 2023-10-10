@@ -78,7 +78,10 @@ export const FetchOverides = {
 }
 
 export const ContainerCheck = {
-  args: FetchOverides.args,
+  args: {
+    ...FetchOverides.args,
+    theme: 'dark'
+  },
 
   render: (args) => {
     const attributes = attrs(args);

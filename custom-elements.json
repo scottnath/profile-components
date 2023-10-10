@@ -239,6 +239,14 @@
               "description": "JSON stringified array of repositories",
               "name": "repos",
               "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "color theme for the component",
+              "name": "theme",
+              "kind": "field"
             }
           ],
           "superclass": {

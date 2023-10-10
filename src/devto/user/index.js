@@ -20,6 +20,7 @@ import { styles } from '../styles/index.js';
  * @property {number} [post_count] - The number of posts the user has published
  * @property {string} [latest_post] - User's latest post content, JSON stringified 
  * @property {string} [popular_post] - User's most popular post content, JSON stringified 
+ * @property {string} [theme] - color theme for the component
  * 
  * @example
  * <!-- import the web component -->
@@ -56,6 +57,9 @@ export class DevtoUser extends HTMLElement {
     this.user = await generateUserContent(this.attrs, this.attrs.fetch);
     view += userHTML(this.user);
     this.shadowRoot.innerHTML = view;
+    if (this.attrs.theme) {
+      this.setAttribute('data-theme', this.attrs.theme);
+    }
   }
   
 }

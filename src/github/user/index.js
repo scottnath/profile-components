@@ -19,6 +19,7 @@ import { styles } from '../styles/index.js';
  * @property {string} [following] - number of people user is following
  * @property {string} [followers] - number of followers
  * @property {string} [repos] - JSON stringified array of repositories
+ * @property {string} [theme] - color theme for the component
  * 
  * @example
  * <!-- import the web component -->
@@ -56,6 +57,9 @@ export class GitHubUser extends HTMLElement {
     this.content = await generateUserContent(this.attrs, this.attrs.fetch);
     view += html(this.content);
     this.shadowRoot.innerHTML = view;
+    if (this.attrs.theme) {
+      this.setAttribute('data-theme', this.attrs.theme);
+    }
   }
 }
 
