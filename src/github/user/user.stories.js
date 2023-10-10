@@ -84,6 +84,19 @@ export const FetchOverides = {
     following: "2980",
     repos: stringify([{"full_name":"scottnath/profile-components","description":"Cool thing, does stuff","language":"HTML"}])
   },
+  parameters: {
+    mockData: [
+      generateMockResponse(userScottnath, 'users'),
+    ]
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedUser(userScottnath),
+      ...args,
+    };
+    await ensureElements(elements, argsAfterFetch);
+  }
 }
 
 export const ReposFetch = {
