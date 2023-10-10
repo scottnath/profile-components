@@ -110,8 +110,8 @@ section[itemscope] {
       [itemprop="image"] {
         flex: 1 1 30%;
         & img {
-          width: 27cqw;
-          height: 27cqw;
+          width: 26cqw;
+          height: 26cqw;
         }
       }
       [itemprop="creator"] {
