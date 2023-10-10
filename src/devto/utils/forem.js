@@ -19,15 +19,15 @@ const generatedFile = path.join(__dirname, '../styles', 'vars-devto.css');
 /**
  * Forem CSS file source directory
  */
-const foremRawSource = 'https://raw.githubusercontent.com/forem/forem/main/app/assets/stylesheets/config/';
+const foremRawSource = 'https://raw.githubusercontent.com/forem/forem/main/app/assets/stylesheets/';
 
 /**
  * Get Forem CSS file's contents
  * @param {string} filename - css file name
  * @returns {string} contents of css file from Forem repo
  */
-export const getForemCSS = async (filename = '_variables.scss') => {
-  const foremCSSRawSource = `${foremRawSource}${filename}`;
+export const getForemCSS = async (filename = '_variables.scss', dir='config') => {
+  const foremCSSRawSource = `${foremRawSource}${dir}/${filename}`;
   try {
     const foremCSS = await fetch(foremCSSRawSource);
     const css = await foremCSS.text();
@@ -58,6 +58,8 @@ const copiedStyles = [
    * @see https://github.com/forem/forem/blob/main/app/assets/images/post.svg?short_path=b79fa43
    */
   `--svg-post-icon: url('data:image/svg+xml, <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 22H5a3 3 0 01-3-3V3a1 1 0 011-1h14a1 1 0 011 1v12h4v4a3 3 0 01-3 3zm-1-5v2a1 1 0 002 0v-2h-2zm-2 3V4H4v15a1 1 0 001 1h11zM6 7h8v2H6V7zm0 4h8v2H6v-2zm0 4h5v2H6v-2z"/></svg>');`,
+
+  `--base: #090909;`
 ]
 
 /**
@@ -71,7 +73,7 @@ export const getOneVarStyle = (style, css) => {
   if (!v) return null;
   const reg = new RegExp(`(${v[1]}.+);`, 'g');
   const styl = css.match(reg);
-  return style.length ? styl[0] : null;
+  return styl && styl.length ? styl[0] : null;
 }
 
 /**
@@ -92,7 +94,9 @@ export const getOneStyle = (name, css) => {
  */
 export const getDevStyleVariables = async () => {
   const topVars = [];
+  const topVarsDark = [];
   const vars = [];
+  const dark = [];
   const styles = [
     '--profile-brand-color: rgb(var(--black));'
   ];
@@ -104,17 +108,23 @@ export const getDevStyleVariables = async () => {
 
   const css = await getForemCSS('_colors.css');
   const cssVars = await getForemCSS('_variables.scss');
+  const cssDark = await getForemCSS('dark.css', 'themes');
 
   const topStyleVars = [
     '--white',
     '--black',
-    '--radius'
+    '--radius',
   ]
   topStyleVars.forEach((s) => {
     const style = getOneStyle(s, cssVars);
     if (!style) return;
     topVars.push(style);
   });
+
+  const baseVars = css.match(/(--base.+:.+);/g);
+  baseVars.forEach((b) => topVars.push(b));
+  const baseVarsDark = cssDark.match(/(--base.+:.+);/g);
+  baseVarsDark.forEach((b) => topVarsDark.push(b));
 
   const accentVars = cssVars.match(/(--accent-.+);/g);
   accentVars.forEach((b) => {
@@ -125,15 +135,31 @@ export const getDevStyleVariables = async () => {
 
   const accentColors = css.match(/( --accent-brand.+);/g);
   accentColors.forEach(s => vars.push(s.trim()));
+  const accentColorsDark = cssDark.match(/( --accent-brand.+);/g);
+  accentColorsDark.forEach(s => {
+    dark.push(s.trim());
+    const style = getOneVarStyle(s, cssVars);
+    (style && !duplicateCheck(style)) ? topVars.push(style) : null;
+  });
 
   const linkColors = css.match(/( --link-color.+);/g);
-  linkColors.forEach(s => vars.push(s.trim()));
+  linkColors.forEach((b) => {
+    vars.push(b.trim());
+    let style = getOneVarStyle(b, cssVars);
+    (style && !duplicateCheck(style)) ? topVars.push(style) : null;
+  });
+
+  const linkColorsDark = cssDark.match(/( --link-color.+);/g);
+  linkColorsDark.forEach((b) => {
+    dark.push(b.trim());
+    let style = getOneVarStyle(b, cssVars);
+    (style && !duplicateCheck(style)) ? topVarsDark.push(style) : null;
+  });
   
   const weights = cssVars.match(/(--fw-.+);/g);
   weights.forEach((w) => vars.push(w));
   
   const specificStylesCss = [
-    '--base-60',
     '--card-bg',
     '--card-border',
   ]
@@ -146,12 +172,27 @@ export const getDevStyleVariables = async () => {
     }
     styles.push(style);
   });
+  specificStylesCss.forEach((s) => {
+    const style = getOneStyle(s, cssDark);
+    if (!style) return;
+    if(style.includes('var(--')) {
+      const subStyle = getOneVarStyle(style, cssVars);
+      (subStyle && !duplicateCheck(subStyle)) ? topVarsDark.push(subStyle) : null;
+    }
+    dark.push(style);
+  });
 
   const body = css.match(/(  --body-.+);/g);
   body.forEach((b) => {
     vars.push(b);
     const style = getOneVarStyle(b, cssVars);
     style ? topVars.push(style) : null;
+  })
+  const bodyDark = cssDark.match(/(  --body-.+);/g);
+  bodyDark.forEach((b) => {
+    dark.push(b);
+    const style = getOneVarStyle(b, cssVars);
+    style ? topVarsDark.push(style) : null;
   })
 
   const ctas = css.match(/(  --cta-branded.+);/g);
@@ -160,12 +201,22 @@ export const getDevStyleVariables = async () => {
     const style = getOneVarStyle(b, cssVars);
     (style && !duplicateCheck(style)) ? topVars.push(style) : null;
   })
+  const ctasDark = cssDark.match(/(  --cta-branded.+);/g);
+  ctasDark.forEach((b) => {
+    dark.push(b);
+    const style = getOneVarStyle(b, cssVars);
+    (style && !duplicateCheck(style)) ? topVarsDark.push(style) : null;
+  })
 
   const sections = [copiedStyles];
   sections.push(topVars);
   sections.push(vars);
   sections.push(styles);
-  return sections;
+  const darkSections = [topVarsDark, dark];
+  return {
+    all: sections,
+    dark: darkSections,
+  };
 }
 
 /**
@@ -179,7 +230,21 @@ export const getDevCss = async () => {
 :host {
 `;
   const sections = await getDevStyleVariables();
-  sections.forEach(globals => {
+  sections.all.forEach(globals => {
+    globals
+      .filter((item, index) => globals.indexOf(item) === index)
+      .forEach(s => {
+        css += s.startsWith('  ') ? s : `  ${s}`;
+        css += '\n';
+      });
+    css += '\n';
+  })
+  css += `}\n`;
+  css += `
+/* dark variables */
+:host([data-theme="dark"]) {
+`;
+  sections.dark.forEach(globals => {
     globals
       .filter((item, index) => globals.indexOf(item) === index)
       .forEach(s => {

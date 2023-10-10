@@ -2,7 +2,14 @@
 import repositoryHTML from '../repository/html.js';
 import { intToString } from '../../utils/index.js';
 
-function user(content) {
+/**
+ * Generates an HTML string for a GitHub user profile.
+ * @param {GitHubUserHTML} content - a content object representing a GitHub user
+ * @returns {string} HTML string
+ * @function
+ * @memberof GitHubUtils.user
+ */
+function html(content) {
   {
     if (content.error) {
       return `
@@ -63,4 +70,4 @@ function user(content) {
   }
 }
 
-export default user;
+export default html;

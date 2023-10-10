@@ -62,7 +62,8 @@ section[itemscope] {
 
       & span {
         position: absolute;
-        top: calc(var(--logo-size) * -2);
+        top: calc(var(--logo-size) * -3);
+        font-size: .1em;
       }
     }
 

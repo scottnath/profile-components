@@ -1,11 +1,3 @@
-/**
- * @name GitHub-User-Utilities
- * @module
- * @typicalname githubUserUtils
- * @description Utility functions for fetching and parsing GitHub User data
- * @author @scottnath
- */
-
 import { generateRepoContent } from '../repository/content.js';
 
 /** @ignore */
@@ -13,6 +5,7 @@ const githubApi = 'https://api.github.com';
 
 /**
  * Blank base64-encoded png
+ * @ignore
  * @see https://png-pixel.com/
  */
 const blankPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mN8/x8AAuMB8DtXNJsAAAAASUVORK5CYII=';
@@ -20,6 +13,7 @@ const blankPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1
 /**
  * Content needed to render a GitHub user. This is a subset of the `users` endpoint response
  * @see https://docs.github.com/en/rest/users/users#get-a-user
+ * @memberof GitHubUtils.user
  * @typedef {Object} GitHubUserHTML
  * 
  * @property {string} login - User's GitHub login
@@ -39,6 +33,7 @@ const blankPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1
  * @param {string} username 
  * @returns response status 200: {Object} user; else {Object} error
  * @function
+ * @ignore
  */
 export const fetchUser = async (username) => {
   const response = await fetch(`${githubApi}/users/${username}`);
@@ -52,6 +47,7 @@ export const fetchUser = async (username) => {
  * @param {Object} user
  * @returns {GitHubUserHTML} component-ready user object
  * @function
+ * @ignore
  */
 export const parseFetchedUser = (user = {}) => {
   return {
@@ -73,8 +69,10 @@ export const parseFetchedUser = (user = {}) => {
  * @param {string} [owner] - GitHub user login, repository strings are not `full_name`s
  * @returns array of strings of attributes for each repository
  * @function
+ * @ignore
  */
 export const parseReposString = (reposStr, owner) => {
+  if (typeof reposStr !== 'string') return reposStr;
   let repos = [];
   try {
     repos = JSON.parse(reposStr);
@@ -107,6 +105,7 @@ export const parseReposString = (reposStr, owner) => {
  * @param {GitHubUserHTML} content - a content object representing a GitHub user
  * @returns {GitHubUserHTML} ready for HTML content
  * @function
+ * @ignore
  */
 export const cleanUserContent = (content = {}) => {
   if (content.username && !content.login) {
@@ -139,6 +138,8 @@ export const cleanUserContent = (content = {}) => {
  * @param {boolean} [fetch] 
  * @returns {GitHubUserHTML} content ready for HTML, possibly includes fetched content
  * @function
+ * @memberof GitHubUtils.user
+ * @name generateContent
  */
 export const generateUserContent = async (content, fetch = false) => {
   const userFromContent = cleanUserContent(content);

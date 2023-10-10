@@ -3,9 +3,11 @@
  * dev.to (or forem.dev) post HTML generation
  * @param {ForemPostHTML} content 
  * @returns {string} HTML string with added content
+ * @function
+ * @memberof DEVUtils.post
  */
-function post(content) {
-  if (content.error) {
+function html(content) {
+  if (content.error || !content.url || !content.title) {
     return '';
   }
 
@@ -19,4 +21,4 @@ function post(content) {
   `;
 }
 
-export default post;
+export default html;

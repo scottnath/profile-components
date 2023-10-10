@@ -22,11 +22,9 @@ export default {
   }
 };
 
-
-export const FullNameOnly = {
+export const Repository = {
   args: {
-    full_name: repoProfileComponents.full_name,
-    stargazers_count: '0'
+    ...parseFetchedRepo(repoFreeCodeCamp),
   },
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
@@ -34,33 +32,35 @@ export const FullNameOnly = {
   }
 }
 
+
+export const FullNameOnly = {
+  args: {
+    full_name: repoProfileComponents.full_name,
+    stargazers_count: '0'
+  },
+  play: Repository.play,
+}
+
 export const OrgIsUser = {
   args: {
     full_name: repoProfileComponents.full_name,
     no_org: true,
   },
-  play: FullNameOnly.play,
+  play: Repository.play,
 }
 export const WithOrgName = {
   args: {
     full_name: repoProfileComponents.full_name,
     org: 'different-org-name'
   },
-  play: FullNameOnly.play,
+  play: Repository.play,
 }
 export const LanguageCircle = {
   args: {
     full_name: 'just-another/c-plus-plus-repo',
     language: 'C++',
   },
-  play: FullNameOnly.play,
-}
-
-export const AllRepoContent = {
-  args: {
-    ...parseFetchedRepo(repoFreeCodeCamp),
-  },
-  play: FullNameOnly.play,
+  play: Repository.play,
 }
 
 export const Fetch = {
@@ -113,5 +113,5 @@ export const FetchError = {
 }
 
 export const NoRepo = {
-  play: FullNameOnly.play,
+  play: Repository.play,
 };

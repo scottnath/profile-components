@@ -6,15 +6,19 @@ import { getElements, ensureElements } from './user.shared-spec';
 
 import '.';
 
+const stringify = (obj) => JSON.stringify(obj).replace(/"/g, "&quot;");
+
+const attrs = (args) => Object.entries(args)
+.filter(([key, value]) => value)
+.map(([key, value]) => `${key}="${value}"`)
+.join(' ');
+
 export default {
   title: 'GitHub/github-user',
   component: 'github-user',
   tags: ['autodocs'],
   render: (args) => {
-    const attributes = Object.entries(args)
-      .filter(([key, value]) => value)
-      .map(([key, value]) => `${key}="${value}"`)
-      .join(' ');
+    const attributes = attrs(args);
   
     return `
       <github-user ${attributes}></github-user>
@@ -33,7 +37,7 @@ export const User  = {
 export const UserRepos = {
   args: {
     ...User.args,
-    repos: JSON.stringify([parseFetchedRepo(repoStorydocker), { ...parseFetchedRepo(repoScottnathdotcom), user_login: userScottnath.login }]).replace(/"/g, "&quot;"),
+    repos: stringify([parseFetchedRepo(repoStorydocker), { ...parseFetchedRepo(repoScottnathdotcom), user_login: userScottnath.login }]),
   },
   play: User.play,
 }
@@ -49,21 +53,6 @@ export const OnlyRequired = {
     name: userScottnath.name,
   },
   play: User.play,
-}
-
-export const ReposFetch = {
-  args: {
-    ...User.args,
-    repos: JSON.stringify([repoScottnathdotcom.name, repoStorydocker.full_name]).replace(/"/g, "&quot;"),
-  },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...parseFetchedUser(userScottnath),
-      ...args,
-    };
-    await ensureElements(elements, args);
-  }
 }
 
 export const Fetch = {
@@ -86,6 +75,53 @@ export const Fetch = {
   }
 };
 
+export const FetchOverides = {
+  args: {
+    login: userScottnath.login,
+    fetch: true,
+    name: "Meowy McMeowerstein",
+    bio: "Spending time purring and sleepin",
+    avatar_url: 'cat-square.jpeg',
+    followers: "500000",
+    following: "2980",
+    repos: stringify([{"full_name":"scottnath/profile-components","description":"Cool thing, does stuff","language":"HTML"}])
+  },
+  parameters: {
+    mockData: [
+      generateMockResponse(userScottnath, 'users'),
+    ]
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedUser(userScottnath),
+      ...args,
+    };
+    await ensureElements(elements, argsAfterFetch);
+  }
+}
+
+export const ReposFetch = {
+  args: {
+    login: userScottnath.login,
+    fetch: true,
+    repos: stringify([repoScottnathdotcom.name, repoStorydocker.full_name]),
+  },
+  parameters: {
+    mockData: [
+      generateMockResponse(userScottnath, 'users'),
+    ]
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedUser(userScottnath),
+      ...args,
+    };
+    await ensureElements(elements, argsAfterFetch);
+  }
+}
+
 export const FetchError = {
   args: {
     login: 'not-a-real-user',
@@ -105,3 +141,20 @@ export const FetchError = {
     await ensureElements(elements, argsAfterFetch);
   }
 };
+
+
+export const ContainerCheck = {
+  args: FetchOverides.args,
+
+  render: (args) => {
+    const attributes = attrs(args);
+  
+    return `
+      <div style="display: flex; width: 1000px; margin: 1em;">
+        <github-user ${attributes} style="flex: 1 1 200px;"></github-user>
+        <github-user ${attributes} style="flex: 1 1 300px;"></github-user>
+        <github-user ${attributes} style="flex: 1 1 400px;"></github-user>
+      </div>
+    `;
+  }
+}

@@ -26,6 +26,8 @@ section[itemscope] {
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
     -webkit-mask-image: var(--svg-mark-github);
     mask-image: var(--svg-mark-github);
   }
@@ -70,9 +72,10 @@ section[itemscope] {
         border: var(--border-width) solid var(--border-color);
         border-radius: 50%;
         line-height: 1;
-        width: 70%;
-        height: auto;
+        width: 70cqw;
+        height: 70cqw;
         margin: 0 auto;
+        object-fit: cover;
       }
     }
 
@@ -106,6 +109,10 @@ section[itemscope] {
 
       [itemprop="image"] {
         flex: 1 1 30%;
+        & img {
+          width: 26cqw;
+          height: 26cqw;
+        }
       }
       [itemprop="creator"] {
         flex: 1 0 70%;

@@ -1,11 +1,3 @@
-/**
- * @name GitHub-Repo-Utilities
- * @module
- * @typicalname githubRepoUtils
- * @description Utility functions for fetching and parsing GitHub Repository data
- * @author @scottnath
- */
-
 /** @ignore */
 const githubApi = 'https://api.github.com';
 
@@ -22,6 +14,7 @@ const githubApi = 'https://api.github.com';
  * @property {string} [forks_count] - number of forks
  * @property {string} [subscribers_count] - number of watchers
  * @property {string} [error] - error message, if any
+ * @memberof GitHubUtils.repo
  */
 
 /**
@@ -30,6 +23,7 @@ const githubApi = 'https://api.github.com';
  * @param {string} full_name
  * @returns response status 200: {Object} repo; else {Object} error
  * @function
+ * @ignore
  */
 export const fetchRepo = async (full_name) => {
   const response = await fetch(`${githubApi}/repos/${full_name}`);
@@ -43,6 +37,7 @@ export const fetchRepo = async (full_name) => {
  * @param {Object} repo - GitHub repository object
  * @returns {GitHubRepositoryHTML}
  * @function
+ * @ignore
  */
 export const parseFetchedRepo = (repo = {}) => {
   return {
@@ -63,6 +58,7 @@ export const parseFetchedRepo = (repo = {}) => {
  * @param {boolean} [no_org] - if true, remove the `org` attribute from the returned object
  * @returns {GitHubRepositoryHTML} ready for HTML content
  * @function
+ * @ignore
  */
 export const cleanRepoContent = (content, no_org) => {
   const repo = parseFetchedRepo(content);
@@ -97,6 +93,8 @@ export const cleanRepoContent = (content, no_org) => {
  * @param {boolean} [no_org] 
  * @returns {GitHubRepositoryHTML} content ready for HTML, possibly includes fetched content
  * @function
+ * @memberof GitHubUtils.repo
+ * @name generateContent
  */
 export const generateRepoContent = async (content, fetch = false, no_org = false) => {
   const repoFromContent = cleanRepoContent(content, no_org);

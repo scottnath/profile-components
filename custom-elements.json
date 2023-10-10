@@ -95,7 +95,7 @@
               "type": {
                 "text": "boolean"
               },
-              "description": "when true, fetches repo from GitHub api",
+              "description": "when true, fetches repo from [GitHub api](https://docs.github.com/en/rest/repos/repos#get-a-repository)",
               "name": "fetch",
               "kind": "field"
             },
@@ -196,7 +196,7 @@
               "type": {
                 "text": "boolean"
               },
-              "description": "when true, fetches user from GitHub api",
+              "description": "when true, fetches user from [GitHub api](https://docs.github.com/en/rest/users/users#get-a-user)",
               "name": "fetch",
               "kind": "field"
             },
@@ -391,7 +391,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "dev.to (or forem.dev) post web component",
+          "description": "dev.to post web component",
           "name": "DevtoPost",
           "members": [
             {
