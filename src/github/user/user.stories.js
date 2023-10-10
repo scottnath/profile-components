@@ -79,7 +79,7 @@ export const FetchOverides = {
     fetch: true,
     name: "Meowy McMeowerstein",
     bio: "Spending time purring and sleepin",
-    avatar_url: 'multi-face-image.jpeg',
+    avatar_url: 'cat-square.jpeg',
     followers: "500000",
     following: "2980",
     repos: stringify([{"full_name":"scottnath/profile-components","description":"Cool thing, does stuff","language":"HTML"}])

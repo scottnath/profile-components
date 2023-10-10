@@ -64,7 +64,7 @@ export const FetchOverides = {
     fetch: 'true',
     name: "Meowy McMeowerstein",
     summary: "Spending time purring and sleepin",
-    profile_image: 'multi-face-image.jpeg',
+    profile_image: 'cat-square.jpeg',
     joined_at: 'Jan 1, 1979',
     post_count: 1000000,
     latest_post: stringify({

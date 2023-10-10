@@ -26,6 +26,8 @@ section[itemscope] {
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
     -webkit-mask-image: var(--svg-mark-github);
     mask-image: var(--svg-mark-github);
   }
