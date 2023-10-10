@@ -9,15 +9,17 @@ import './index.js';
 
 const stringify = (obj) => JSON.stringify(obj).replace(/"/g, "&quot;");
 
+const attrs = (args) => Object.entries(args)
+.filter(([key, value]) => value)
+.map(([key, value]) => `${key}="${value}"`)
+.join(' ');
+
 export default {
   title: 'DevTo/devto-user',
   component: 'devto-user',
   tags: ['autodocs'],
   render: (args) => {
-    const attributes = Object.entries(args)
-      .filter(([key, value]) => value)
-      .map(([key, value]) => `${key}="${value}"`)
-      .join(' ');
+    const attributes = attrs(args);
   
     return `
       <devto-user ${attributes}></devto-user>
@@ -73,4 +75,20 @@ export const FetchOverides = {
       cover_image: 'cat-1000-420.jpeg'
     }),
   },
+}
+
+export const ContainerCheck = {
+  args: FetchOverides.args,
+
+  render: (args) => {
+    const attributes = attrs(args);
+  
+    return `
+      <div style="display: flex; width: 1000px; margin: 1em;">
+        <devto-user ${attributes} style="flex: 1 1 200px;"></devto-user>
+        <devto-user ${attributes} style="flex: 1 1 300px;"></devto-user>
+        <devto-user ${attributes} style="flex: 1 1 400px;"></devto-user>
+      </div>
+    `;
+  }
 }

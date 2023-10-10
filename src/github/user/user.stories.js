@@ -8,15 +8,17 @@ import '.';
 
 const stringify = (obj) => JSON.stringify(obj).replace(/"/g, "&quot;");
 
+const attrs = (args) => Object.entries(args)
+.filter(([key, value]) => value)
+.map(([key, value]) => `${key}="${value}"`)
+.join(' ');
+
 export default {
   title: 'GitHub/github-user',
   component: 'github-user',
   tags: ['autodocs'],
   render: (args) => {
-    const attributes = Object.entries(args)
-      .filter(([key, value]) => value)
-      .map(([key, value]) => `${key}="${value}"`)
-      .join(' ');
+    const attributes = attrs(args);
   
     return `
       <github-user ${attributes}></github-user>
@@ -120,7 +122,6 @@ export const ReposFetch = {
   }
 }
 
-
 export const FetchError = {
   args: {
     login: 'not-a-real-user',
@@ -140,3 +141,20 @@ export const FetchError = {
     await ensureElements(elements, argsAfterFetch);
   }
 };
+
+
+export const ContainerCheck = {
+  args: FetchOverides.args,
+
+  render: (args) => {
+    const attributes = attrs(args);
+  
+    return `
+      <div style="display: flex; width: 1000px; margin: 1em;">
+        <github-user ${attributes} style="flex: 1 1 200px;"></github-user>
+        <github-user ${attributes} style="flex: 1 1 300px;"></github-user>
+        <github-user ${attributes} style="flex: 1 1 400px;"></github-user>
+      </div>
+    `;
+  }
+}
