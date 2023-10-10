@@ -69,7 +69,8 @@ export const FetchOverides = {
     post_count: 1000000,
     latest_post: stringify({
       title: 'Meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow',
-      url: 'http://example.com'
+      url: 'http://example.com',
+      cover_image: 'cat-1000-420.jpeg'
     }),
   },
 }
