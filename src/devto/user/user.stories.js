@@ -1,5 +1,5 @@
 
-import { generateMockResponse } from '../utils/testing';
+import { generateMockResponse } from '../helpers/testing';
 import { parseFetchedUser } from './content';
 import { parseFetchedPost } from '../post/content';
 import { default as userScottnath } from '../fixtures/generated/user--scottnath.json';
@@ -78,7 +78,10 @@ export const FetchOverides = {
 }
 
 export const ContainerCheck = {
-  args: FetchOverides.args,
+  args: {
+    ...FetchOverides.args,
+    theme: 'dark'
+  },
 
   render: (args) => {
     const attributes = attrs(args);

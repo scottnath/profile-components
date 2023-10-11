@@ -13,12 +13,13 @@ import { styles } from '../styles/index.js';
  * @property {string} login - User's GitHub login
  * @property {string} avatar_url - URL to user's avatar
  * @property {string} name - User's name
- * @property {boolean} [fetch] - when true, fetches user from [GitHub api](https://docs.github.com/en/rest/users/users#get-a-user)
+ * @property {boolean} [fetch] - when true, fetches user from the [GitHub api](https://docs.github.com/en/rest/users/users#get-a-user)
  * @property {string} [username] - alias for `login`
  * @property {string} [bio] - User's biography content
  * @property {string} [following] - number of people user is following
  * @property {string} [followers] - number of followers
  * @property {string} [repos] - JSON stringified array of repositories
+ * @property {string} [theme] - color theme for the component
  * 
  * @example
  * <!-- import the web component -->
@@ -56,6 +57,9 @@ export class GitHubUser extends HTMLElement {
     this.content = await generateUserContent(this.attrs, this.attrs.fetch);
     view += html(this.content);
     this.shadowRoot.innerHTML = view;
+    if (this.attrs.theme) {
+      this.setAttribute('data-theme', this.attrs.theme);
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-import { formatDate } from "../utils";
+import { formatDate } from "../helpers";
 import postHTML from "../post/html.js";
 
 /**

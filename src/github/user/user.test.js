@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert'
 
-import { generateMockResponse } from '../utils/testing.js';
+import { generateMockResponse } from '../helpers/testing.js';
 import { fetchUser, parseFetchedUser, parseReposString, cleanUserContent, generateUserContent } from './content.js';
 import { default as repoFreeCodeCamp } from '../fixtures/generated/repo--freeCodeCamp-freeCodeCamp.json' assert { type: 'json' };
 

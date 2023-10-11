@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert'
 
 import { fetchUser } from './content.js';
-import { generateMockResponse } from '../utils/testing.js';
+import { generateMockResponse } from '../helpers/testing.js';
 
 import { default as userScottnath } from '../fixtures/generated/user--scottnath.json' assert { type: 'json' };
 

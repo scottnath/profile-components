@@ -9,6 +9,7 @@ const config = {
     '@storybook/addon-interactions',
     '@storybook/addon-coverage',
     'storybook-addon-mock',
+    '@chromaui/addon-visual-tests',
   ],
   framework: {
     name: '@storybook/web-components-vite',

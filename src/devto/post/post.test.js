@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert'
 
 import { fetchPost, fetchUserPosts, findPost, parseFetchedPost, cleanPostContent, generatePostContent } from './content.js';
-import { generateMockResponse } from '../utils/testing.js';
+import { generateMockResponse } from '../helpers/testing.js';
 
 import { default as postDependabot } from '../fixtures/generated/post--dependabot.json' assert { type: 'json' };
 import { default as postBugfix } from '../fixtures/generated/post--bugfix-multi-vite.json' assert { type: 'json' };

@@ -1,2 +1,0 @@
-# GitHub user profile component
-

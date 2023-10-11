@@ -1,4 +1,4 @@
-import { getApiUrl } from '../utils/index.js';
+import { getApiUrl } from '../helpers/index.js';
 
 /**
  * Content about one post by dev.to (or Forem) user, sourced from a Forem API.

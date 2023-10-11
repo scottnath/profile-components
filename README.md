@@ -9,8 +9,6 @@ Web components which display profile information from various websites
 
 ## Components
 
-## Modules
-
 <dl>
 <dt><a href="#module_GitHubUser">GitHubUser</a></dt>
 <dd><p>GitHub user profile web component</p>
@@ -41,12 +39,13 @@ GitHub user profile web component
 | login | <code>string</code> | User's GitHub login |
 | avatar_url | <code>string</code> | URL to user's avatar |
 | name | <code>string</code> | User's name |
-| [fetch] | <code>boolean</code> | when true, fetches user from [GitHub api](https://docs.github.com/en/rest/users/users#get-a-user) |
+| [fetch] | <code>boolean</code> | when true, fetches user from the [GitHub api](https://docs.github.com/en/rest/users/users#get-a-user) |
 | [username] | <code>string</code> | alias for `login` |
 | [bio] | <code>string</code> | User's biography content |
 | [following] | <code>string</code> | number of people user is following |
 | [followers] | <code>string</code> | number of followers |
 | [repos] | <code>string</code> | JSON stringified array of repositories |
+| [theme] | <code>string</code> | color theme for the component |
 
 **Example**  
 ```js
@@ -69,6 +68,7 @@ GitHub repository web component
 | Name | Type | Description |
 | --- | --- | --- |
 | full_name | <code>string</code> | repository org and name, as in `scottnath/profile-components` |
+| [fetch] | <code>boolean</code> | when true, fetches repo from the [GitHub api](https://docs.github.com/en/rest/repos/repos#get-a-repository) |
 | [name] | <code>string</code> | repo name |
 | [org] | <code>string</code> | repo owner organization's login, found at `<REST_RESPONSE>.organization.login` |
 | [description] | <code>string</code> | repo description |
@@ -76,9 +76,9 @@ GitHub repository web component
 | [stargazers_count] | <code>string</code> | number of stars |
 | [forks_count] | <code>string</code> | number of forks |
 | [subscribers_count] | <code>string</code> | number of watchers |
-| [fetch] | <code>boolean</code> | when true, fetches repo from [GitHub api](https://docs.github.com/en/rest/repos/repos#get-a-repository) |
 | [itemprop] | <code>string</code> | Itemprop content to go with a containing component's itemscope |
 | [no_org] | <code>string</code> | Do not include the repo owner or organization |
+| [theme] | <code>string</code> | color theme for the component |
 
 **Example**  
 ```js
@@ -101,14 +101,15 @@ dev.to user profile web component
 | Name | Type | Description |
 | --- | --- | --- |
 | username | <code>string</code> | User's dev.to username |
+| [fetch] | <code>boolean</code> | when true, fetches user and posts from the [Forem API](https://developers.forem.com/api/v0#tag/users/operation/getUser) |
 | [name] | <code>string</code> | The name of the user |
 | [summary] | <code>string</code> | The user's bio |
 | [joined_at] | <code>string</code> | The date the user joined |
 | [profile_image] | <code>string</code> | The URL of the user's profile image |
-| [fetch] | <code>boolean</code> | when true, fetches user and posts from api |
 | [post_count] | <code>number</code> | The number of posts the user has published |
 | [latest_post] | <code>string</code> | User's latest post content, JSON stringified |
 | [popular_post] | <code>string</code> | User's most popular post content, JSON stringified |
+| [theme] | <code>string</code> | color theme for the component |
 
 **Example**  
 ```js
@@ -135,7 +136,7 @@ dev.to post web component
 | url | <code>string</code> | Post URL |
 | cover_image | <code>string</code> | Post cover image URL |
 | social_image | <code>string</code> | Post social image URL |
-| [fetch] | <code>boolean</code> | when true, fetches post from api |
+| [fetch] | <code>boolean</code> | when true, fetches post from the [Forem API](https://developers.forem.com/api/v0#tag/articles/operation/getArticleById) |
 
 **Example**  
 ```js

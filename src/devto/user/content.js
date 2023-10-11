@@ -1,5 +1,5 @@
 import { fetchUserPosts, findPost } from '../post/content.js';
-import { getApiUrl } from '../utils/index.js';
+import { getApiUrl } from '../helpers/index.js';
 
 /**
  * Blank base64-encoded png

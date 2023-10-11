@@ -1,8 +1,10 @@
-import { repoScottnathdotcom, repoStorydocker, userScottnath, userSindresorhus } from '../fixtures';
-import { generateMockResponse } from '../utils/testing';
+import { repoProfileComponents, repoStorydocker, userScottnath, userSindresorhus } from '../fixtures';
+import { generateMockResponse } from '../helpers/testing';
 import { parseFetchedUser } from './content';
 import { parseFetchedRepo } from '../repository/content.js';
 import { getElements, ensureElements } from './user.shared-spec';
+import { primerThemes } from '../../../.storybook/primer-preview.js';
+import { defaultModesDisabled } from '../../../.storybook/modes.js';
 
 import '.';
 
@@ -37,7 +39,7 @@ export const User  = {
 export const UserRepos = {
   args: {
     ...User.args,
-    repos: stringify([parseFetchedRepo(repoStorydocker), { ...parseFetchedRepo(repoScottnathdotcom), user_login: userScottnath.login }]),
+    repos: stringify([{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)]),
   },
   play: User.play,
 }
@@ -105,7 +107,7 @@ export const ReposFetch = {
   args: {
     login: userScottnath.login,
     fetch: true,
-    repos: stringify([repoScottnathdotcom.name, repoStorydocker.full_name]),
+    repos: stringify([repoProfileComponents.name, repoStorydocker.full_name]),
   },
   parameters: {
     mockData: [
@@ -142,10 +144,11 @@ export const FetchError = {
   }
 };
 
-
 export const ContainerCheck = {
-  args: FetchOverides.args,
-
+  args: {
+    ...FetchOverides.args,
+    theme: 'light_high_contrast'
+  },
   render: (args) => {
     const attributes = attrs(args);
   
@@ -157,4 +160,56 @@ export const ContainerCheck = {
       </div>
     `;
   }
+}
+
+const themesRender = (args) => {
+  const attributes = attrs(args);
+
+  return `
+    <div style="display: flex; flex-wrap: wrap; width: 1000px; margin: 1em;">
+      ${primerThemes.map((theme) => {
+        return `
+        <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 200px;"></github-user>
+        `;
+      }).join('')}
+      ${primerThemes.map((theme) => {
+        return `
+        <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 300px;"></github-user>
+        `;
+      }).join('')}
+      ${primerThemes.map((theme) => {
+        return `
+        <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 400px;"></github-user>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+export const Themes = {
+  args: {
+    ...ReposFetch.args,
+  },
+  render: themesRender,
+  parameters: {
+    chromatic: {
+      modes: {
+        ...defaultModesDisabled
+      }
+    },
+  },
+}
+
+export const ThemesWithOverrides = {
+  args: {
+    ...FetchOverides.args,
+  },
+  render: themesRender,
+  parameters: {
+    chromatic: {
+      modes: {
+        ...defaultModesDisabled
+      }
+    },
+  },
 }

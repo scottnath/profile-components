@@ -1,4 +1,4 @@
-# DEV profile components' utilities
+# DEV profile components' helpers
 
 ## Modules
 
