@@ -192,7 +192,11 @@ export const Themes = {
   render: themesRender,
   parameters: {
     chromatic: {
-      modes: { disable: true },
+      modes: {
+        containerMin1: { disable: true },
+        containerMin2: { disable: true },
+        containerMin3: { disable: true },
+      }
     },
   },
 }
@@ -204,7 +208,11 @@ export const ThemesWithOverrides = {
   render: themesRender,
   parameters: {
     chromatic: {
-      modes: { disable: true },
+      modes: {
+        containerMin1: { disable: true },
+        containerMin2: { disable: true },
+        containerMin3: { disable: true },
+      }
     },
   },
 }

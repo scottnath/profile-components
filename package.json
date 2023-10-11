@@ -43,6 +43,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@chromaui/addon-visual-tests": "^0.0.105",
     "@custom-elements-manifest/analyzer": "^0.8.4",
     "@custom-elements-manifest/to-markdown": "^0.1.0",
     "@primer/octicons": "^19.8.0",
