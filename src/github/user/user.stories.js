@@ -189,12 +189,22 @@ export const Themes = {
   args: {
     ...ReposFetch.args,
   },
-  render: themesRender
+  render: themesRender,
+  parameters: {
+    chromatic: {
+      modes: { disable: true },
+    },
+  },
 }
 
 export const ThemesWithOverrides = {
   args: {
     ...FetchOverides.args,
   },
-  render: themesRender
+  render: themesRender,
+  parameters: {
+    chromatic: {
+      modes: { disable: true },
+    },
+  },
 }
