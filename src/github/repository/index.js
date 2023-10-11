@@ -21,6 +21,7 @@ import { repository as styles } from '../styles/index.js';
  * @property {boolean} [fetch] - when true, fetches repo from [GitHub api](https://docs.github.com/en/rest/repos/repos#get-a-repository)
  * @property {string} [itemprop] - Itemprop content to go with a containing component's itemscope
  * @property {string} [no_org] - Do not include the repo owner or organization
+ * @property {string} [theme] - color theme for the component
  * 
  * @example
  * <!-- import the web component -->
@@ -60,6 +61,9 @@ export class GitHubRepository extends HTMLElement {
     this.shadowRoot.innerHTML = view;
     if (this.attrs.itemprop) {
       this.setAttribute('itemprop', this.attrs.itemprop);
+    }
+    if (this.attrs.theme) {
+      this.setAttribute('data-theme', this.attrs.theme);
     }
   }
 }

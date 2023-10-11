@@ -32,7 +32,6 @@ export const Repository = {
   }
 }
 
-
 export const FullNameOnly = {
   args: {
     full_name: repoProfileComponents.full_name,
@@ -59,8 +58,23 @@ export const LanguageCircle = {
   args: {
     full_name: 'just-another/c-plus-plus-repo',
     language: 'C++',
+    stargazers_count: '123',
+    forks_count: '456',
+    subscribers_count: '789',
+    description: 'This is meow meow.'
   },
   play: Repository.play,
+}
+
+export const Theme = {
+  args: {
+    ...parseFetchedRepo(repoFreeCodeCamp),
+    theme: 'dark',
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    await ensureElements(elements, args);
+  }
 }
 
 export const Fetch = {
