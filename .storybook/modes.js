@@ -9,11 +9,15 @@ import { primerThemes } from './primer-preview';
 const defaultThemes = ['light', 'dark'];
 
 export const defaultModes = {};
+export const defaultModesDisabled = {};
 export const githubModes = {};
 
 for (const key of Object.keys(customViewports)) {
   defaultModes[key] = {
     viewport: key,
+  };
+  defaultModesDisabled[key] = {
+    disabled: true,
   };
   githubModes[key] = {
     viewport: key,
@@ -22,6 +26,9 @@ for (const key of Object.keys(customViewports)) {
     defaultModes[`${theme} ${key}`] = {
       viewport: key,
       theme: theme,
+    };
+    defaultModesDisabled[`${theme} ${key}`] = {
+      disabled: true,
     };
   };
   for (const theme of primerThemes) {

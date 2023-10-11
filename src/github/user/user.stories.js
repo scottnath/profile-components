@@ -4,6 +4,7 @@ import { parseFetchedUser } from './content';
 import { parseFetchedRepo } from '../repository/content.js';
 import { getElements, ensureElements } from './user.shared-spec';
 import { primerThemes } from '../../../.storybook/primer-preview.js';
+import { defaultModesDisabled } from '../../../.storybook/modes.js';
 
 import '.';
 
@@ -193,9 +194,7 @@ export const Themes = {
   parameters: {
     chromatic: {
       modes: {
-        containerMin1: { disable: true },
-        containerMin2: { disable: true },
-        containerMin3: { disable: true },
+        ...defaultModesDisabled
       }
     },
   },
@@ -209,9 +208,7 @@ export const ThemesWithOverrides = {
   parameters: {
     chromatic: {
       modes: {
-        containerMin1: { disable: true },
-        containerMin2: { disable: true },
-        containerMin3: { disable: true },
+        ...defaultModesDisabled
       }
     },
   },
