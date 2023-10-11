@@ -1,5 +1,5 @@
 import { repoProfileComponents, repoStorydocker, userScottnath, userSindresorhus } from '../fixtures';
-import { generateMockResponse } from '../utils/testing';
+import { generateMockResponse } from '../helpers/testing';
 import { parseFetchedUser } from './content';
 import { parseFetchedRepo } from '../repository/content.js';
 import { getElements, ensureElements } from './user.shared-spec';

@@ -12,11 +12,11 @@ import { styles } from '../styles/index.js';
  * @module
  * 
  * @property {string} username - User's dev.to username
+ * @property {boolean} [fetch] - when true, fetches user and posts from the [Forem API](https://developers.forem.com/api/v0#tag/users/operation/getUser)
  * @property {string} [name] - The name of the user
  * @property {string} [summary] - The user's bio
  * @property {string} [joined_at] - The date the user joined
  * @property {string} [profile_image] - The URL of the user's profile image
- * @property {boolean} [fetch] - when true, fetches user and posts from api
  * @property {number} [post_count] - The number of posts the user has published
  * @property {string} [latest_post] - User's latest post content, JSON stringified 
  * @property {string} [popular_post] - User's most popular post content, JSON stringified 

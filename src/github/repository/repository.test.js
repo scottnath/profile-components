@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert'
 
-import { generateMockResponse } from '../utils/testing.js';
+import { generateMockResponse } from '../helpers/testing.js';
 import { fetchRepo, parseFetchedRepo, cleanRepoContent, generateRepoContent } from './content.js';
 import { default as repoScottnathdotcom } from '../fixtures/generated/repo--scottnath-scottnath.com.json' assert { type: 'json' };
 import { default as repoStorydocker } from '../fixtures/generated/repo--storydocker-storydocker.json' assert { type: 'json' };

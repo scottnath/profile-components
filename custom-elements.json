@@ -37,6 +37,14 @@
             },
             {
               "type": {
+                "text": "boolean"
+              },
+              "description": "when true, fetches repo from the [GitHub api](https://docs.github.com/en/rest/repos/repos#get-a-repository)",
+              "name": "fetch",
+              "kind": "field"
+            },
+            {
+              "type": {
                 "text": "string"
               },
               "description": "repo name",
@@ -93,14 +101,6 @@
             },
             {
               "type": {
-                "text": "boolean"
-              },
-              "description": "when true, fetches repo from [GitHub api](https://docs.github.com/en/rest/repos/repos#get-a-repository)",
-              "name": "fetch",
-              "kind": "field"
-            },
-            {
-              "type": {
                 "text": "string"
               },
               "description": "Itemprop content to go with a containing component's itemscope",
@@ -113,6 +113,14 @@
               },
               "description": "Do not include the repo owner or organization",
               "name": "no_org",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "color theme for the component",
+              "name": "theme",
               "kind": "field"
             }
           ],
@@ -196,7 +204,7 @@
               "type": {
                 "text": "boolean"
               },
-              "description": "when true, fetches user from [GitHub api](https://docs.github.com/en/rest/users/users#get-a-user)",
+              "description": "when true, fetches user from the [GitHub api](https://docs.github.com/en/rest/users/users#get-a-user)",
               "name": "fetch",
               "kind": "field"
             },
@@ -303,6 +311,14 @@
             },
             {
               "type": {
+                "text": "boolean"
+              },
+              "description": "when true, fetches user and posts from the [Forem API](https://developers.forem.com/api/v0#tag/users/operation/getUser)",
+              "name": "fetch",
+              "kind": "field"
+            },
+            {
+              "type": {
                 "text": "string"
               },
               "description": "The name of the user",
@@ -335,14 +351,6 @@
             },
             {
               "type": {
-                "text": "boolean"
-              },
-              "description": "when true, fetches user and posts from api",
-              "name": "fetch",
-              "kind": "field"
-            },
-            {
-              "type": {
                 "text": "number"
               },
               "description": "The number of posts the user has published",
@@ -363,6 +371,14 @@
               },
               "description": "User's most popular post content, JSON stringified",
               "name": "popular_post",
+              "kind": "field"
+            },
+            {
+              "type": {
+                "text": "string"
+              },
+              "description": "color theme for the component",
+              "name": "theme",
               "kind": "field"
             }
           ],
@@ -454,7 +470,7 @@
               "type": {
                 "text": "boolean"
               },
-              "description": "when true, fetches post from api",
+              "description": "when true, fetches post from the [Forem API](https://developers.forem.com/api/v0#tag/articles/operation/getArticleById)",
               "name": "fetch",
               "kind": "field"
             }

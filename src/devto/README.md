@@ -1,4 +1,27 @@
-# DEV utilities
+<center><img src="./devto-unofficial-logo.png" alt="Unofficial DEV component" /></center>
+
+# DEV profile components
+
+Includes two web components:
+
+* `<devto-user>` - displays information about a DEV user, includes `<devto-post>`
+* `<devto-post>` - displays information about a DEV post
+
+see README at root of repo for usage details
+
+## api
+
+* https://developers.forem.com/api/v0#tag/articles
+
+## @todo
+
+- [ ] re-do `parts`, removing parts that are just for style-sharing
+- [ ] interaction tests
+- [ ] a11y testing
+- [ ] test in plain HTML page
+- [ ] conform to https://dev.to/brand
+
+---
 
 <a name="DEVUtils"></a>
 
@@ -191,3 +214,10 @@ Only required properties from the api are defined.
 | [latest_post] | <code>ForemPostHTML</code> | User's latest post |
 | [popular_post] | <code>ForemPostHTML</code> | User's most popular post |
 
+
+
+
+## Inspriation
+
+- https://dev.to/asheeshh/devembed-embed-your-devto-profile-anywhere-using-widgets-linode-hacakathon-4659
+- https://dev.to/saurabhdaware/i-made-dev-to-widget-for-websites-blogs-40p2

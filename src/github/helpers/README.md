@@ -1,4 +1,4 @@
-# GitHub profile components' utilities
+# GitHub profile components' helpers
 
 ## Modules
 

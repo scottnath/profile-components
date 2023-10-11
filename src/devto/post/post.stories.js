@@ -1,5 +1,5 @@
 
-import { generateMockResponse } from '../utils/testing';
+import { generateMockResponse } from '../helpers/testing';
 import { parseFetchedPost } from './content';
 import { default as postDependabot } from '../fixtures/generated/post--dependabot.json';
 

@@ -11,6 +11,7 @@ import { repository as styles } from '../styles/index.js';
  * @module
  * 
  * @property {string} full_name - repository org and name, as in `scottnath/profile-components`
+ * @property {boolean} [fetch] - when true, fetches repo from the [GitHub api](https://docs.github.com/en/rest/repos/repos#get-a-repository)
  * @property {string} [name] - repo name
  * @property {string} [org] - repo owner organization's login, found at `<REST_RESPONSE>.organization.login`
  * @property {string} [description] - repo description
@@ -18,7 +19,6 @@ import { repository as styles } from '../styles/index.js';
  * @property {string} [stargazers_count] - number of stars
  * @property {string} [forks_count] - number of forks
  * @property {string} [subscribers_count] - number of watchers
- * @property {boolean} [fetch] - when true, fetches repo from [GitHub api](https://docs.github.com/en/rest/repos/repos#get-a-repository)
  * @property {string} [itemprop] - Itemprop content to go with a containing component's itemscope
  * @property {string} [no_org] - Do not include the repo owner or organization
  * @property {string} [theme] - color theme for the component
