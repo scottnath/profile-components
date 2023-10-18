@@ -4,6 +4,7 @@
 }
 span[itemscope].post {
   [itemprop="url"] {
+    background: var(--card-bg);
     display: flex;
     flex-direction: column;
     gap: var(--row-spacing);
@@ -19,7 +20,7 @@ span[itemscope].post {
         flex: 1 1 9em;
       }
       [itemprop="name"] {
-        flex: 1 0 calc(100% - 9em);
+        flex: 1 0 calc(100% - 10em);
         display: inline-block;
         font-size: var(--font-size-light)
       }

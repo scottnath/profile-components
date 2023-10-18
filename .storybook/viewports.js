@@ -24,6 +24,13 @@ export const customViewports = {
       height: '100%',
     },
   },
+  containerMin4: {
+    name: 'ContainerMin4: 600px',
+    styles: {
+      width: '600px',
+      height: '100%',
+    },
+  },
 };
 
 export const viewports ={

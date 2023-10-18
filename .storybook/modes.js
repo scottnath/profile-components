@@ -65,3 +65,14 @@ export const allModes = {
     viewport: 'small',
   },
 };
+
+export const basicModes = {
+  dark: {
+    backgrounds: 'dark',
+    theme: 'dark',
+  },
+  light: {
+    backgrounds: 'light',
+    theme: 'light',
+  },
+}

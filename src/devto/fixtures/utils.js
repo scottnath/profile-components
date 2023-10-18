@@ -61,6 +61,14 @@ export const generateFixtures = async () => {
       id: 1466138,
       slug: 'bugfix-multi-vite',
     },
+    {
+      id: 1630208,
+      slug: 'profile-components',
+    },
+    {
+      id: 1631825,
+      slug: 'profile-components-github',
+    }
   ];
   const users = [
     'scottnath',

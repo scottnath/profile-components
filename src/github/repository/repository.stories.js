@@ -3,6 +3,7 @@ import { generateMockResponse } from '../helpers/testing';
 import { parseFetchedRepo } from './content';
 import { getElements, ensureElements } from './repository.shared-spec';
 import { repoProfileComponents, repoFreeCodeCamp } from '../fixtures';
+import { primerThemes } from '../../../.storybook/primer-preview.js';
 
 import './index.js';
 
@@ -11,10 +12,7 @@ export default {
   component: 'github-repository',
   tags: ['autodocs'],
   render: (args) => {
-    const attributes = Object.entries(args)
-      .filter(([key, value]) => value)
-      .map(([key, value]) => `${key}="${value}"`)
-      .join(' ');
+    const attributes = attrGen(args);
   
     return `
       <github-repository ${attributes}></github-repository>
@@ -129,3 +127,41 @@ export const FetchError = {
 export const NoRepo = {
   play: Repository.play,
 };
+
+const themesRender = (args) => {
+  const attributes = attrGen(args);
+
+  return `
+    <div style="display: flex; flex-wrap: wrap; width: 1000px; margin: 1em;">
+      ${primerThemes.map((theme) => {
+        return `
+        <github-repository ${attributes} theme="${theme.value}" style="flex: 1 1 200px;"></github-repository>
+        `;
+      }).join('')}
+      ${primerThemes.map((theme) => {
+        return `
+        <github-repository ${attributes} theme="${theme.value}" style="flex: 1 1 300px;"></github-repository>
+        `;
+      }).join('')}
+      ${primerThemes.map((theme) => {
+        return `
+        <github-repository ${attributes} theme="${theme.value}" style="flex: 1 1 400px;"></github-repository>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+export const Themes = {
+  args: {
+    ...Repository.args,
+  },
+  render: themesRender,
+}
+
+export const ThemesWithOverrides = {
+  args: {
+    ...LanguageCircle.args,
+  },
+  render: themesRender,
+}
