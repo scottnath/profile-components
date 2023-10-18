@@ -4,23 +4,15 @@ import { parseFetchedUser } from './content';
 import { parseFetchedRepo } from '../repository/content.js';
 import { getElements, ensureElements } from './user.shared-spec';
 import { primerThemes } from '../../../.storybook/primer-preview.js';
-import { defaultModesDisabled } from '../../../.storybook/modes.js';
 
 import '.';
-
-const stringify = (obj) => JSON.stringify(obj).replace(/"/g, "&quot;");
-
-const attrs = (args) => Object.entries(args)
-.filter(([key, value]) => value)
-.map(([key, value]) => `${key}="${value}"`)
-.join(' ');
 
 export default {
   title: 'GitHub/github-user',
   component: 'github-user',
   tags: ['autodocs'],
   render: (args) => {
-    const attributes = attrs(args);
+    const attributes = attrGen(args);
   
     return `
       <github-user ${attributes}></github-user>
@@ -150,7 +142,7 @@ export const ContainerCheck = {
     theme: 'light_high_contrast'
   },
   render: (args) => {
-    const attributes = attrs(args);
+    const attributes = attrGen(args);
   
     return `
       <div style="display: flex; width: 1000px; margin: 1em;">
@@ -163,7 +155,7 @@ export const ContainerCheck = {
 }
 
 const themesRender = (args) => {
-  const attributes = attrs(args);
+  const attributes = attrGen(args);
 
   return `
     <div style="display: flex; flex-wrap: wrap; width: 1000px; margin: 1em;">
@@ -191,13 +183,6 @@ export const Themes = {
     ...ReposFetch.args,
   },
   render: themesRender,
-  parameters: {
-    chromatic: {
-      modes: {
-        ...defaultModesDisabled
-      }
-    },
-  },
 }
 
 export const ThemesWithOverrides = {
@@ -205,11 +190,4 @@ export const ThemesWithOverrides = {
     ...FetchOverides.args,
   },
   render: themesRender,
-  parameters: {
-    chromatic: {
-      modes: {
-        ...defaultModesDisabled
-      }
-    },
-  },
 }
