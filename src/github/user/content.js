@@ -36,7 +36,10 @@ const blankPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1
  * @ignore
  */
 export const fetchUser = async (username) => {
-  const response = await fetch(`${githubApi}/users/${username}`);
+  const options = {
+    cache: 'no-cache',
+  };
+  const response = await fetch(`${githubApi}/users/${username}`, options);
   const userJson = await response.json();
   return userJson;
 }

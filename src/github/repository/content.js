@@ -26,7 +26,10 @@ const githubApi = 'https://api.github.com';
  * @ignore
  */
 export const fetchRepo = async (full_name) => {
-  const response = await fetch(`${githubApi}/repos/${full_name}`);
+  const options = {
+    cache: 'no-cache',
+  };
+  const response = await fetch(`${githubApi}/repos/${full_name}`, options);
   const repoJson = await response.json();
   return repoJson;
 }

@@ -28,7 +28,9 @@ import { getApiUrl } from '../helpers/index.js';
  * @ignore
  */
 export const fetchPost = async (id) => {
-  const response = await fetch(`${getApiUrl()}/articles/${id}`);
+  const response = await fetch(`${getApiUrl()}/articles/${id}`, {
+    cache: 'no-cache',
+  });
   const repoJson = await response.json();
   return repoJson;
 }
@@ -40,7 +42,9 @@ export const fetchPost = async (id) => {
  * @ignore
  */
 export const fetchUserPosts = async (username) => {
-  const articles = await fetch(`${getApiUrl()}/articles/latest?per_page=1000&username=${username?.toLowerCase()}`);
+  const articles = await fetch(`${getApiUrl()}/articles/latest?per_page=1000&username=${username?.toLowerCase()}`, {
+    cache: 'no-cache',
+  });
   const articlesJson = await articles.json();
   return articlesJson;
 }

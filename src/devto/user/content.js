@@ -43,9 +43,13 @@ const blankPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1
 export const fetchUser = async (username, id) => {
   let response;
   if (!username && id) {
-    response = await fetch(`${getApiUrl()}/users/${id}`);
+    response = await fetch(`${getApiUrl()}/users/${id}`, {
+      cache: 'no-cache',
+    });
   } else {
-    response = await fetch(`${getApiUrl()}/users/by_username?url=${username?.toLowerCase()}`);
+    response = await fetch(`${getApiUrl()}/users/by_username?url=${username?.toLowerCase()}`, {
+      cache: 'no-cache',
+    });
   }
   const userJson = await response.json();
   return userJson;
