@@ -2,6 +2,7 @@ import { setCustomElementsManifest } from '@storybook/web-components';
 import customElements from '../custom-elements.json';
 import { globalTypesPrimer, decoratorsPrimer } from './primer-preview';
 import { viewports } from './viewports';
+import { stringify, parseify } from '../src/utils';
 import "./storybook.css";
 
 setCustomElementsManifest(customElements);
@@ -14,7 +15,8 @@ global.attrGen = (args) => Object.entries(args)
 .map(([key, value]) => `\n  ${key}="${value}"`)
 .join(' ');
 
-global.stringify = (obj) => JSON.stringify(obj).replace(/"/g, "&quot;")
+global.stringify = stringify;
+global.parseify = parseify;
 
 /** @type { import('@storybook/web-components').Preview } */
 const preview = {

@@ -5,6 +5,7 @@ import { parseFetchedPost } from '../post/content';
 import { default as userScottnath } from '../fixtures/generated/user--scottnath.json';
 import { default as postDependabot } from '../fixtures/generated/post--dependabot.json';
 import { default as postBugfix } from '../fixtures/generated/post--bugfix-multi-vite.json';
+import { getElements, ensureElements } from './user.shared-spec';
 
 import './index.js';
 
@@ -26,10 +27,10 @@ export const User = {
   args: {
     ...parseFetchedUser(userScottnath),
   },
-  // play: async ({ args, canvasElement, step }) => {
-  //   const elements = await getElements(canvasElement);
-  //   await ensureElements(elements, args);
-  // }
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    await ensureElements(elements, args);
+  }
 }
 
 export const UserPosts = {
@@ -37,7 +38,8 @@ export const UserPosts = {
     ...User.args,
     latest_post: stringify(parseFetchedPost(postDependabot)),
     popular_post: stringify(parseFetchedPost(postBugfix)),
-  }
+  },
+  play: User.play,
 }
 
 export const OnlyRequired = {
@@ -45,6 +47,7 @@ export const OnlyRequired = {
     username: userScottnath.username,
     name: userScottnath.name,
   },
+  play: User.play,
 }
 
 export const Fetch = {
@@ -52,6 +55,23 @@ export const Fetch = {
     username: userScottnath.username,
     fetch: true,
   },
+  parameters: {
+    mockData: [
+      generateMockResponse(userScottnath, 'users'),
+      generateMockResponse([postDependabot, postBugfix], 'articles'),
+    ]
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedUser(userScottnath),
+      ...args,
+      post_count: 2,
+      latest_post: parseFetchedPost(postDependabot),
+      popular_post: parseFetchedPost(postBugfix),
+    };
+    await ensureElements(elements, argsAfterFetch);
+  }
 }
 
 export const FetchWithoutPosts = {
@@ -59,6 +79,23 @@ export const FetchWithoutPosts = {
     username: userScottnath.username,
     fetch: 'no-posts',
   },
+  parameters: {
+    mockData: [
+      generateMockResponse(userScottnath, 'users'),
+      generateMockResponse([postDependabot, postBugfix], 'articles'),
+    ]
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedUser(userScottnath),
+      ...args,
+      post_count: 2,
+      latest_post: null,
+      popular_post: null,
+    };
+    await ensureElements(elements, argsAfterFetch);
+  }
 }
 
 export const FetchOverides = {
@@ -72,15 +109,36 @@ export const FetchOverides = {
     post_count: 1000000,
     popular_post: stringify({
       title: 'Meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow',
-      url: 'http://example.com',
-      cover_image: 'cat-1000-420.jpeg'
+      cover_image: 'cat-1000-420.jpeg',
     }),
     latest_post: stringify({
       title: 'Mess? Make your human blame the dog',
-      url: 'http://example.com',
       cover_image: 'cat-glasses-1000-420.jpeg'
     }),
   },
+  parameters: {
+    mockData: [
+      generateMockResponse(userScottnath, 'users'),
+      generateMockResponse([postDependabot, postBugfix], 'articles'),
+    ]
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+
+    const argsAfterFetch = {
+      ...parseFetchedUser(userScottnath),
+      ...args,
+      latest_post: {
+        ...parseFetchedPost(postDependabot),
+        ...parseify(args.latest_post),
+      },
+      popular_post: {
+        ...parseFetchedPost(postBugfix),
+        ...parseify(args.popular_post),
+      },
+    };
+    await ensureElements(elements, argsAfterFetch);
+  }
 }
 
 export const FetchError = {
@@ -93,6 +151,14 @@ export const FetchError = {
       generateMockResponse({username: 'not-a-real-user'}, 'users', 404),
     ]
   },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...args,
+      error: 'Fetch Error: User "not-a-real-user" not found'
+    };
+    await ensureElements(elements, argsAfterFetch);
+  }
 }
 
 export const ContainerCheck = {

@@ -31,3 +31,17 @@ export const intToString = (num) => {
 
   return num;
 };
+
+/**
+ * Stringify an object with quotes escaped
+ * @param {Object} obj 
+ * @returns {string} stringified object with quotes escaped
+ */
+export const stringify = (obj) => JSON.stringify(obj).replace(/"/g, "&quot;")
+
+/**
+ * Parse a stringified object with quotes escaped
+ * @param {string} str 
+ * @returns {Object} parsed object
+ */
+export const parseify = (str) => JSON.parse(str.replace(/&quot;/g, "\""));

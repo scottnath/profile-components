@@ -4,6 +4,8 @@ import { parseFetchedPost } from './content';
 import { default as postDependabot } from '../fixtures/generated/post--dependabot.json';
 import { default as postProfileComponents } from '../fixtures/generated/post--profile-components.json';
 
+import { getElements, ensureElements } from './post.shared-spec';
+
 import './index.js';
 
 export default {
@@ -24,10 +26,10 @@ export const Post = {
   args: {
     ...parseFetchedPost(postDependabot),
   },
-  // play: async ({ args, canvasElement, step }) => {
-  //   const elements = await getElements(canvasElement);
-  //   await ensureElements(elements, args);
-  // }
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    await ensureElements(elements, args);
+  }
 }
 
 export const Fetch = {
@@ -35,6 +37,19 @@ export const Fetch = {
     id: postProfileComponents.id,
     fetch: true,
   },
+  parameters: {
+    mockData: [
+      generateMockResponse(postProfileComponents, 'article'),
+    ]
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedPost(postProfileComponents),
+      ...args,
+    };
+    await ensureElements(elements, argsAfterFetch);
+  }
 }
 
 export const FetchOverides = {
@@ -43,4 +58,37 @@ export const FetchOverides = {
       title: 'Mess? Make your human blame the dog',
       cover_image: 'cat-glasses-1000-420.jpeg'
   },
+  parameters: {
+    mockData: [
+      generateMockResponse(postProfileComponents, 'article'),
+    ]
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedPost(postProfileComponents),
+      ...args,
+    };
+    await ensureElements(elements, argsAfterFetch);
+  }
+}
+
+export const FetchError = {
+  args: {
+    id: 'not-a-real-id',
+    fetch: true,
+  },
+  parameters: {
+    mockData: [
+      generateMockResponse({id: 'not-a-real-id'}, 'article', 404),
+    ]
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...args,
+      error: `Fetch Error: Post "${args.id}" not found`,
+    };
+    await ensureElements(elements, argsAfterFetch);
+  }
 }

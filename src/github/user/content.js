@@ -78,7 +78,7 @@ export const parseReposString = (reposStr, owner) => {
   if (typeof reposStr !== 'string') return reposStr;
   let repos = [];
   try {
-    repos = JSON.parse(reposStr);
+    repos = parseify(reposStr);
   } catch (error) {
     console.error(error);
     return [];
