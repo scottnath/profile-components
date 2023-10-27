@@ -1,4 +1,5 @@
 import { generateRepoContent } from '../repository/content.js';
+import { parseify } from '../../utils/index.js';
 
 /** @ignore */
 const githubApi = 'https://api.github.com';
