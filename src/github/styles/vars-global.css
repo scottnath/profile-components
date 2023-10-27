@@ -67,7 +67,7 @@ address {
 }
 
 .sr-only {
-  clip: rect(1px, 1px, 1px, 1px);
+  clip: rect(0px, 0px, 0px, 0px);
   clip-path: inset(50%);
   height: 1px;
   width: 1px;
@@ -75,6 +75,7 @@ address {
   overflow: hidden;
   padding: 0;
   position: absolute;
+  white-space: nowrap;
 }
 
 section[itemscope],

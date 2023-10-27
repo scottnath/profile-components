@@ -32,7 +32,7 @@ function html(content) {
       </header>
       <div part="main">
         ${content.summary ? `<p itemprop="description">${content.summary}</p>` : ''}
-        ${content.joined_at ? `<p>Joined on <time datetime="${formatDate(content.joined_at)}">${content.joined_at}</time></p>` : ''}
+        ${content.joined_at ? `<p>Joined on <time itemprop="startDate" datetime="${formatDate(content.joined_at)}">${content.joined_at}</time></p>` : ''}
         ${content.post_count ? `<p class="post_count">${content.post_count} posts published</p>` : ''}
         ${content.latest_post || content.popular_post ? `
           <dl>

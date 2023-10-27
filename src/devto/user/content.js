@@ -1,5 +1,6 @@
-import { fetchUserPosts, findPost } from '../post/content.js';
+import { fetchUserPosts, findPost, parseFetchedPost } from '../post/content.js';
 import { getApiUrl } from '../helpers/index.js';
+import { parseify } from '../../utils/index.js';
 
 /**
  * Blank base64-encoded png
@@ -56,6 +57,26 @@ export const fetchUser = async (username, id) => {
 }
 
 /**
+ * Parses a string, which should be a JSON stringified array of DEV post 
+ *  objects
+ * @param {string} postStr - String of ForemPost data
+ * @returns {ForemPost} content for a post
+ * @function
+ * @ignore
+ */
+export const parsePostString = (postStr) => {
+  if (typeof postStr !== 'string') return postStr;
+  let post = {};
+  try {
+    post = parseify(postStr);
+  } catch (error) {
+    console.error(error);
+    return {};
+  }
+  return post;
+}
+
+/**
  * Parse a dev.to (or Forem) user's content. This is a reducer on the endpoint response, 
  *  but generally reduces any object to just the data required for the user component HTML
  * @param {ForemUser} user - user object
@@ -75,8 +96,8 @@ export const parseFetchedUser = (user = {}) => {
     joined_at: user.joined_at,
     profile_image: user.profile_image,
     post_count: user.post_count,
-    latest_post: user.latest_post,
-    popular_post: user.popular_post,
+    latest_post: parsePostString(user.latest_post),
+    popular_post: parsePostString(user.popular_post),
   }
   const usr = {};
   // remove `undefined` values
@@ -84,26 +105,6 @@ export const parseFetchedUser = (user = {}) => {
     if (parsed[key]) usr[key] = parsed[key];
   }
   return usr;
-}
-
-/**
- * Parses a string, which should be a JSON stringified array of DEV post 
- *  objects
- * @param {string} postStr - String of ForemPost data
- * @returns {ForemPost} content for a post
- * @function
- * @ignore
- */
-export const parsePostString = (postStr) => {
-  if (typeof postStr !== 'string') return postStr;
-  let post = {};
-  try {
-    post = JSON.parse(postStr);
-  } catch (error) {
-    console.error(error);
-    return {};
-  }
-  return post;
 }
 
 /**
@@ -117,10 +118,10 @@ export const cleanUserContent = (content = {}) => {
   content.profile_image = content.profile_image || blankPng;
   content.name = content.name || `@${content.username}`;
   if (content.latest_post) {
-    content.latest_post = parsePostString(content.latest_post);
+    content.latest_post = parseFetchedPost(parsePostString(content.latest_post));
     if (content.popular_post) {
-      content.popular_post = parsePostString(content.popular_post);
-      if (content.popular_post === content.latest_post) {
+      content.popular_post = parseFetchedPost(parsePostString(content.popular_post));
+      if (content.popular_post.url === content.latest_post.url) {
         delete content.popular_post;
       } else {
         content.popular_post.cover_image = content.popular_post.cover_image || blankPng;
@@ -145,18 +146,31 @@ export const generateUserContent = async (content, fetch = false) => {
   let fetched = {};
   if (fetch && fetch !== 'false') {
     fetched = await fetchUser(user.username);
-    if (fetched.error) {
+    if (fetched?.error) {
       if (fetched.error === 'Not Found') {
         return { error: `Fetch Error: User "${content.username}" not found`};
       }
       return { error: `Fetch Error: ${fetched.message}`};
     }
+    fetched = parseFetchedUser(fetched);
     const posts = await fetchUserPosts(user.username);
     if (posts.length) {
       fetched.post_count = posts.length;
       if (fetch !== 'no-posts') {
         fetched.latest_post = findPost(posts, 'latest');
         fetched.popular_post = findPost(posts, 'popular');
+      }
+      if (fetched.latest_post && user.latest_post) {
+        user.latest_post = {
+          ...fetched.latest_post,
+          ...user.latest_post,
+        }
+      }
+      if (fetched.popular_post && user.popular_post) {
+        user.popular_post = {
+          ...fetched.popular_post,
+          ...user.popular_post,
+        }
       }
     }
   }

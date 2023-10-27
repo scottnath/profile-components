@@ -7,12 +7,16 @@
  * @memberof DEVUtils.post
  */
 function html(content) {
-  if (content.error || !content.url || !content.title) {
-    return '';
+  if (content.error) {
+    return `
+      <div aria-label="dev.to article" class="post" itemscope itemtype="http://schema.org/Action">
+        <p itemprop="error">${content.error}</p>
+      </div>
+    `
   }
 
   return `
-    <span class="post" itemscope itemtype="http://schema.org/Article">
+    <span aria-label="dev.to article" class="post" itemscope itemtype="http://schema.org/Article">
       <a href="${content.url}" itemprop="url" aria-label="read post ${content.title}">
         <img src="${content.cover_image}" itemprop="image" alt="Cover image for post ${content.title}" />
         <span itemprop="name">${content.title}</span>

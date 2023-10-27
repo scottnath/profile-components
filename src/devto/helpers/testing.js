@@ -20,6 +20,8 @@ export const generateMockResponse = (content, type='article', status=200) => {
   if (type === 'article') {
     // calls /articleS/:id (adds 's' to type)
     url += `${type}s/${content.id}`;
+  } else if (type === 'articles') {
+    url += `${type}/latest?per_page=1000&username=fake`;
   } else if (type === 'users') {
     if (!content.id) {
       url += `${type}/by_username?url=${content.username}`;
@@ -30,9 +32,21 @@ export const generateMockResponse = (content, type='article', status=200) => {
 
   if (status === 404) {
     return {
+      url,
+      method: 'GET',
       status: 404,
-      error: "Not Found"
+      delay: 0,
+      response: {
+        status: 404,
+        error: "Not Found"
+      },
     }
   }
-  return content
+  return {
+    url,
+    method: 'GET',
+    status: 200,
+    delay: 0,
+    response: content,
+  }
 }

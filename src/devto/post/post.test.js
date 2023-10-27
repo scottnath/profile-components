@@ -12,7 +12,7 @@ describe('fetchPost', () => {
   it('Should accept a post id and return a response', async (t) => {
     const fn = t.mock.method(global, 'fetch');
     const mockRes = {
-      json: () => generateMockResponse(postDependabot, 'article'),
+      json: () => generateMockResponse(postDependabot, 'article').response,
     };
     fn.mock.mockImplementationOnce(() => 
       Promise.resolve(mockRes)
@@ -27,7 +27,7 @@ describe('fetchUserPosts', () => {
   it('Should accept a username and return a response', async (t) => {
     const fn = t.mock.method(global, 'fetch');
     const mockRes = {
-      json: () => generateMockResponse([postDependabot, postBugfix], 'articles'),
+      json: () => generateMockResponse([postDependabot, postBugfix], 'articles').response,
     };
     fn.mock.mockImplementationOnce(() =>
       Promise.resolve(mockRes)
@@ -121,7 +121,7 @@ describe('generatePostContent', () => {
     const fn = t.mock.method(global, 'fetch');
     const mockContent = generateMockResponse(testObj, 'article', 404);
     const mockRes = {
-      json: () => mockContent,
+      json: () => mockContent.response,
     };
     fn.mock.mockImplementationOnce(() => 
       Promise.resolve(mockRes)
@@ -140,7 +140,7 @@ describe('generatePostContent', () => {
     }
     const fn = t.mock.method(global, 'fetch');
     const mockRes = {
-      json: () => testPost,
+      json: () => generateMockResponse(testPost, 'article').response,
     };
     fn.mock.mockImplementationOnce(() => 
       Promise.resolve(mockRes)

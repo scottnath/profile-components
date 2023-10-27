@@ -51,7 +51,7 @@ export const ensureElements = async (elements, args) => {
   await expect(elements.avatar).toBeTruthy();
   await expect(elements.name).toBeTruthy();
   await expect(elements.login).toBeTruthy();
-  console.log(args)
+  
   if (args?.bio) {
     await expect(elements.bio).toBeTruthy();
     await expect(elements.bio).toHaveTextContent(args.bio);
@@ -73,7 +73,7 @@ export const ensureElements = async (elements, args) => {
   if (args?.repos) {
     let reps = [];
     try {
-      reps = JSON.parse(args.repos.replace(/&quot;/g, "\""));
+      reps = parseify(args.repos);
       await expect(elements.repos).toHaveLength(reps.length);
     } catch (error) {
       await expect(elements.repos).toHaveLength(0);

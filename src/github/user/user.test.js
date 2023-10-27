@@ -1,10 +1,10 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert'
 
+import { stringify } from '../../utils/index.js';
 import { generateMockResponse } from '../helpers/testing.js';
 import { fetchUser, parseFetchedUser, parseReposString, cleanUserContent, generateUserContent } from './content.js';
 import { default as repoFreeCodeCamp } from '../fixtures/generated/repo--freeCodeCamp-freeCodeCamp.json' assert { type: 'json' };
-
 import { default as userScottnath } from '../fixtures/generated/user--scottnath.json' assert { type: 'json' };
 import { default as userSindresorhus } from '../fixtures/generated/user--sindresorhus.json' assert { type: 'json' };
 
@@ -56,7 +56,7 @@ describe('parseFetchedUser', () => {
 describe('parseReposString', () => {
   it('Should parse a string of repos full_names', () => {
     const testRepos = ['meow/purr', 'woof/sniff'];
-    const testString = JSON.stringify(testRepos);
+    const testString = stringify(testRepos);
     const expected = testRepos.map(repo => {
       return {
         full_name: repo,
@@ -67,7 +67,7 @@ describe('parseReposString', () => {
   });
   it('Should parse a string of repos names, adding owner, or fail gracefully', () => {
     const testRepos = ['purr', 'sniff'];
-    const testString = JSON.stringify(testRepos);
+    const testString = stringify(testRepos);
     const expected = testRepos.map(repo => {
       return {
         full_name: `meow/${repo}`,
@@ -97,7 +97,7 @@ describe('cleanUserContent', () => {
   })
   it('Should convert a string of repos to an array', () => {
     const testRepos = ['meow/purr'];
-    const testString = JSON.stringify(testRepos);
+    const testString = stringify(testRepos);
     const expected = testRepos.map(repo => {
       return {
         full_name: repo,
@@ -148,7 +148,7 @@ describe('generateUserContent', () => {
       followers: 0,
       username: userSindresorhus.login,
       login: undefined,
-      repos: JSON.stringify([testRepo.full_name]),
+      repos: stringify([testRepo.full_name]),
     };
     const expected = {
       login: userSindresorhus.login,
