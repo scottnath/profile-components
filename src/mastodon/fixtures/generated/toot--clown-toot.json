@@ -1,0 +1,109 @@
+{
+  "id": "111310465311344002",
+  "created_at": "2023-10-28T03:15:10.642Z",
+  "in_reply_to_id": null,
+  "in_reply_to_account_id": null,
+  "sensitive": true,
+  "spoiler_text": "",
+  "visibility": "public",
+  "language": "en",
+  "uri": "https://mastodon.social/users/scottnath/statuses/111310465311344002",
+  "url": "https://mastodon.social/@scottnath/111310465311344002",
+  "replies_count": 0,
+  "reblogs_count": 0,
+  "favourites_count": 0,
+  "edited_at": null,
+  "content": "<p>I&#39;m working on a new component 😉 ...so here&#39;s a toot with the extra bits...so one might play with the api...</p><p><a href=\"https://mastodon.social/tags/webcomponents\" class=\"mention hashtag\" rel=\"tag\">#<span>webcomponents</span></a> <a href=\"https://mastodon.social/tags/weekend\" class=\"mention hashtag\" rel=\"tag\">#<span>weekend</span></a> <br />🤯</p>",
+  "reblog": null,
+  "application": {
+    "name": "Web",
+    "website": null
+  },
+  "account": {
+    "id": "109492813814424051",
+    "username": "scottnath",
+    "acct": "scottnath",
+    "display_name": "Scott Nath",
+    "locked": false,
+    "bot": false,
+    "discoverable": true,
+    "group": false,
+    "created_at": "2022-12-11T00:00:00.000Z",
+    "note": "<p>Front end architect</p>",
+    "url": "https://mastodon.social/@scottnath",
+    "uri": "https://mastodon.social/users/scottnath",
+    "avatar": "https://files.mastodon.social/accounts/avatars/109/492/813/814/424/051/original/5df852bf2410202d.jpeg",
+    "avatar_static": "https://files.mastodon.social/accounts/avatars/109/492/813/814/424/051/original/5df852bf2410202d.jpeg",
+    "header": "https://files.mastodon.social/accounts/headers/109/492/813/814/424/051/original/0aff488edd07c1b1.jpg",
+    "header_static": "https://files.mastodon.social/accounts/headers/109/492/813/814/424/051/original/0aff488edd07c1b1.jpg",
+    "followers_count": 17,
+    "following_count": 287,
+    "statuses_count": 36,
+    "last_status_at": "2023-10-28",
+    "noindex": false,
+    "emojis": [],
+    "roles": [],
+    "fields": [
+      {
+        "name": "scottnath.com",
+        "value": "<a href=\"https://scottnath.com\" target=\"_blank\" rel=\"nofollow noopener noreferrer me\" translate=\"no\"><span class=\"invisible\">https://</span><span class=\"\">scottnath.com</span><span class=\"invisible\"></span></a>",
+        "verified_at": "2023-04-24T15:36:04.713+00:00"
+      },
+      {
+        "name": "GitHub",
+        "value": "<a href=\"https://scottnath.com/github\" target=\"_blank\" rel=\"nofollow noopener noreferrer me\" translate=\"no\"><span class=\"invisible\">https://</span><span class=\"\">scottnath.com/github</span><span class=\"invisible\"></span></a>",
+        "verified_at": "2023-04-25T20:01:46.377+00:00"
+      },
+      {
+        "name": "LinkedIn",
+        "value": "<a href=\"https://linkedin.com/in/scottnath\" target=\"_blank\" rel=\"nofollow noopener noreferrer me\" translate=\"no\"><span class=\"invisible\">https://</span><span class=\"\">linkedin.com/in/scottnath</span><span class=\"invisible\"></span></a>",
+        "verified_at": null
+      }
+    ]
+  },
+  "media_attachments": [
+    {
+      "id": "111310419940679487",
+      "type": "image",
+      "url": "https://files.mastodon.social/media_attachments/files/111/310/419/940/679/487/original/4e9f6f0230b3eb1c.png",
+      "preview_url": "https://files.mastodon.social/media_attachments/files/111/310/419/940/679/487/small/4e9f6f0230b3eb1c.png",
+      "remote_url": null,
+      "preview_remote_url": null,
+      "text_url": null,
+      "meta": {
+        "original": {
+          "width": 192,
+          "height": 192,
+          "size": "192x192",
+          "aspect": 1
+        },
+        "small": {
+          "width": 192,
+          "height": 192,
+          "size": "192x192",
+          "aspect": 1
+        },
+        "focus": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      "description": "clown face emoji, large size",
+      "blurhash": "UcPFW6oe0%jbPBj[R;fk0~ay4=bHv-ayf,ay"
+    }
+  ],
+  "mentions": [],
+  "tags": [
+    {
+      "name": "webcomponents",
+      "url": "https://mastodon.social/tags/webcomponents"
+    },
+    {
+      "name": "weekend",
+      "url": "https://mastodon.social/tags/weekend"
+    }
+  ],
+  "emojis": [],
+  "card": null,
+  "poll": null
+}

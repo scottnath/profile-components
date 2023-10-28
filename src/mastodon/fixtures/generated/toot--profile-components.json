@@ -1,0 +1,101 @@
+{
+  "id": "111213146929010808",
+  "created_at": "2023-10-10T22:45:49.970Z",
+  "in_reply_to_id": null,
+  "in_reply_to_account_id": null,
+  "sensitive": false,
+  "spoiler_text": "",
+  "visibility": "public",
+  "language": "en",
+  "uri": "https://mastodon.social/users/scottnath/statuses/111213146929010808",
+  "url": "https://mastodon.social/@scottnath/111213146929010808",
+  "replies_count": 1,
+  "reblogs_count": 2,
+  "favourites_count": 2,
+  "edited_at": null,
+  "content": "<p>Hey folks - I find the best way to learn is by doing and I wanted to learn how to make  native web components so... </p><p>Here&#39;s an article I wrote about a new set of open source web components I created! :-)</p><p><a href=\"https://dev.to/scottnath/profile-components-display-social-profiles-in-native-web-components-49b2\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" translate=\"no\"><span class=\"invisible\">https://</span><span class=\"ellipsis\">dev.to/scottnath/profile-compo</span><span class=\"invisible\">nents-display-social-profiles-in-native-web-components-49b2</span></a></p><p><a href=\"https://mastodon.social/tags/javascript\" class=\"mention hashtag\" rel=\"tag\">#<span>javascript</span></a> <a href=\"https://mastodon.social/tags/webcomponents\" class=\"mention hashtag\" rel=\"tag\">#<span>webcomponents</span></a> <a href=\"https://mastodon.social/tags/html\" class=\"mention hashtag\" rel=\"tag\">#<span>html</span></a></p>",
+  "reblog": null,
+  "application": {
+    "name": "Web",
+    "website": null
+  },
+  "account": {
+    "id": "109492813814424051",
+    "username": "scottnath",
+    "acct": "scottnath",
+    "display_name": "Scott Nath",
+    "locked": false,
+    "bot": false,
+    "discoverable": true,
+    "group": false,
+    "created_at": "2022-12-11T00:00:00.000Z",
+    "note": "<p>Front end architect</p>",
+    "url": "https://mastodon.social/@scottnath",
+    "uri": "https://mastodon.social/users/scottnath",
+    "avatar": "https://files.mastodon.social/accounts/avatars/109/492/813/814/424/051/original/5df852bf2410202d.jpeg",
+    "avatar_static": "https://files.mastodon.social/accounts/avatars/109/492/813/814/424/051/original/5df852bf2410202d.jpeg",
+    "header": "https://files.mastodon.social/accounts/headers/109/492/813/814/424/051/original/0aff488edd07c1b1.jpg",
+    "header_static": "https://files.mastodon.social/accounts/headers/109/492/813/814/424/051/original/0aff488edd07c1b1.jpg",
+    "followers_count": 17,
+    "following_count": 287,
+    "statuses_count": 36,
+    "last_status_at": "2023-10-28",
+    "noindex": false,
+    "emojis": [],
+    "roles": [],
+    "fields": [
+      {
+        "name": "scottnath.com",
+        "value": "<a href=\"https://scottnath.com\" target=\"_blank\" rel=\"nofollow noopener noreferrer me\" translate=\"no\"><span class=\"invisible\">https://</span><span class=\"\">scottnath.com</span><span class=\"invisible\"></span></a>",
+        "verified_at": "2023-04-24T15:36:04.713+00:00"
+      },
+      {
+        "name": "GitHub",
+        "value": "<a href=\"https://scottnath.com/github\" target=\"_blank\" rel=\"nofollow noopener noreferrer me\" translate=\"no\"><span class=\"invisible\">https://</span><span class=\"\">scottnath.com/github</span><span class=\"invisible\"></span></a>",
+        "verified_at": "2023-04-25T20:01:46.377+00:00"
+      },
+      {
+        "name": "LinkedIn",
+        "value": "<a href=\"https://linkedin.com/in/scottnath\" target=\"_blank\" rel=\"nofollow noopener noreferrer me\" translate=\"no\"><span class=\"invisible\">https://</span><span class=\"\">linkedin.com/in/scottnath</span><span class=\"invisible\"></span></a>",
+        "verified_at": null
+      }
+    ]
+  },
+  "media_attachments": [],
+  "mentions": [],
+  "tags": [
+    {
+      "name": "javascript",
+      "url": "https://mastodon.social/tags/javascript"
+    },
+    {
+      "name": "webcomponents",
+      "url": "https://mastodon.social/tags/webcomponents"
+    },
+    {
+      "name": "html",
+      "url": "https://mastodon.social/tags/html"
+    }
+  ],
+  "emojis": [],
+  "card": {
+    "url": "https://dev.to/scottnath/profile-components-display-social-profiles-in-native-web-components-49b2",
+    "title": "Profile Components: display social profiles in native web components",
+    "description": "Profile-components are a set of web components with zero dependencies that display publicly-available profile information from various social networks. Currently two: GitHub and dev.to.",
+    "language": "en",
+    "type": "link",
+    "author_name": "",
+    "author_url": "",
+    "provider_name": "DEV Community",
+    "provider_url": "",
+    "html": "",
+    "width": 1000,
+    "height": 500,
+    "image": "https://files.mastodon.social/cache/preview_cards/images/075/589/530/original/e660dd4a39810607.jpeg",
+    "image_description": "",
+    "embed_url": "",
+    "blurhash": "UCC$M?=_Irs:0$NHoeR+xVxBWYs.=EIot7oe",
+    "published_at": null
+  },
+  "poll": null
+}
