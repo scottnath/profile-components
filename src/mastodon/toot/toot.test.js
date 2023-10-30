@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert';
 
 import { generateMockResponse } from '../helpers/testing.js';
-import { fetchToot, fetchTootByUsername } from './content.js';
+import { fetchToot, fetchTootByUsername, parseFetchedToot, cleanTootContent, generateTootContent } from './content.js';
 import { default as tootFixture} from '../fixtures/generated/toot--profile-components.json' assert { type: 'json' };
 import { default as searchScottnathStatuses } from '../fixtures/generated/search--scottnath--statuses.json' assert { type: 'json' };
 
@@ -108,8 +108,28 @@ describe('fetchTootByUsername', () => {
 });
 
 describe('parseFetchedToot', () => {
-  it('Should correctly parse a fetched toot', async () => {})
-  it('Should handle missing attributes gracefully', async () => {})
+  it('Should correctly parse a fetched toot', () => {
+    const parsedToot = parseFetchedToot(tootFixture);
+    assert.strictEqual(parsedToot.content, tootFixture.content);
+    assert.strictEqual(parsedToot.favourites_count, tootFixture.favourites_count);
+    assert.strictEqual(parsedToot.replies_count, tootFixture.replies_count);
+    assert.strictEqual(parsedToot.reblogs_count, tootFixture.reblogs_count);
+    assert.strictEqual(parsedToot.created_at, tootFixture.created_at);
+    assert.strictEqual(parsedToot.url, tootFixture.url);
+  });
+
+  it('Should handle missing attributes gracefully', () => {
+    const incompleteToot = {
+      content: "This is a test toot without all attributes."
+    };
+    const parsedToot = parseFetchedToot(incompleteToot);
+    assert.strictEqual(parsedToot.content, incompleteToot.content);
+    assert.strictEqual(parsedToot.favourites_count, undefined);
+    assert.strictEqual(parsedToot.replies_count, undefined);
+    assert.strictEqual(parsedToot.reblogs_count, undefined);
+    assert.strictEqual(parsedToot.created_at, undefined);
+    assert.strictEqual(parsedToot.url, undefined);
+  });
 });
 
 describe('cleanTootContent', () => {
@@ -118,7 +138,68 @@ describe('cleanTootContent', () => {
 });
 
 describe('generateTootContent', () => {
-  it('Should generate content for the toot HTML', async () => {})
-  it('Should handle fetch option correctly', async () => {})
-  it('Should merge fetched and provided content correctly', async () => {})
+  it('Should correctly parse provided content', async () => {
+    const content = { ...tootFixture };
+    const generatedContent = await generateTootContent(content);
+    assert.deepStrictEqual(generatedContent, parseFetchedToot(content));
+  });
+
+  it('Should fetch toot by ID when fetch option is true', async (t) => {
+    const fn = t.mock.method(global, 'fetch');
+    const mockRes = {
+      json: () => generateMockResponse(tootFixture).response,
+    };
+    fn.mock.mockImplementationOnce(() => Promise.resolve(mockRes));
+
+    const content = { id: tootFixture.id };
+    await generateTootContent(content, true);
+    assert.strictEqual(fn.mock.calls[0].arguments[0], `${mastodonStatusApi}/${tootFixture.id}`);
+  });
+
+  it('Should fetch toot by username when fetch option is true and no ID is provided', async (t) => {
+    const fn = t.mock.method(global, 'fetch');
+    const mockRes = {
+      json: () => generateMockResponse(searchScottnathStatuses).response,
+    };
+    fn.mock.mockImplementationOnce(() => Promise.resolve(mockRes));
+
+    const content = { username: 'scottnath' };
+    await generateTootContent(content, true);
+    assert.strictEqual(fn.mock.calls[0].arguments[0], `${mastodonApi}?q=${content.username}&type=statuses`);
+  });
+
+  it('Should handle fetch errors gracefully', async () => {
+    const content = { id: 'nonexistentID' };
+    const generatedContent = await generateTootContent(content, true);
+    assert.strictEqual(generatedContent.error.startsWith('Fetch Error:'), true);
+  });
+
+  it('Should merge fetched content with provided content', async (t) => {
+    // Mock the global fetch function to return the tootFixture
+    const fn = t.mock.method(global, 'fetch');
+    const mockRes = {
+      json: () => Promise.resolve(tootFixture),
+    };
+    fn.mock.mockImplementationOnce(() => Promise.resolve(mockRes));
+
+    // Call the generateTootContent function with content and fetch set to true
+    const content = {
+      content: '<p>Some content</p>',
+      favourites_count: 5,
+      replies_count: 3,
+      reblogs_count: 4,
+      id: tootFixture.id,
+    };
+    const result = await generateTootContent(content, true);
+
+    // Expected result is a merged version of tootFixture and content
+    const expectedResult = parseFetchedToot({
+      ...tootFixture,
+      ...content,
+    });
+
+    // Assert that the result matches the expected result
+    assert.deepStrictEqual(result, expectedResult);
+  });
 });
+

@@ -10,8 +10,6 @@ const mastodonStatusApi = 'https://mastodon.social/api/v1/statuses';
  * @property {number} reblogs_count - Number of reblogs of the toot.
  * @property {string} created_at - Creation date of the toot.
  * @property {string} url - URL of the toot.
- * @property {Array<string>} emojis - Array of emojis used in the toot.
- * @property {Array<string>} tags - Array of tags used in the toot.
  * @property {string} [error] - Optional error message.
  */
 
@@ -67,6 +65,7 @@ export const fetchTootByUsername = async (username) => {
  */
 export const parseFetchedToot = (toot = {}) => {
   const parsed = {
+    username: toot.username || toot.account?.username,
     content: toot.content,
     favourites_count: toot.favourites_count,
     replies_count: toot.replies_count,
@@ -74,8 +73,6 @@ export const parseFetchedToot = (toot = {}) => {
     created_at: toot.created_at,
     url: toot.url,
     username: toot.username,
-    emojis: toot.emojis?.map(emoji => emoji.shortcode),
-    tags: toot.tags?.map(tag => tag.name)
   };
 
   const tt = {};

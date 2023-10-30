@@ -22,18 +22,18 @@ describe('fetchRepo', () => {
       assert.strictEqual(fn.mock.calls[0].arguments[0], `https://api.github.com/repos/${repoScottnathdotcom.full_name}`);
   });
   it('Should handle missing repos', async (t) => {
-      const fn = t.mock.method(global, 'fetch');
-      const mockContent = generateMockResponse({full_name: 'meow'}, 'repos', 404);
-      const mockRes = {
-        json: () => mockContent,
-      };
-      fn.mock.mockImplementationOnce(() => 
-        Promise.resolve(mockRes)
-      )
-      
-      const res = await fetchRepo('meow');
-      assert.strictEqual(res.response, mockContent.response);
-      assert.strictEqual(fn.mock.calls[0].arguments[0], `https://api.github.com/repos/meow`);
+    const fn = t.mock.method(global, 'fetch');
+    const mockContent = generateMockResponse({full_name: 'meow'}, 'repos', 404);
+    const mockRes = {
+      json: () => mockContent,
+    };
+    fn.mock.mockImplementationOnce(() => 
+      Promise.resolve(mockRes)
+    )
+    
+    const res = await fetchRepo('meow');
+    assert.strictEqual(res.response, mockContent.response);
+    assert.strictEqual(fn.mock.calls[0].arguments[0], `https://api.github.com/repos/meow`);
   });
 })
 

@@ -17,8 +17,6 @@ import tootHTML from './html.js';
  * @property {number} replies_count - Number of replies to the toot
  * @property {number} reblogs_count - Number of reblogs of the toot
  * @property {string} created_at - Creation date of the toot
- * @property {Array} emojis - Array of emojis used in the toot
- * @property {Array} tags - Array of tags used in the toot
  * @property {boolean} [fetch] - when true, fetches toot from the Mastodon API
  * 
  * @example
@@ -55,6 +53,7 @@ export class MastodonToot extends HTMLElement {
     // let view = `<style>${styles}</style>`;
     let view = '';
     this.toot = await generateTootContent(this.attrs, this.attrs.fetch);
+    console.log(this.attrs);
     view += tootHTML(this.toot);
     this.shadowRoot.innerHTML = view;
     if (this.attrs.itemprop) {
