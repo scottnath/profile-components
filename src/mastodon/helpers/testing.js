@@ -16,6 +16,7 @@
  */
 export const generateMockResponse = (content, type='toot-id', status=200) => {
   let url = `https://mastodon.social/api`;
+  let error = 'Record not found';
 
   if (type === 'toot-id') {
     // calls /articleS/:id (adds 's' to type)
@@ -38,7 +39,7 @@ export const generateMockResponse = (content, type='toot-id', status=200) => {
       delay: 0,
       response: {
         status: 404,
-        error: "Not Found"
+        error: error
       },
     }
   }
