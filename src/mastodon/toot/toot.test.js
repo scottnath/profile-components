@@ -2,8 +2,9 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert';
 
 import { generateMockResponse } from '../helpers/testing.js';
-import { fetchToot } from './content.js';
+import { fetchToot, fetchTootByUsername } from './content.js';
 import { default as tootFixture} from '../fixtures/generated/toot--profile-components.json' assert { type: 'json' };
+import { default as searchScottnathStatuses } from '../fixtures/generated/search--scottnath--statuses.json' assert { type: 'json' };
 
 /** @ignore */
 const mastodonApi = 'https://mastodon.social/api/v2/search';
@@ -41,10 +42,58 @@ describe('fetchToot', () => {
   })
 });
 describe('fetchTootByUsername', () => {
-  it('Should fetch the latest toot for a given username', async () => {})
-  it('Should return the pinned toot if available for the user', async () => {})
-  it('Should handle errors gracefully when fetching by username', async () => {})
+  it('Should fetch the latest toot for a given username', async (t) => {
+    const username = 'scottnath';
+    const fn = t.mock.method(global, 'fetch');
+    const mockRes = {
+      json: () => generateMockResponse(searchScottnathStatuses).response,
+    };
+    fn.mock.mockImplementationOnce(() => 
+      Promise.resolve(mockRes)
+    );
+
+    const res = await fetchTootByUsername(username);
+    assert.deepEqual(res, searchScottnathStatuses.statuses[0]);
+    assert.strictEqual(fn.mock.calls[0].arguments[0], `${mastodonApi}?q=${username}&type=statuses`);
+  });
+
+  it('Should return the pinned toot if available for the user', async (t) => {
+    const username = 'userWithPinnedToot';
+    const fn = t.mock.method(global, 'fetch');
+    const mockResWithPinned = {
+      ...tootFixture,
+      pinned: true
+    };
+    const mockRes = {
+      json: () => generateMockResponse(mockResWithPinned).response,
+    };
+    fn.mock.mockImplementationOnce(() => 
+      Promise.resolve(mockRes)
+    );
+
+    const res = await fetchTootByUsername(username);
+    assert.deepEqual(res, mockResWithPinned);
+    assert.strictEqual(res.pinned, true);
+  });
+
+  it('Should handle errors gracefully when fetching by username', async (t) => {
+    const username = 'nonexistentUser';
+    const fn = t.mock.method(global, 'fetch');
+    const mockError = {
+      error: "User not found"
+    };
+    const mockRes = {
+      json: () => generateMockResponse(mockError).response,
+    };
+    fn.mock.mockImplementationOnce(() => 
+      Promise.resolve(mockRes)
+    );
+
+    const res = await fetchTootByUsername(username);
+    assert.strictEqual(res.error, mockError.error);
+  });
 });
+
 describe('parseFetchedToot', () => {
   it('Should correctly parse a fetched toot', async () => {})
   it('Should handle missing attributes gracefully', async () => {})

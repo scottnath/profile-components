@@ -44,7 +44,7 @@ export const fetchTootByUsername = async (username) => {
   };
   const response = await fetch(`${mastodonApi}?q=${username}&type=statuses`, options);
   const tootJson = await response.json();
-  return tootJson.statuses[0] || {};
+  return tootJson?.statuses[0] || {};
 }
 
 /**
