@@ -57,30 +57,43 @@ describe('fetchTootByUsername', () => {
     assert.strictEqual(fn.mock.calls[0].arguments[0], `${mastodonApi}?q=${username}&type=statuses`);
   });
 
-  it('Should return the pinned toot if available for the user', async (t) => {
-    const username = 'userWithPinnedToot';
+  it('Should return the first pinned toot if multiple are available for the user', async (t) => {
+    const username = 'scottnath';
     const fn = t.mock.method(global, 'fetch');
-    const mockResWithPinned = {
-      ...tootFixture,
-      pinned: true
+    
+    // Adjusting the content of the second and third toots to make them pinned
+    const mockStatusesWithMultiplePinned = {
+      ...searchScottnathStatuses,
+      statuses: [
+        searchScottnathStatuses.statuses[0],
+        {
+          ...searchScottnathStatuses.statuses[1],
+          pinned: true
+        },
+        {
+          ...searchScottnathStatuses.statuses[2],
+          pinned: true
+        }
+      ]
     };
     const mockRes = {
-      json: () => generateMockResponse(mockResWithPinned).response,
+      json: () => generateMockResponse(mockStatusesWithMultiplePinned).response,
     };
     fn.mock.mockImplementationOnce(() => 
       Promise.resolve(mockRes)
     );
-
+  
     const res = await fetchTootByUsername(username);
-    assert.deepEqual(res, mockResWithPinned);
-    assert.strictEqual(res.pinned, true);
+    assert.deepEqual(res, mockStatusesWithMultiplePinned.statuses[1]);
+    assert.strictEqual(fn.mock.calls[0].arguments[0], `${mastodonApi}?q=${username}&type=statuses`);
   });
+  
 
   it('Should handle errors gracefully when fetching by username', async (t) => {
     const username = 'nonexistentUser';
     const fn = t.mock.method(global, 'fetch');
     const mockError = {
-      error: "User not found"
+      error: `No toots found for ${username}`
     };
     const mockRes = {
       json: () => generateMockResponse(mockError).response,

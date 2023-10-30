@@ -44,8 +44,19 @@ export const fetchTootByUsername = async (username) => {
   };
   const response = await fetch(`${mastodonApi}?q=${username}&type=statuses`, options);
   const tootJson = await response.json();
-  return tootJson?.statuses[0] || {};
+
+  // Filter toots to only include those owned by the specified username
+  const userTweets = tootJson?.statuses 
+  ? tootJson.statuses.filter(status => status.account.username === username)
+  : [];
+
+  // Check for a pinned toot
+  const pinnedToot = userTweets.find(toot => toot.pinned);
+
+  // Return the pinned toot if found, otherwise return the latest toot by the user
+  return pinnedToot || userTweets?.[0] || { error: `No toots found for ${username}`};
 }
+
 
 /**
  * Parse a fetched Mastodon toot's content
