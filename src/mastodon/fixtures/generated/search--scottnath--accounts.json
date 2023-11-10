@@ -1,0 +1,42 @@
+{
+  "id": "109492813814424051",
+  "username": "scottnath",
+  "acct": "scottnath",
+  "display_name": "Scott Nath",
+  "locked": false,
+  "bot": false,
+  "discoverable": true,
+  "group": false,
+  "created_at": "2022-12-11T00:00:00.000Z",
+  "note": "<p>Front end architect</p>",
+  "url": "https://mastodon.social/@scottnath",
+  "uri": "https://mastodon.social/users/scottnath",
+  "avatar": "https://files.mastodon.social/accounts/avatars/109/492/813/814/424/051/original/5df852bf2410202d.jpeg",
+  "avatar_static": "https://files.mastodon.social/accounts/avatars/109/492/813/814/424/051/original/5df852bf2410202d.jpeg",
+  "header": "https://files.mastodon.social/accounts/headers/109/492/813/814/424/051/original/0aff488edd07c1b1.jpg",
+  "header_static": "https://files.mastodon.social/accounts/headers/109/492/813/814/424/051/original/0aff488edd07c1b1.jpg",
+  "followers_count": 17,
+  "following_count": 290,
+  "statuses_count": 37,
+  "last_status_at": "2023-10-29",
+  "noindex": false,
+  "emojis": [],
+  "roles": [],
+  "fields": [
+    {
+      "name": "scottnath.com",
+      "value": "<a href=\"https://scottnath.com\" target=\"_blank\" rel=\"nofollow noopener noreferrer me\" translate=\"no\"><span class=\"invisible\">https://</span><span class=\"\">scottnath.com</span><span class=\"invisible\"></span></a>",
+      "verified_at": "2023-04-24T15:36:04.713+00:00"
+    },
+    {
+      "name": "GitHub",
+      "value": "<a href=\"https://scottnath.com/github\" target=\"_blank\" rel=\"nofollow noopener noreferrer me\" translate=\"no\"><span class=\"invisible\">https://</span><span class=\"\">scottnath.com/github</span><span class=\"invisible\"></span></a>",
+      "verified_at": "2023-04-25T20:01:46.377+00:00"
+    },
+    {
+      "name": "LinkedIn",
+      "value": "<a href=\"https://linkedin.com/in/scottnath\" target=\"_blank\" rel=\"nofollow noopener noreferrer me\" translate=\"no\"><span class=\"invisible\">https://</span><span class=\"\">linkedin.com/in/scottnath</span><span class=\"invisible\"></span></a>",
+      "verified_at": null
+    }
+  ]
+}

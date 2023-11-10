@@ -11,7 +11,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { fetchToot } from '../toot/content.js';
-// import { fetchUser } from '../user/content.js';
+import { fetchUser, fetchUserByUsername } from '../user/content.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,9 +37,18 @@ export const generateFixturePost = async ({id, slug}) => {
  * Generate a fixture for a GitHub user and write it to a JSON file
  * @param {string} username - GitHub user login 
  */
-export const generateFixtureUser = async (username) => {
-  const filename = `user--${username}.json`;
-  const contents = await fetchUser(username);
+export const generateFixtureUser = async ({id, username}) => {
+  let filename = `search--${username}--accounts.json`;
+  let contents = await fetchUserByUsername(username);
+
+  try {
+    await outputFile(path.join(fixturesDir, filename), JSON.stringify(contents, null, 2));
+  } catch (err) {
+    console.error(err)
+  }
+
+  filename = `account--${username}.json`;
+  contents = await fetchUser(id);
 
   try {
     await outputFile(path.join(fixturesDir, filename), JSON.stringify(contents, null, 2));
@@ -63,15 +72,17 @@ export const generateFixtures = async () => {
     },
   ];
   const users = [
-    'scottnath',
-    'meowmeow',
+    {
+      id: '109492813814424051',
+      username: 'scottnath',
+    },
   ];
 
   for (const post of posts) {
     await generateFixturePost(post);
   }
-  // for (const user of users) {
-  //   await generateFixtureUser(user);
-  // }
+  for (const user of users) {
+    await generateFixtureUser(user);
+  }
 }
 generateFixtures()

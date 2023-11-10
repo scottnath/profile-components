@@ -40,7 +40,7 @@ export const generateFixturePost = async ({id, slug}) => {
 export const generateFixtureUser = async (username) => {
   const filename = `user--${username}.json`;
   const contents = await fetchUser(username);
-
+  
   try {
     await outputFile(path.join(fixturesDir, filename), JSON.stringify(contents, null, 2));
   } catch (err) {
@@ -68,6 +68,10 @@ export const generateFixtures = async () => {
     {
       id: 1631825,
       slug: 'profile-components-github',
+    },
+    {
+      id: 1471624,
+      slug: 'local-multi-framework'
     }
   ];
   const users = [

@@ -65,16 +65,16 @@
   "releases_url": "https://api.github.com/repos/freeCodeCamp/freeCodeCamp/releases{/id}",
   "deployments_url": "https://api.github.com/repos/freeCodeCamp/freeCodeCamp/deployments",
   "created_at": "2014-12-24T17:49:19Z",
-  "updated_at": "2023-10-18T14:03:55Z",
-  "pushed_at": "2023-10-18T12:53:01Z",
+  "updated_at": "2023-11-09T16:55:39Z",
+  "pushed_at": "2023-11-09T17:02:56Z",
   "git_url": "git://github.com/freeCodeCamp/freeCodeCamp.git",
   "ssh_url": "git@github.com:freeCodeCamp/freeCodeCamp.git",
   "clone_url": "https://github.com/freeCodeCamp/freeCodeCamp.git",
   "svn_url": "https://github.com/freeCodeCamp/freeCodeCamp",
   "homepage": "http://contribute.freecodecamp.org/",
-  "size": 395231,
-  "stargazers_count": 376075,
-  "watchers_count": 376075,
+  "size": 397774,
+  "stargazers_count": 377808,
+  "watchers_count": 377808,
   "language": "TypeScript",
   "has_issues": true,
   "has_projects": true,
@@ -82,11 +82,11 @@
   "has_wiki": false,
   "has_pages": true,
   "has_discussions": false,
-  "forks_count": 34372,
+  "forks_count": 34758,
   "mirror_url": null,
   "archived": false,
   "disabled": false,
-  "open_issues_count": 285,
+  "open_issues_count": 236,
   "license": {
     "key": "bsd-3-clause",
     "name": "BSD 3-Clause \"New\" or \"Revised\" License",
@@ -116,9 +116,9 @@
     "teachers"
   ],
   "visibility": "public",
-  "forks": 34372,
-  "open_issues": 285,
-  "watchers": 376075,
+  "forks": 34758,
+  "open_issues": 236,
+  "watchers": 377808,
   "default_branch": "main",
   "temp_clone_token": null,
   "organization": {
@@ -141,6 +141,6 @@
     "type": "Organization",
     "site_admin": false
   },
-  "network_count": 34372,
-  "subscribers_count": 8458
+  "network_count": 34758,
+  "subscribers_count": 8476
 }

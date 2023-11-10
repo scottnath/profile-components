@@ -22,7 +22,7 @@
   --color-normal: var(--body-color);
   --color-shadow: var(--card-border);
   --color-profile: var(--profile-brand-color);
-  /* --color-bold: var(--color-bold); */
+  --color-bold: var(--body-color);
 
   --color-link: var(--link-color);
   --color-link-hover: var(--link-color-hover);
