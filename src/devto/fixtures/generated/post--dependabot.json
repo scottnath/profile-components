@@ -3,7 +3,7 @@
   "id": 1568661,
   "title": "A crazy-simple way to bulk-update NPM dependencies with GitHub's Dependabot",
   "description": "This is the simplest way I've found to keep your NPM dependencies up-to-date. This will update all...",
-  "readable_publish_date": "Aug 15",
+  "readable_publish_date": "Aug 15 '23",
   "slug": "a-crazy-simple-way-to-bulk-update-npm-dependencies-with-githubs-dependabot-3e2o",
   "path": "/scottnath/a-crazy-simple-way-to-bulk-update-npm-dependencies-with-githubs-dependabot-3e2o",
   "url": "https://dev.to/scottnath/a-crazy-simple-way-to-bulk-update-npm-dependencies-with-githubs-dependabot-3e2o",
@@ -12,8 +12,8 @@
   "collection_id": null,
   "published_timestamp": "2023-08-15T18:00:37Z",
   "positive_reactions_count": 0,
-  "cover_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--DfcEJZWu--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/d9sds37k57qzn6j5nbxp.png",
-  "social_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--XDW1Jh5r--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/d9sds37k57qzn6j5nbxp.png",
+  "cover_image": "https://media.dev.to/cdn-cgi/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fd9sds37k57qzn6j5nbxp.png",
+  "social_image": "https://media.dev.to/cdn-cgi/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fd9sds37k57qzn6j5nbxp.png",
   "canonical_url": "https://dev.to/scottnath/a-crazy-simple-way-to-bulk-update-npm-dependencies-with-githubs-dependabot-3e2o",
   "created_at": "2023-08-15T00:55:09Z",
   "edited_at": null,
@@ -37,7 +37,7 @@
     "github_username": "scottnath",
     "user_id": 1055555,
     "website_url": "https://scottnath.com",
-    "profile_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--k0ZYTR18--/c_fill,f_auto,fl_progressive,h_640,q_auto,w_640/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/1055555/99c3a97d-b160-4d6d-96c1-1007d266c024.jpeg",
-    "profile_image_90": "https://res.cloudinary.com/practicaldev/image/fetch/s--K8yLyVye--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/1055555/99c3a97d-b160-4d6d-96c1-1007d266c024.jpeg"
+    "profile_image": "https://media.dev.to/cdn-cgi/image/width=640,height=640,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F1055555%2F4d0bf90a-bec7-4228-b1ca-d663fa40adeb.jpeg",
+    "profile_image_90": "https://media.dev.to/cdn-cgi/image/width=90,height=90,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F1055555%2F4d0bf90a-bec7-4228-b1ca-d663fa40adeb.jpeg"
   }
 }

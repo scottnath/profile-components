@@ -15,29 +15,55 @@ import {generateRepoContent} from './repository/content.js';
 import repoHTML from './repository/html.js';
 
 /**
+ * @name GitHub-Repository-Declarative-Shadow-DOM
+ * @param {GitHubRepositoryHTML} content - a content object representing a GitHub repository
+ * @param {boolean} fetch 
+ * @returns {string} GitHub HTML wrapped in a `template`
+ */
+const dsdRepo = async (content, fetch = false) => {
+  const generated = await generateRepoContent(content, fetch);
+  let genHTML = '<template shadowrootmode="open"><style>' + repository + '</style>';
+  genHTML += repoHTML(generated);
+  genHTML += '</template>';
+  return genHTML;
+}
+
+/**
  * @name GitHub-Repository-Utilities
  * @module
  * @namespace repo
  * @memberof GitHubUtils
  * @description Utility functions for a repository
  * 
- * @example <caption>Server side rendering trick</caption>
- * <github-repository>
- *  <template id="github-repo" shadowrootmode="open"></template>
- * </github-repository>
+ * @example <caption>Server side rendering a Repository with Declarative Shadow Dom</caption>
+ * <github-repository id="github-repo-1"></github-repository>
  * 
  * <script type="module">
  * import {repo} from 'profile-components/github-utils';
- * const content = repo.generateContent({full_name: 'scottnath/profile-components'}, true);
- * const html = repo.html(content);
- * document.querySelector('#github-repo').innerHTML = `<style>${repo.style}</style>${html}`;
+ * const dsdHTML = repo.dsd({full_name: 'scottnath/profile-components'}, true);
+ * document.querySelector('#github-repo-1').innerHTML = dsdHTML;
  * </script>
  */
 const repo = {
   generateContent: generateRepoContent,
   html: repoHTML,
   styles: repository,
+  dsd: dsdRepo
 };
+
+/**
+ * @name GitHub-Declarative-Shadow-DOM
+ * @param {GitHubUserHTML} content - a content object representing a GitHub user
+ * @param {boolean} fetch 
+ * @returns {string} GitHub HTML wrapped in a `template`
+ */
+const dsd = async (content, fetch = false) => {
+  const generated = await generateUserContent(content, fetch);
+  let genHTML = '<template shadowrootmode="open"><style>' + styles + '</style>';
+  genHTML += userHTML(generated);
+  genHTML += '</template>';
+  return genHTML;
+}
 
 /**
  * @name GitHub-User-Utilities
@@ -46,25 +72,24 @@ const repo = {
  * @memberof GitHubUtils
  * @description Utility functions for a user
  * 
- * @example <caption>Server side rendering trick</caption>
- * <github-user>
- *  <template id="github-user" shadowrootmode="open"></template>
- * </github-user>
+ * @example <caption>Server side rendering with Declarative Shadow Dom</caption>
+ * <github-user></github-user>
  * 
  * <script type="module">
- * import {user} from 'profile-components/github-utils';
- * const content = user.generateContent({login: 'scottnath'}, true);
- * const html = user.html(content);
- * document.querySelector('#github-user').innerHTML = `<style>${user.style}</style>${html}`;
+ * import {dsd} from 'profile-components/github-utils';
+ * const dsdHTML = dsd({login: 'scottnath'}, true);
+ * document.querySelector('github-user').innerHTML = dsdHTML;
  * </script>
  */
 const user = {
   generateContent: generateUserContent,
   html: userHTML,
   styles,
+  dsd
 };
 
-export default {
+export {
   repo,
-  user
+  user,
+  dsd
 }
