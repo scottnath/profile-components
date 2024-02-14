@@ -39,7 +39,16 @@ export const UserPosts = {
     latest_post: stringify(parseFetchedPost(postDependabot)),
     popular_post: stringify(parseFetchedPost(postBugfix)),
   },
-  // play: User.play,
+  play: async ({ args, canvasElement }) => {
+    const elements = await getElements(canvasElement);
+
+    const argsAfterFetch = {
+      ...args,
+      latest_post: parseify(args.latest_post),
+      popular_post: parseify(args.popular_post),
+    };
+    await ensureElements(elements, argsAfterFetch);
+  }
 }
 
 export const OnlyRequired = {
