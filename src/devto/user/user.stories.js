@@ -44,9 +44,10 @@ export const UserPosts = {
 
     const argsAfterFetch = {
       ...args,
-      latest_post: parseify(args.latest_post),
-      popular_post: parseify(args.popular_post),
+      latest_post: parseFetchedPost(postDependabot),
+      popular_post: parseFetchedPost(postBugfix),
     };
+    console.log('argsAfterFetch', argsAfterFetch)
     await ensureElements(elements, argsAfterFetch);
   }
 }
