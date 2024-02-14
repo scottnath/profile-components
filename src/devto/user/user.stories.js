@@ -39,7 +39,7 @@ export const UserPosts = {
     latest_post: stringify(parseFetchedPost(postDependabot)),
     popular_post: stringify(parseFetchedPost(postBugfix)),
   },
-  play: User.play,
+  // play: User.play,
 }
 
 export const OnlyRequired = {
