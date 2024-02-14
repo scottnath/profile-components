@@ -3,7 +3,7 @@
   "id": 1630208,
   "title": "Profile Components: display social profiles in native web components",
   "description": "Profile-components are a set of web components with zero dependencies that display publicly-available profile information from various social networks. Currently two: GitHub and dev.to.",
-  "readable_publish_date": "Oct 10",
+  "readable_publish_date": "Oct 10 2023",
   "slug": "profile-components-display-social-profiles-in-native-web-components-49b2",
   "path": "/scottnath/profile-components-display-social-profiles-in-native-web-components-49b2",
   "url": "https://dev.to/scottnath/profile-components-display-social-profiles-in-native-web-components-49b2",
@@ -12,8 +12,8 @@
   "collection_id": 24992,
   "published_timestamp": "2023-10-10T16:19:14Z",
   "positive_reactions_count": 0,
-  "cover_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--5oEkYDnE--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/svvid1vh9qtimahal8c7.jpeg",
-  "social_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--cT2BXB9L--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/svvid1vh9qtimahal8c7.jpeg",
+  "cover_image": "https://media.dev.to/cdn-cgi/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fsvvid1vh9qtimahal8c7.jpeg",
+  "social_image": "https://media.dev.to/cdn-cgi/image/width=1000,height=500,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fsvvid1vh9qtimahal8c7.jpeg",
   "canonical_url": "https://scottnath.com/blahg/profile-components/",
   "created_at": "2023-10-10T16:19:15Z",
   "edited_at": "2023-10-11T20:26:42Z",
@@ -37,7 +37,7 @@
     "github_username": "scottnath",
     "user_id": 1055555,
     "website_url": "https://scottnath.com",
-    "profile_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--k0ZYTR18--/c_fill,f_auto,fl_progressive,h_640,q_auto,w_640/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/1055555/99c3a97d-b160-4d6d-96c1-1007d266c024.jpeg",
-    "profile_image_90": "https://res.cloudinary.com/practicaldev/image/fetch/s--K8yLyVye--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/1055555/99c3a97d-b160-4d6d-96c1-1007d266c024.jpeg"
+    "profile_image": "https://media.dev.to/cdn-cgi/image/width=640,height=640,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F1055555%2F4d0bf90a-bec7-4228-b1ca-d663fa40adeb.jpeg",
+    "profile_image_90": "https://media.dev.to/cdn-cgi/image/width=90,height=90,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Fuser%2Fprofile_image%2F1055555%2F4d0bf90a-bec7-4228-b1ca-d663fa40adeb.jpeg"
   }
 }

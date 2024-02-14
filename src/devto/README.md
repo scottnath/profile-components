@@ -23,6 +23,46 @@ see README at root of repo for usage details
 
 ---
 
+## Members
+
+<dl>
+<dt><a href="#DEV-Post-Declarative-Shadow-DOM">DEV-Post-Declarative-Shadow-DOM</a> ⇒ <code>string</code></dt>
+<dd></dd>
+<dt><a href="#DEV-Declarative-Shadow-DOM">DEV-Declarative-Shadow-DOM</a> ⇒ <code>string</code></dt>
+<dd></dd>
+</dl>
+
+## Objects
+
+<dl>
+<dt><a href="#DEVUtils">DEVUtils</a> : <code>object</code></dt>
+<dd><p>Utility functions for fetching and parsing dev.to api data, getting
+ styles and generating HTML for dev.to profile UIs</p>
+</dd>
+</dl>
+
+<a name="DEV-Post-Declarative-Shadow-DOM"></a>
+
+## DEV-Post-Declarative-Shadow-DOM ⇒ <code>string</code>
+**Kind**: global variable  
+**Returns**: <code>string</code> - DEV post HTML wrapped in a `template`  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| content | <code>ForemPostHTML</code> | Content about one post by dev.to (or Forem) user |
+| fetch | <code>boolean</code> |  |
+
+<a name="DEV-Declarative-Shadow-DOM"></a>
+
+## DEV-Declarative-Shadow-DOM ⇒ <code>string</code>
+**Kind**: global variable  
+**Returns**: <code>string</code> - DEV HTML wrapped in a `template`  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| content | <code>ForemUserHTML</code> | a content object representing a DEV user |
+| fetch | <code>boolean</code> |  |
+
 <a name="DEVUtils"></a>
 
 ## DEVUtils : <code>object</code>
@@ -51,17 +91,14 @@ Utility functions for fetching and parsing dev.to api data, getting
 Utility functions for a post
 
 **Kind**: static namespace of [<code>DEVUtils</code>](#DEVUtils)  
-**Example** *(Server side rendering trick)*  
+**Example** *(Server side rendering a post with Declarative Shadow Dom)*  
 ```js
-<devto-post>
- <template id="devto-post" shadowrootmode="open"></template>
-</devto-post>
+<devto-post></devto-post>
 
 <script type="module">
 import {post} from 'profile-components/devto-utils';
-const content = post.generateContent({id: '12345'}, true);
-const html = post.html(content);
-document.querySelector('#devto-post').innerHTML = `<style>${post.style}</style>${html}`;
+const dsdHTML = post.dsd({id: '12345'}, true);
+document.querySelector('devto-post').innerHTML = dsdHTML;
 </script>
 ```
 
@@ -131,17 +168,14 @@ Forem post content, ready for HTML
 Utility functions for a user
 
 **Kind**: static namespace of [<code>DEVUtils</code>](#DEVUtils)  
-**Example** *(Server side rendering trick)*  
+**Example** *(Server side rendering with Declarative Shadow Dom)*  
 ```js
-<devto-user>
- <template id="devto-user" shadowrootmode="open"></template>
-</devto-user>
+<devto-user></devto-user>
 
 <script type="module">
-import {user} from 'profile-components/devto-utils';
-const content = user.generateContent({username: 'scottnath'}, true);
-const html = user.html(content);
-document.querySelector('#devto-user').innerHTML = `<style>${user.style}</style>${html}`;
+import {dsd} from 'profile-components/devto-utils';
+const dsdHTML = dsd({username: 'scottnath'}, true);
+document.querySelector('devto-user').innerHTML = dsdHTML;
 </script>
 ```
 
