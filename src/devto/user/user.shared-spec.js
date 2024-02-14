@@ -47,7 +47,6 @@ export const getElements = async (canvasElement) => {
  * Ensure elements are present and have the correct content
  */
 export const ensureElements = async (elements, args) => {
-  console.log('elements', elements, args)
   await expect(elements.container).toBeInTheDocument();
   if (args.error) {
     await expect(elements.mainLink).not.toBeInTheDocument();
