@@ -19,46 +19,6 @@ see README at root of repo for usage details
 
 ---
 
-## Members
-
-<dl>
-<dt><a href="#GitHub-Repository-Declarative-Shadow-DOM">GitHub-Repository-Declarative-Shadow-DOM</a> ⇒ <code>string</code></dt>
-<dd></dd>
-<dt><a href="#GitHub-Declarative-Shadow-DOM">GitHub-Declarative-Shadow-DOM</a> ⇒ <code>string</code></dt>
-<dd></dd>
-</dl>
-
-## Objects
-
-<dl>
-<dt><a href="#GitHubUtils">GitHubUtils</a> : <code>object</code></dt>
-<dd><p>Utility functions for fetching and parsing GitHub api data, getting
- styles and generating HTML for GitHub profile UIs</p>
-</dd>
-</dl>
-
-<a name="GitHub-Repository-Declarative-Shadow-DOM"></a>
-
-## GitHub-Repository-Declarative-Shadow-DOM ⇒ <code>string</code>
-**Kind**: global variable  
-**Returns**: <code>string</code> - GitHub HTML wrapped in a `template`  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| content | <code>GitHubRepositoryHTML</code> | a content object representing a GitHub repository |
-| fetch | <code>boolean</code> |  |
-
-<a name="GitHub-Declarative-Shadow-DOM"></a>
-
-## GitHub-Declarative-Shadow-DOM ⇒ <code>string</code>
-**Kind**: global variable  
-**Returns**: <code>string</code> - GitHub HTML wrapped in a `template`  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| content | <code>GitHubUserHTML</code> | a content object representing a GitHub user |
-| fetch | <code>boolean</code> |  |
-
 <a name="GitHubUtils"></a>
 
 ## GitHubUtils : <code>object</code>
@@ -71,11 +31,13 @@ Utility functions for fetching and parsing GitHub api data, getting
 * [GitHubUtils](#GitHubUtils) : <code>object</code>
     * [.repo](#GitHubUtils.repo) : <code>object</code>
         * [.styles](#GitHubUtils.repo.styles)
+        * [.dsd](#GitHubUtils.repo.dsd) ⇒ <code>string</code>
         * [.html(content)](#GitHubUtils.repo.html) ⇒ <code>string</code>
         * [.generateContent(content, [fetch], [no_org])](#GitHubUtils.repo.generateContent) ⇒ <code>GitHubRepositoryHTML</code>
         * [.GitHubRepositoryHTML](#GitHubUtils.repo.GitHubRepositoryHTML) : <code>Object</code>
     * [.user](#GitHubUtils.user) : <code>object</code>
         * [.styles](#GitHubUtils.user.styles)
+        * [.dsd](#GitHubUtils.user.dsd) ⇒ <code>string</code>
         * [.html(content)](#GitHubUtils.user.html) ⇒ <code>string</code>
         * [.generateContent(content, [fetch])](#GitHubUtils.user.generateContent) ⇒ <code>GitHubUserHTML</code>
         * [.GitHubUserHTML](#GitHubUtils.user.GitHubUserHTML) : <code>Object</code>
@@ -86,19 +48,10 @@ Utility functions for fetching and parsing GitHub api data, getting
 Utility functions for a repository
 
 **Kind**: static namespace of [<code>GitHubUtils</code>](#GitHubUtils)  
-**Example** *(Server side rendering a Repository with Declarative Shadow Dom)*  
-```js
-<github-repository id="github-repo-1"></github-repository>
-
-<script type="module">
-import {repo} from 'profile-components/github-utils';
-const dsdHTML = repo.dsd({full_name: 'scottnath/profile-components'}, true);
-document.querySelector('#github-repo-1').innerHTML = dsdHTML;
-</script>
-```
 
 * [.repo](#GitHubUtils.repo) : <code>object</code>
     * [.styles](#GitHubUtils.repo.styles)
+    * [.dsd](#GitHubUtils.repo.dsd) ⇒ <code>string</code>
     * [.html(content)](#GitHubUtils.repo.html) ⇒ <code>string</code>
     * [.generateContent(content, [fetch], [no_org])](#GitHubUtils.repo.generateContent) ⇒ <code>GitHubRepositoryHTML</code>
     * [.GitHubRepositoryHTML](#GitHubUtils.repo.GitHubRepositoryHTML) : <code>Object</code>
@@ -109,6 +62,29 @@ document.querySelector('#github-repo-1').innerHTML = dsdHTML;
 GitHub repository styles
 
 **Kind**: static property of [<code>repo</code>](#GitHubUtils.repo)  
+<a name="GitHubUtils.repo.dsd"></a>
+
+#### repo.dsd ⇒ <code>string</code>
+Generate a `template` element with shadowrootmode and a repository in it
+
+**Kind**: static namespace of [<code>repo</code>](#GitHubUtils.repo)  
+**Returns**: <code>string</code> - GitHub HTML wrapped in a `template`  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| content | <code>GitHubRepositoryHTML</code> | a content object representing a GitHub repository |
+| fetch | <code>boolean</code> |  |
+
+**Example** *(Server side rendering a Repository with Declarative Shadow Dom)*  
+```js
+<github-repository id="github-repo-1"></github-repository>
+
+<script type="module">
+import {repo} from 'profile-components/github-utils';
+const dsdHTML = repo.dsd({full_name: 'scottnath/profile-components'}, true);
+document.querySelector('#github-repo-1').innerHTML = dsdHTML;
+</script>
+```
 <a name="GitHubUtils.repo.html"></a>
 
 #### repo.html(content) ⇒ <code>string</code>
@@ -161,19 +137,10 @@ Content needed to render a GitHub repository. This is a subset of the `repos` en
 Utility functions for a user
 
 **Kind**: static namespace of [<code>GitHubUtils</code>](#GitHubUtils)  
-**Example** *(Server side rendering with Declarative Shadow Dom)*  
-```js
-<github-user></github-user>
-
-<script type="module">
-import {dsd} from 'profile-components/github-utils';
-const dsdHTML = dsd({login: 'scottnath'}, true);
-document.querySelector('github-user').innerHTML = dsdHTML;
-</script>
-```
 
 * [.user](#GitHubUtils.user) : <code>object</code>
     * [.styles](#GitHubUtils.user.styles)
+    * [.dsd](#GitHubUtils.user.dsd) ⇒ <code>string</code>
     * [.html(content)](#GitHubUtils.user.html) ⇒ <code>string</code>
     * [.generateContent(content, [fetch])](#GitHubUtils.user.generateContent) ⇒ <code>GitHubUserHTML</code>
     * [.GitHubUserHTML](#GitHubUtils.user.GitHubUserHTML) : <code>Object</code>
@@ -184,6 +151,29 @@ document.querySelector('github-user').innerHTML = dsdHTML;
 GitHub user styles
 
 **Kind**: static property of [<code>user</code>](#GitHubUtils.user)  
+<a name="GitHubUtils.user.dsd"></a>
+
+#### user.dsd ⇒ <code>string</code>
+Generate a `template` element with shadowrootmode with a User in it
+
+**Kind**: static namespace of [<code>user</code>](#GitHubUtils.user)  
+**Returns**: <code>string</code> - GitHub HTML wrapped in a `template`  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| content | <code>GitHubUserHTML</code> | a content object representing a GitHub user |
+| fetch | <code>boolean</code> |  |
+
+**Example** *(Server side rendering with Declarative Shadow Dom)*  
+```js
+<github-user></github-user>
+
+<script type="module">
+import {dsd} from 'profile-components/github-utils';
+const dsdHTML = dsd({login: 'scottnath'}, true);
+document.querySelector('github-user').innerHTML = dsdHTML;
+</script>
+```
 <a name="GitHubUtils.user.html"></a>
 
 #### user.html(content) ⇒ <code>string</code>

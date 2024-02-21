@@ -23,46 +23,6 @@ see README at root of repo for usage details
 
 ---
 
-## Members
-
-<dl>
-<dt><a href="#DEV-Post-Declarative-Shadow-DOM">DEV-Post-Declarative-Shadow-DOM</a> ⇒ <code>string</code></dt>
-<dd></dd>
-<dt><a href="#DEV-Declarative-Shadow-DOM">DEV-Declarative-Shadow-DOM</a> ⇒ <code>string</code></dt>
-<dd></dd>
-</dl>
-
-## Objects
-
-<dl>
-<dt><a href="#DEVUtils">DEVUtils</a> : <code>object</code></dt>
-<dd><p>Utility functions for fetching and parsing dev.to api data, getting
- styles and generating HTML for dev.to profile UIs</p>
-</dd>
-</dl>
-
-<a name="DEV-Post-Declarative-Shadow-DOM"></a>
-
-## DEV-Post-Declarative-Shadow-DOM ⇒ <code>string</code>
-**Kind**: global variable  
-**Returns**: <code>string</code> - DEV post HTML wrapped in a `template`  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| content | <code>ForemPostHTML</code> | Content about one post by dev.to (or Forem) user |
-| fetch | <code>boolean</code> |  |
-
-<a name="DEV-Declarative-Shadow-DOM"></a>
-
-## DEV-Declarative-Shadow-DOM ⇒ <code>string</code>
-**Kind**: global variable  
-**Returns**: <code>string</code> - DEV HTML wrapped in a `template`  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| content | <code>ForemUserHTML</code> | a content object representing a DEV user |
-| fetch | <code>boolean</code> |  |
-
 <a name="DEVUtils"></a>
 
 ## DEVUtils : <code>object</code>
@@ -74,6 +34,7 @@ Utility functions for fetching and parsing dev.to api data, getting
 
 * [DEVUtils](#DEVUtils) : <code>object</code>
     * [.post](#DEVUtils.post) : <code>object</code>
+        * [.dsd](#DEVUtils.post.dsd) ⇒ <code>string</code>
         * [.html(content)](#DEVUtils.post.html) ⇒ <code>string</code>
         * [.generateContent(content, [fetch])](#DEVUtils.post.generateContent) ⇒ <code>ForemPost</code> \| <code>ForemError</code>
         * [.ForemPost](#DEVUtils.post.ForemPost) : <code>Object</code>
@@ -82,6 +43,7 @@ Utility functions for fetching and parsing dev.to api data, getting
         * [.styles](#DEVUtils.user.styles)
         * [.html(content)](#DEVUtils.user.html) ⇒ <code>string</code>
         * [.generateContent(content, [fetch])](#DEVUtils.user.generateContent) ⇒ <code>ForemUserHTML</code>
+        * [.dsd(content, fetch)](#DEVUtils.user.dsd) ⇒ <code>string</code>
         * [.ForemUser](#DEVUtils.user.ForemUser) : <code>Object</code>
         * [.ForemUserHTML](#DEVUtils.user.ForemUserHTML) : <code>ForemUser</code>
 
@@ -91,6 +53,27 @@ Utility functions for fetching and parsing dev.to api data, getting
 Utility functions for a post
 
 **Kind**: static namespace of [<code>DEVUtils</code>](#DEVUtils)  
+
+* [.post](#DEVUtils.post) : <code>object</code>
+    * [.dsd](#DEVUtils.post.dsd) ⇒ <code>string</code>
+    * [.html(content)](#DEVUtils.post.html) ⇒ <code>string</code>
+    * [.generateContent(content, [fetch])](#DEVUtils.post.generateContent) ⇒ <code>ForemPost</code> \| <code>ForemError</code>
+    * [.ForemPost](#DEVUtils.post.ForemPost) : <code>Object</code>
+    * [.ForemPostHTML](#DEVUtils.post.ForemPostHTML) : <code>ForemPost</code>
+
+<a name="DEVUtils.post.dsd"></a>
+
+#### post.dsd ⇒ <code>string</code>
+Generate a `template` element with a shadowdom with a Post in it
+
+**Kind**: static namespace of [<code>post</code>](#DEVUtils.post)  
+**Returns**: <code>string</code> - DEV post HTML wrapped in a `template`  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| content | <code>ForemPostHTML</code> | Content about one post by dev.to (or Forem) user |
+| fetch | <code>boolean</code> |  |
+
 **Example** *(Server side rendering a post with Declarative Shadow Dom)*  
 ```js
 <devto-post></devto-post>
@@ -101,13 +84,6 @@ const dsdHTML = post.dsd({id: '12345'}, true);
 document.querySelector('devto-post').innerHTML = dsdHTML;
 </script>
 ```
-
-* [.post](#DEVUtils.post) : <code>object</code>
-    * [.html(content)](#DEVUtils.post.html) ⇒ <code>string</code>
-    * [.generateContent(content, [fetch])](#DEVUtils.post.generateContent) ⇒ <code>ForemPost</code> \| <code>ForemError</code>
-    * [.ForemPost](#DEVUtils.post.ForemPost) : <code>Object</code>
-    * [.ForemPostHTML](#DEVUtils.post.ForemPostHTML) : <code>ForemPost</code>
-
 <a name="DEVUtils.post.html"></a>
 
 #### post.html(content) ⇒ <code>string</code>
@@ -168,21 +144,12 @@ Forem post content, ready for HTML
 Utility functions for a user
 
 **Kind**: static namespace of [<code>DEVUtils</code>](#DEVUtils)  
-**Example** *(Server side rendering with Declarative Shadow Dom)*  
-```js
-<devto-user></devto-user>
-
-<script type="module">
-import {dsd} from 'profile-components/devto-utils';
-const dsdHTML = dsd({username: 'scottnath'}, true);
-document.querySelector('devto-user').innerHTML = dsdHTML;
-</script>
-```
 
 * [.user](#DEVUtils.user) : <code>object</code>
     * [.styles](#DEVUtils.user.styles)
     * [.html(content)](#DEVUtils.user.html) ⇒ <code>string</code>
     * [.generateContent(content, [fetch])](#DEVUtils.user.generateContent) ⇒ <code>ForemUserHTML</code>
+    * [.dsd(content, fetch)](#DEVUtils.user.dsd) ⇒ <code>string</code>
     * [.ForemUser](#DEVUtils.user.ForemUser) : <code>Object</code>
     * [.ForemUserHTML](#DEVUtils.user.ForemUserHTML) : <code>ForemUser</code>
 
@@ -217,6 +184,29 @@ Generates an object of content for the user HTML
 | content | <code>ForemUserHTML</code> | 
 | [fetch] | <code>boolean</code> | 
 
+<a name="DEVUtils.user.dsd"></a>
+
+#### user.dsd(content, fetch) ⇒ <code>string</code>
+Generate a `template` element with shadowrootmode with a User in it
+
+**Kind**: static method of [<code>user</code>](#DEVUtils.user)  
+**Returns**: <code>string</code> - DEV HTML wrapped in a `template`  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| content | <code>ForemUserHTML</code> | a content object representing a DEV user |
+| fetch | <code>boolean</code> |  |
+
+**Example** *(Server side rendering with Declarative Shadow Dom)*  
+```js
+<devto-user></devto-user>
+
+<script type="module">
+import {dsd} from 'profile-components/devto-utils';
+const dsdHTML = dsd({username: 'scottnath'}, true);
+document.querySelector('devto-user').innerHTML = dsdHTML;
+</script>
+```
 <a name="DEVUtils.user.ForemUser"></a>
 
 #### user.ForemUser : <code>Object</code>
