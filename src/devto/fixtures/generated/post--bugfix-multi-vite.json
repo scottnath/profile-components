@@ -3,7 +3,7 @@
   "id": 1466138,
   "title": "Bugfix: Multiple Vite Storybooks from Same node_modules",
   "description": "tl;dr   Encountering Failed to fetch dynamically imported module or ENOTEMPTY: directory not...",
-  "readable_publish_date": "May 12 2023",
+  "readable_publish_date": "May 12 '23",
   "slug": "bugfix-multiple-vite-storybooks-from-same-nodemodules-4mg1",
   "path": "/scottnath/bugfix-multiple-vite-storybooks-from-same-nodemodules-4mg1",
   "url": "https://dev.to/scottnath/bugfix-multiple-vite-storybooks-from-same-nodemodules-4mg1",
