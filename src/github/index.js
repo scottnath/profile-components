@@ -19,6 +19,19 @@ import repoHTML from './repository/html.js';
  * @param {GitHubRepositoryHTML} content - a content object representing a GitHub repository
  * @param {boolean} fetch 
  * @returns {string} GitHub HTML wrapped in a `template`
+ * @function
+ * @memberof GitHubUtils.repo
+ * @namespace dsd
+ * @description Generate a `template` element with shadowrootmode and a repository in it
+ * 
+ * @example <caption>Server side rendering a Repository with Declarative Shadow Dom</caption>
+ * <github-repository id="github-repo-1"></github-repository>
+ * 
+ * <script type="module">
+ * import {repo} from 'profile-components/github-utils';
+ * const dsdHTML = repo.dsd({full_name: 'scottnath/profile-components'}, true);
+ * document.querySelector('#github-repo-1').innerHTML = dsdHTML;
+ * </script>
  */
 const dsdRepo = async (content, fetch = false) => {
   const generated = await generateRepoContent(content, fetch);
@@ -34,15 +47,6 @@ const dsdRepo = async (content, fetch = false) => {
  * @namespace repo
  * @memberof GitHubUtils
  * @description Utility functions for a repository
- * 
- * @example <caption>Server side rendering a Repository with Declarative Shadow Dom</caption>
- * <github-repository id="github-repo-1"></github-repository>
- * 
- * <script type="module">
- * import {repo} from 'profile-components/github-utils';
- * const dsdHTML = repo.dsd({full_name: 'scottnath/profile-components'}, true);
- * document.querySelector('#github-repo-1').innerHTML = dsdHTML;
- * </script>
  */
 const repo = {
   generateContent: generateRepoContent,
@@ -56,6 +60,19 @@ const repo = {
  * @param {GitHubUserHTML} content - a content object representing a GitHub user
  * @param {boolean} fetch 
  * @returns {string} GitHub HTML wrapped in a `template`
+ * @function
+ * @memberof GitHubUtils.user
+ * @namespace dsd
+ * @description Generate a `template` element with shadowrootmode with a User in it
+ * 
+ * @example <caption>Server side rendering with Declarative Shadow Dom</caption>
+ * <github-user></github-user>
+ * 
+ * <script type="module">
+ * import {dsd} from 'profile-components/github-utils';
+ * const dsdHTML = dsd({login: 'scottnath'}, true);
+ * document.querySelector('github-user').innerHTML = dsdHTML;
+ * </script>
  */
 const dsd = async (content, fetch = false) => {
   const generated = await generateUserContent(content, fetch);
@@ -71,15 +88,6 @@ const dsd = async (content, fetch = false) => {
  * @namespace user
  * @memberof GitHubUtils
  * @description Utility functions for a user
- * 
- * @example <caption>Server side rendering with Declarative Shadow Dom</caption>
- * <github-user></github-user>
- * 
- * <script type="module">
- * import {dsd} from 'profile-components/github-utils';
- * const dsdHTML = dsd({login: 'scottnath'}, true);
- * document.querySelector('github-user').innerHTML = dsdHTML;
- * </script>
  */
 const user = {
   generateContent: generateUserContent,

@@ -7,7 +7,7 @@
     "cem": "custom-elements-manifest analyze --config 'lib/custom-elements-manifest.config.js'",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "preview-storybook": "storybook preview",
+    "preview-storybook": "storybook dev",
     "test-storybook": "test-storybook --coverage",
     "predist": "npm run cem && npm run build-storybook",
     "dist": "node lib/esbuild.config.js",

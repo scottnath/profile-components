@@ -18,6 +18,19 @@ import postHTML from './post/html.js';
  * @param {ForemPostHTML} content - Content about one post by dev.to (or Forem) user
  * @param {boolean} fetch 
  * @returns {string} DEV post HTML wrapped in a `template`
+ * @function
+ * @memberof DEVUtils.post
+ * @namespace dsd
+ * @description Generate a `template` element with a shadowdom with a Post in it
+ * 
+ * @example <caption>Server side rendering a post with Declarative Shadow Dom</caption>
+ * <devto-post></devto-post>
+ * 
+ * <script type="module">
+ * import {post} from 'profile-components/devto-utils';
+ * const dsdHTML = post.dsd({id: '12345'}, true);
+ * document.querySelector('devto-post').innerHTML = dsdHTML;
+ * </script>
  */
 const dsdPost = async (content, fetch = false) => {
   const generated = await generatePostContent(content, fetch);
@@ -33,15 +46,6 @@ const dsdPost = async (content, fetch = false) => {
  * @namespace post
  * @memberof DEVUtils
  * @description Utility functions for a post
- * 
- * @example <caption>Server side rendering a post with Declarative Shadow Dom</caption>
- * <devto-post></devto-post>
- * 
- * <script type="module">
- * import {post} from 'profile-components/devto-utils';
- * const dsdHTML = post.dsd({id: '12345'}, true);
- * document.querySelector('devto-post').innerHTML = dsdHTML;
- * </script>
  */
 const post = {
   generateContent: generatePostContent,
@@ -52,9 +56,22 @@ const post = {
 
 /**
  * @name DEV-Declarative-Shadow-DOM
+ * @namespace dsd
  * @param {ForemUserHTML} content - a content object representing a DEV user
  * @param {boolean} fetch 
  * @returns {string} DEV HTML wrapped in a `template`
+ * @function
+ * @memberof DEVUtils.user
+ * @description Generate a `template` element with shadowrootmode with a User in it
+ * 
+ * @example <caption>Server side rendering with Declarative Shadow Dom</caption>
+ * <devto-user></devto-user>
+ * 
+ * <script type="module">
+ * import {dsd} from 'profile-components/devto-utils';
+ * const dsdHTML = dsd({username: 'scottnath'}, true);
+ * document.querySelector('devto-user').innerHTML = dsdHTML;
+ * </script>
  */
 const dsd = async (content, fetch = false) => {
   const generated = await generateUserContent(content, fetch);
@@ -70,15 +87,6 @@ const dsd = async (content, fetch = false) => {
  * @namespace user
  * @memberof DEVUtils
  * @description Utility functions for a user
- * 
- * @example <caption>Server side rendering with Declarative Shadow Dom</caption>
- * <devto-user></devto-user>
- * 
- * <script type="module">
- * import {dsd} from 'profile-components/devto-utils';
- * const dsdHTML = dsd({username: 'scottnath'}, true);
- * document.querySelector('devto-user').innerHTML = dsdHTML;
- * </script>
  */
 const user = {
   generateContent: generateUserContent,

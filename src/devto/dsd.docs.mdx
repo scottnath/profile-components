@@ -1,0 +1,114 @@
+import { Meta, Title, Source } from '@storybook/blocks';
+
+<Meta isTemplate />
+
+<Title />
+
+Both DEV components can be implemented via Declarative Shadow DOM using methods exported from the `devto-utils.js` file.
+
+
+## Server Side Rendering HTML in Node.js
+
+<Source code={`
+// import from npm module
+import { dsd } from 'profile-components/devto-utils';
+
+const generatedTemplate = await dsd({
+  username: 'scottnath',
+},true);
+
+/**
+generatedTemplate contains:
+<template shadowrootmode="open">
+  <styles>(...css styles for DEV component)</styles>
+  <section (...rest of generated HTML)</section>
+</template>
+*/
+
+const componentHTML = \`<devto-user>\${generatedTemplate}</devto-user>\`;
+`} language='js' />
+
+## Server side render in an Astro component
+
+<Source code={`
+---
+import {dsd} from 'profile-components/devto-utils';
+
+const declaredDOM = await dsd({
+  username: 'scottnath',
+},true)
+---
+
+<devto-user
+  data-theme="light_high_contrast"
+  set:html={declaredDOM}>
+</devto-user>
+`} language='jsx' />
+
+## Client side rendering via unpkg
+
+<Source code={`
+
+<!-- add empty elements to HTML -->
+<devto-post></devto-post>
+<hr />
+<devto-user></devto-user>
+
+<script type="module">
+  // import from unpkg
+  import {
+    user,
+    post,
+  } from 'https://unpkg.com/profile-components/dist/devto-utils.js';
+
+  // post has it's own DSD method:
+  const dsdPost = post.dsd;
+
+  /**
+    * Polyfill for Declarative Shadow DOM which, when triggered, converts
+    *  the template element into actual shadow DOM.
+    * This is only needed when injecting _after_ page is loaded
+    * @see https://developer.chrome.com/docs/css-ui/declarative-shadow-dom#polyfill
+    */
+  const triggerAttachShadowRoots = () => {
+    (function attachShadowRoots(root) {
+      root
+        .querySelectorAll('template[shadowrootmode]')
+        .forEach((template) => {
+          const mode = template.getAttribute('shadowrootmode');
+          const shadowRoot = template.parentNode.attachShadow({ mode });
+          shadowRoot.appendChild(template.content);
+          template.remove();
+          attachShadowRoots(shadowRoot);
+        });
+    })(document);
+  };
+
+  /**
+    * Uses the "dsd" method to generate DSD, add the string of DSD content
+    *  to the element, then trigger the polyfill to convert the template
+    */
+  const injectDSD = async () => {
+    const dsdHTML = await dsd({ username: 'scottnath' }, true);
+    document.querySelector('devto-user').innerHTML = dsdHTML;
+    // now that the HTML is async-created, the polyfill can convert it
+    triggerAttachShadowRoots();
+  };
+  injectDSD();
+
+  /**
+    * Uses the "dsdPost" method to generate DSD, add the string of DSD content
+    *  to the element, then trigger the polyfill to convert the template
+    */
+  const injectPostDSD = async () => {
+    const dsdHTML = await dsdPost(
+      { full_name: 'scottnath/profile-components' },
+      true
+    );
+    document.querySelector('devto-post').innerHTML = dsdHTML;
+    // now that the HTML is async-created, the polyfill can convert it
+    triggerAttachShadowRoots();
+  };
+  injectPostDSD();
+</script>
+`} language='html' />
