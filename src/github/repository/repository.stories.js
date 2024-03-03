@@ -1,7 +1,6 @@
-
 import { generateMockResponse } from '../helpers/testing';
 import { parseFetchedRepo } from './content';
-import { getElements, ensureElements } from './repository.shared-spec';
+import { getElements, ensureElements, ensureScreenRead } from './repository.shared-spec';
 import { repoProfileComponents, repoFreeCodeCamp } from '../fixtures';
 import { primerThemes } from '../../../.storybook/primer-preview.js';
 
@@ -27,6 +26,7 @@ export const Repository = {
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
     await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
   }
 }
 
@@ -69,10 +69,7 @@ export const Theme = {
     ...parseFetchedRepo(repoFreeCodeCamp),
     theme: 'dark',
   },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    await ensureElements(elements, args);
-  }
+  play: Repository.play,
 }
 
 export const Fetch = {
@@ -92,6 +89,7 @@ export const Fetch = {
       ...args,
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
@@ -121,11 +119,20 @@ export const FetchError = {
       error: `Fetch Error: Repo "${args.full_name}" not found`,
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
 export const NoRepo = {
-  play: Repository.play,
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...args,
+      error: 'Missing repo attribute: `full_name`',
+    };
+    await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
+  }
 };
 
 const themesRender = (args) => {
