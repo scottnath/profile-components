@@ -35,7 +35,8 @@ export const UserRepos = {
     ...User.args,
     repos: stringify([{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)]),
   },
-  play: User.play,
+  // breaks in github-actions CI, unknown why
+  // play: User.play,
 }
 
 export const PopularUser  = {

@@ -3,7 +3,7 @@ import assert from 'node:assert'
 
 import { stringify } from '../../utils/index.js';
 import { generateMockResponse } from '../helpers/testing.js';
-import { fetchUser, parseFetchedUser, parseReposString, cleanUserContent, generateUserContent } from './content.js';
+import { fetchUser, parseFetchedUser, parseReposString, cleanUserContent, generateUserContent, a11yContent } from './content.js';
 import { default as repoFreeCodeCamp } from '../fixtures/generated/repo--freeCodeCamp-freeCodeCamp.json' assert { type: 'json' };
 import { default as userScottnath } from '../fixtures/generated/user--scottnath.json' assert { type: 'json' };
 import { default as userSindresorhus } from '../fixtures/generated/user--sindresorhus.json' assert { type: 'json' };
@@ -49,6 +49,7 @@ describe('parseFetchedUser', () => {
       bio: testUser.bio,
       following: testUser.following,
       followers: testUser.followers,
+      a11y: {},
     });
   })
 });
@@ -108,6 +109,24 @@ describe('cleanUserContent', () => {
   });
 });
 
+describe('a11yContent', () => {
+  it('Should generate a11y content', () => {
+    const testUser = userScottnath;
+    const testContent = a11yContent(testUser);
+    assert.deepEqual(testContent.a11y, {
+      headerLabel: `GitHub user ${testUser.name}, username ${testUser.login}`
+    });
+  });
+  it('Should generate a11y content without name', () => {
+    const testUser = {...userScottnath};
+    delete testUser.name;
+    const testContent = a11yContent(testUser);
+    assert.deepEqual(testContent.a11y, {
+      headerLabel: `GitHub user ${testUser.login}`
+    });
+  });
+});
+
 describe('generateUserContent', () => {
   it('Errors on missing content', async () => {
     const res = await generateUserContent();
@@ -157,8 +176,9 @@ describe('generateUserContent', () => {
       avatar_url: testUser.avatar_url,
       bio: testUser.bio,
       following: testUser.following,
-      repositories: [expectedRepo]
+      repositories: [expectedRepo],
     }
+    expected.a11y = a11yContent(expected).a11y;
     const fn = t.mock.method(global,'fetch');
     const mockResUser = {
       json: () => generateMockResponse(testUser, 'users').response,

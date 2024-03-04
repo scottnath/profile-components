@@ -63,6 +63,7 @@ describe('parseFetchedUser', () => {
       summary: testUser.summary,
       joined_at: testUser.joined_at,
       profile_image: testUser.profile_image,
+      a11y: {}
     });
   })
   it('Should require a username', () => {
@@ -90,6 +91,24 @@ describe('parsePostString', () => {
   it('Should fail gracefully', () => {
     assert.deepEqual(content.parsePostString(postBugfix), postBugfix);
     assert.deepEqual(content.parsePostString('["postBugfix`]'), {});
+  });
+});
+
+describe('a11yContent', () => {
+  it('Should generate a11y content', () => {
+    const testUser = userScottnath;
+    const testContent = content.a11yContent(testUser);
+    assert.deepEqual(testContent.a11y, {
+      headerLabel: `dev.to user ${testUser.name}, username ${testUser.username}`
+    });
+  });
+  it('Should generate a11y content without name', () => {
+    const testUser = {...userScottnath};
+    delete testUser.name;
+    const testContent = content.a11yContent(testUser);
+    assert.deepEqual(testContent.a11y, {
+      headerLabel: `dev.to user ${testUser.username}`
+    });
   });
 });
 
@@ -135,6 +154,7 @@ describe('generateUserContent', () => {
       summary: testUser.summary,
       joined_at: testUser.joined_at,
       profile_image: testUser.profile_image,
+      a11y: content.a11yContent(testUser).a11y,
     });
   });
   it('Fetches and fails', async (t) => {
@@ -184,6 +204,7 @@ describe('generateUserContent', () => {
         ...postLatestUserDefined
       },
     }
+    expected.a11y = content.a11yContent(expected).a11y;
     const fn = t.mock.method(global,'fetch');
     const mockResUser = {
       json: () => generateMockResponse(testUser, 'users').response,
@@ -232,6 +253,7 @@ describe('generateUserContent', () => {
     fn.mock.mockImplementationOnce(async () => mockResPosts, 1)
     
     const returned = await content.generateUserContent({username: testUser.username}, 'no-posts');
+    expected.a11y = content.a11yContent(returned).a11y;
     assert.deepEqual(returned, expected);
   });
 });
