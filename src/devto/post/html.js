@@ -17,9 +17,9 @@ function html(content) {
 
   return `
     <span aria-label="dev.to article" class="post" itemscope itemtype="http://schema.org/Article">
-      <a href="${content.url}" itemprop="url" aria-label="read post ${content.title}">
-        <img src="${content.cover_image}" itemprop="image" alt="Cover image for post ${content.title}" />
-        <span itemprop="name">${content.title}</span>
+      <a href="${content.url}" itemprop="url" aria-label="article ${content.title}">
+        <img src="${content.cover_image}" itemprop="image" alt="Cover image for article ${content.title}" />
+        <span itemprop="name" aria-hidden="true">${content.title}</span>
       </a>
     </span>
   `;

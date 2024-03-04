@@ -30,6 +30,7 @@ const blankPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1
  * @property {number} [post_count] - The number of posts the user has published
  * @property {ForemPostHTML} [latest_post] - User's latest post
  * @property {ForemPostHTML} [popular_post] - User's most popular post
+ * @property {Object} [a11y] - accessibility content
  * @memberof DEVUtils.user
  */
 
@@ -98,6 +99,7 @@ export const parseFetchedUser = (user = {}) => {
     post_count: user.post_count,
     latest_post: parsePostString(user.latest_post),
     popular_post: parsePostString(user.popular_post),
+    a11y: user.a11y || {},
   }
   const usr = {};
   // remove `undefined` values
@@ -105,6 +107,18 @@ export const parseFetchedUser = (user = {}) => {
     if (parsed[key]) usr[key] = parsed[key];
   }
   return usr;
+}
+
+export const a11yContent = (content) => {
+  let headerLabel = `dev.to user ${content.username}`;
+  if (content.name) {
+    headerLabel = headerLabel.replace(content.username, `${content.name}, username ${content.username}`);
+  }
+  content.a11y = {
+    ...content.a11y,
+    headerLabel,
+  }
+  return content;
 }
 
 /**
@@ -129,7 +143,7 @@ export const cleanUserContent = (content = {}) => {
     }
     content.latest_post.cover_image = content.latest_post.cover_image || blankPng;
   }
-  return content;
+  return a11yContent(content);
 }
 
 /**

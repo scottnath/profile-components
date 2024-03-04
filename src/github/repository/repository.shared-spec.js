@@ -80,7 +80,6 @@ export const ensureElements = async (elements, args) => {
   }
 }
 
-
 /**
  * Extract the expected screen reader spoken output
  * @param {GitHubRepositoryHTML} args - a content object representing a GitHub repository

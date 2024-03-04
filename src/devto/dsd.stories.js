@@ -5,6 +5,12 @@ import { default as userScottnath } from './fixtures/generated/user--scottnath.j
 import { default as postProfileComponents } from './fixtures/generated/post--profile-components.json';
 import { default as postDependabot } from './fixtures/generated/post--dependabot.json';
 import { default as postBugfix } from './fixtures/generated/post--bugfix-multi-vite.json';
+import { getElements, ensureElements, ensureScreenRead } from './post/post.shared-spec';
+import { 
+  getElements as getElementsUser,
+  ensureElements as ensureElementsUser,
+  ensureScreenRead as ensureScreenReadUser
+} from './user/user.shared-spec';
 import { post, dsd } from './index.js';
 import docs from './dsd.docs.mdx';
 
@@ -48,6 +54,11 @@ export const Post = {
   args: {
     ...parseFetchedPost(postProfileComponents)
   },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
+  }
 }
 
 export const User = {
@@ -67,4 +78,18 @@ export const User = {
     latest_post: stringify(parseFetchedPost(postDependabot)),
     popular_post: stringify(parseFetchedPost(postBugfix)),
   },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElementsUser(canvasElement);
+    const argsAfterFetch = {
+      ...args,
+      latest_post: {
+        ...parseFetchedPost(postDependabot),
+      },
+      popular_post: {
+        ...parseFetchedPost(postBugfix),
+      },
+    };
+    await ensureElementsUser(elements, argsAfterFetch);
+    await ensureScreenReadUser(elements, argsAfterFetch);
+  }
 }

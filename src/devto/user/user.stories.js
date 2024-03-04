@@ -5,7 +5,7 @@ import { parseFetchedPost } from '../post/content';
 import { default as userScottnath } from '../fixtures/generated/user--scottnath.json';
 import { default as postDependabot } from '../fixtures/generated/post--dependabot.json';
 import { default as postBugfix } from '../fixtures/generated/post--bugfix-multi-vite.json';
-import { getElements, ensureElements } from './user.shared-spec';
+import { getElements, ensureElements, ensureScreenRead } from './user.shared-spec';
 
 import './index.js';
 
@@ -22,7 +22,6 @@ export default {
   }
 };
 
-
 export const User = {
   args: {
     ...parseFetchedUser(userScottnath),
@@ -30,26 +29,29 @@ export const User = {
   play: async ({ args, canvasElement }) => {
     const elements = await getElements(canvasElement);
     await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
   }
 }
 
 export const UserPosts = {
   args: {
     ...User.args,
+    post_count: 222,
     latest_post: stringify(parseFetchedPost(postDependabot)),
     popular_post: stringify(parseFetchedPost(postBugfix)),
   },
   // breaks in github-actions CI, unknown why
-  // play: async ({ args, canvasElement }) => {
-  //   const elements = await getElements(canvasElement);
+  play: async ({ args, canvasElement }) => {
+    const elements = await getElements(canvasElement);
 
-  //   const argsAfterFetch = {
-  //     ...args,
-  //     latest_post: parseFetchedPost(postDependabot),
-  //     popular_post: parseFetchedPost(postBugfix),
-  //   };
-  //   await ensureElements(elements, argsAfterFetch);
-  // }
+    const argsAfterFetch = {
+      ...args,
+      latest_post: parseFetchedPost(postDependabot),
+      popular_post: parseFetchedPost(postBugfix),
+    };
+    await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
+  }
 }
 
 export const OnlyRequired = {
@@ -61,6 +63,13 @@ export const OnlyRequired = {
 }
 
 export const Fetch = {
+  args: {
+    username: userScottnath.username,
+    fetch: true,
+  },
+}
+
+export const FetchMocked = {
   args: {
     username: userScottnath.username,
     fetch: true,
@@ -81,8 +90,10 @@ export const Fetch = {
       popular_post: parseFetchedPost(postBugfix),
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
+
 
 export const FetchWithoutPosts = {
   args: {
@@ -105,6 +116,7 @@ export const FetchWithoutPosts = {
       popular_post: null,
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
@@ -148,6 +160,7 @@ export const FetchOverides = {
       },
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
@@ -168,12 +181,14 @@ export const FetchError = {
       error: 'Fetch Error: User "not-a-real-user" not found'
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
 export const ContainerCheck = {
   args: {
     ...FetchOverides.args,
+    fetch: false,
   },
 
   render: (args) => {

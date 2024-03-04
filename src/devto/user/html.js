@@ -19,14 +19,14 @@ function html(content) {
 
   return `
     <section aria-label="dev.to user profile" itemscope itemtype="http://schema.org/Person">
-      <header>
-        <span><span itemprop="memberOf">dev.to</span> <span>user</span></span> 
+      <header aria-label="${content.a11y.headerLabel}">
+        <span aria-hidden="true"><span itemprop="memberOf">dev.to</span></span> 
         <address>
-          <a href="https://dev.to/${content.username}" aria-label="View @${content.username}'s profile on dev.to" itemprop="url">
+          <a href="https://dev.to/${content.username}" aria-label="${content.name || content.username}'s profile on dev.to" itemprop="url">
             <span itemprop="image">
-              <img src="${content.profile_image}" alt="Avatar for ${content.name}" loading="lazy" />
+              <img src="${content.profile_image}" alt="Avatar for ${content.name || content.username}" loading="lazy" />
             </span>
-            <span itemprop="name">${content.name}</span>
+            <span itemprop="name" aria-hidden="true">${content.name}</span>
           </a>
         </address>
       </header>
@@ -35,16 +35,16 @@ function html(content) {
         ${content.joined_at ? `<p>Joined on <time itemprop="startDate" datetime="${formatDate(content.joined_at)}">${content.joined_at}</time></p>` : ''}
         ${content.post_count ? `<p class="post_count">${content.post_count} posts published</p>` : ''}
         ${content.latest_post || content.popular_post ? `
-          <dl>
+          <div>
             ${content.latest_post ? `
-              <dt>Latest post</dt>
-              <dd>${postHTML(content.latest_post)}</dd>
+              <header aria-label="Latest post">Latest post</header>
+              ${postHTML(content.latest_post)}
             ` : ''}
             ${content.popular_post ? `
-              <dt>Popular post</dt>
-              <dd>${postHTML(content.popular_post)}</dd>
+              <header aria-label="Popular post">Popular post</header>
+              ${postHTML(content.popular_post)}
             ` : ''}
-          </dl>
+          </div>
         ` : ''}
       </div>
       <footer>

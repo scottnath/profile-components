@@ -39,14 +39,14 @@ section[itemscope] {
   box-shadow: 0 0 0 1px var(--color-shadow);
   background: var(--card-bg);
 
-  & header {
+  header:first-child {
     &::before {
       content: " ";
       display: block;
       background-color: var(--color-profile);
       height: var(--heading-height);
     }
-    & span:has([itemprop="memberOf"]) {
+    span:has([itemprop="memberOf"]) {
       display: inline-block;
       background: var(--svg-dev-logo) no-repeat white;
       background-position: center -2px;
@@ -61,7 +61,7 @@ section[itemscope] {
       right: var(--side-spacing);
       top: calc(calc(var(--heading-height) - var(--logo-size)) / 2);
 
-      & span {
+      span {
         position: absolute;
         top: calc(var(--logo-size) * -3);
         font-size: .1em;
@@ -176,16 +176,19 @@ section[itemscope] {
       }
     }
 
-    & dl:has(.post) {
+    div:has(.post) {
       border-bottom: 1px solid var(--color-shadow);
       padding-bottom: 1em;
 
-      & dt {
+      header {
         color: var(--color-light);
         font-size: var(--font-size-light);
         font-weight: var(--font-weight-light);
         border-top: 1px solid var(--color-shadow);
         margin-top: .5em;
+        &::before {
+          display: none;
+        }
       }
     }
   }
