@@ -18,7 +18,12 @@ export default {
     return `
       <github-user ${attributes}></github-user>
     `;
-  }
+  },
+  parameters: {
+    fetchMock: {
+      mocks: []
+    }
+  },
 };
 
 // export const User  = {
@@ -142,11 +147,13 @@ export const ReposFetch = {
   },
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
+    console.log('ReposFetchReposFetch = elms', elements)
     const argsAfterFetch = {
       ...parseFetchedUser({...userScottnath}),
       ...args,
       repos: stringify([repoProfileComponents, repoStorydocker]),
     };
+    console.log('argsAfterFetch', argsAfterFetch)
     await ensureElements(elements, argsAfterFetch);
     await ensureScreenRead(elements, argsAfterFetch);
   }

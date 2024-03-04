@@ -16,7 +16,12 @@ export default {
     return `
       <github-repository ${attributes}></github-repository>
     `;
-  }
+  },
+  parameters: {
+    fetchMock: {
+      mocks: []
+    }
+  },
 };
 
 export const Repository = {

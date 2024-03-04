@@ -17,7 +17,12 @@ export default {
     return `
       <devto-post ${attributes}></devto-post>
     `;
-  }
+  },
+  parameters: {
+    fetchMock: {
+      mocks: []
+    }
+  },
 };
 
 
