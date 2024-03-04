@@ -122,8 +122,8 @@ export const getExpectedScreenText = (args) => {
         expected.push(`following: ${args.following}`);
       }
     }
-    if (args.repos) {
-      const repos = parseify(args.repos);
+    if (args.repositories) {
+      const repos = args.repositories;
       if (Array.isArray(repos)) {
         expected.push('banner, Pinned repositories');
         repos.forEach((repo) => {

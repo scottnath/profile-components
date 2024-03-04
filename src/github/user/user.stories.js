@@ -25,7 +25,6 @@ export const User  = {
   args: parseFetchedUser(userScottnath),
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
-    console.log('UserUser = elms', elements.container.innerHTML)
     await ensureElements(elements, args);
     await ensureScreenRead(elements, args);
   }
@@ -36,8 +35,12 @@ export const UserRepos = {
     ...User.args,
     repos: stringify([{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)]),
   },
-  // breaks in github-actions CI, unknown why
-  // play: User.play,
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    args.repositories = [{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)];
+    await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
+  }
 }
 
 export const PopularUser  = {
@@ -53,33 +56,30 @@ export const OnlyRequired = {
   play: User.play,
 }
 
-// export const Fetch = {
-//   args: {
-//     login: userScottnath.login,
-//     fetch: true,
-//   },
-//   parameters: {
-//     fetchMock: {
-//       mocks: [
-//         {
-//           response: generateMockResponse(userScottnath, 'users'),
-//         }
-//       ]
-//     }
-//     // mockData: [
-//     //   generateMockResponse(userScottnath, 'users'),
-//     // ]
-//   },
-//   play: async ({ args, canvasElement, step }) => {
-//     const elements = await getElements(canvasElement);
-//     const argsAfterFetch = {
-//       ...parseFetchedUser({...userScottnath}),
-//       ...args,
-//     };
-//     await ensureElements(elements, argsAfterFetch);
-//     await ensureScreenRead(elements, argsAfterFetch);
-//   }
-// };
+export const Fetch = {
+  args: {
+    login: userScottnath.login,
+    fetch: true,
+  },
+  parameters: {
+    fetchMock: {
+      mocks: [
+        {
+          response: generateMockResponse(userScottnath, 'users'),
+        }
+      ]
+    }
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedUser({...userScottnath}),
+      ...args,
+    };
+    await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
+  }
+};
 
 // export const FetchOverides = {
 //   args: {
@@ -148,6 +148,7 @@ export const ReposFetch = {
       ...parseFetchedUser({...userScottnath}),
       ...args,
       repos: stringify([repoProfileComponents, repoStorydocker]),
+      repositories: [parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]
     };
     console.log('argsAfterFetch', argsAfterFetch)
     await ensureElements(elements, argsAfterFetch);
