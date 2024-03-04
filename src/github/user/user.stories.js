@@ -4,7 +4,7 @@ import { parseFetchedUser } from './content';
 import { parseFetchedRepo } from '../repository/content.js';
 import { getElements, ensureElements, ensureScreenRead } from './user.shared-spec';
 import { primerThemes } from '../../../.storybook/primer-preview.js';
-
+import { within as shadowWithin } from 'shadow-dom-testing-library';
 import './index.js';
 
 export default {
@@ -36,8 +36,8 @@ export const UserRepos = {
     repos: stringify([{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)]),
   },
   play: async ({ args, canvasElement, step }) => {
-    console.log('UserRepos = elms', canvasElement.innerHTML)
     const elements = await getElements(canvasElement);
+    console.log('UserRepos = elms', elements.container.innerHTML)
     args.repositories = [{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)];
     await ensureElements(elements, args);
     await ensureScreenRead(elements, args);
