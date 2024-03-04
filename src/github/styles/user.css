@@ -10,7 +10,7 @@ section[itemscope] {
   overflow-wrap: anywhere;
   overflow: hidden;
 }
-:host header {
+:host header:first-child {
   background-color: var(--bg-color-light);
   padding: var(--row-spacing);
 
@@ -18,7 +18,7 @@ section[itemscope] {
   gap: var(--svg-gap);
   height: calc(var(--logo-size) + var(--logo-outline-offset) * 2);
 
-  > span:has([itemprop="memberOf"]) {
+  [itemprop="memberOf"] {
     background-color: var(--color-normal);
     width: var(--logo-size);
     height: var(--logo-size);
@@ -144,7 +144,7 @@ section[itemscope] {
       mask-image: var(--svg-people);
     }
 
-    > span {
+    div {
       display: inline-flex;
       flex-direction: row-reverse;
       flex-wrap: nowrap;

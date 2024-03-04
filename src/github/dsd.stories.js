@@ -3,6 +3,11 @@ import { parseFetchedRepo } from './repository/content.js';
 import { parseFetchedUser } from './user/content.js';
 import { repoProfileComponents, repoStorydocker, userScottnath, repoFreeCodeCamp } from './fixtures';
 import { getElements, ensureElements, ensureScreenRead } from './repository/repository.shared-spec';
+import { 
+  getElements as getElementsUser,
+  ensureElements as ensureElementsUser,
+  ensureScreenRead as ensureScreenReadUser
+} from './user/user.shared-spec';
 import { repo, dsd } from './index.js';
 import docs from './dsd.docs.mdx';
 
@@ -74,4 +79,9 @@ export const User = {
       }, 
       parseFetchedRepo(repoStorydocker)]),
   },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElementsUser(canvasElement);
+    await ensureElementsUser(elements, args);
+    await ensureScreenReadUser(elements, args);
+  }
 }

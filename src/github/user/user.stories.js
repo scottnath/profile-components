@@ -1,8 +1,9 @@
+import { expect } from '@storybook/jest';
 import { repoProfileComponents, repoStorydocker, userScottnath, userSindresorhus } from '../fixtures';
 import { generateMockResponse } from '../helpers/testing';
 import { parseFetchedUser } from './content';
 import { parseFetchedRepo } from '../repository/content.js';
-import { getElements, ensureElements } from './user.shared-spec';
+import { getElements, ensureElements, ensureScreenRead } from './user.shared-spec';
 import { primerThemes } from '../../../.storybook/primer-preview.js';
 
 import '.';
@@ -25,6 +26,7 @@ export const User  = {
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
     await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
   }
 }
 
@@ -66,6 +68,7 @@ export const Fetch = {
       ...args,
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 };
 
@@ -92,6 +95,7 @@ export const FetchOverides = {
       ...args,
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
@@ -104,6 +108,8 @@ export const ReposFetch = {
   parameters: {
     mockData: [
       generateMockResponse(userScottnath, 'users'),
+      generateMockResponse(repoProfileComponents, 'repos'),
+      generateMockResponse(repoStorydocker, 'repos'),
     ]
   },
   play: async ({ args, canvasElement, step }) => {
@@ -111,8 +117,10 @@ export const ReposFetch = {
     const argsAfterFetch = {
       ...parseFetchedUser(userScottnath),
       ...args,
+      repos: stringify([repoProfileComponents, repoStorydocker]),
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 

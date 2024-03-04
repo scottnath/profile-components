@@ -2,7 +2,7 @@ import { expect } from '@storybook/jest';
 import { within as shadowWithin } from 'shadow-dom-testing-library';
 import { virtual } from '@guidepup/virtual-screen-reader';
 
-import { spokenDLItem } from '../helpers/testing';
+import { spokenDLItem } from '../../utils/testing.js';
 
 /**
  * Extract elements from an shadow DOM element
@@ -80,10 +80,13 @@ export const ensureElements = async (elements, args) => {
   }
 }
 
+
 /**
- * Ensure the screen reader reads the correct content
+ * Extract the expected screen reader spoken output
+ * @param {GitHubRepositoryHTML} args - a content object representing a GitHub repository
+ * @returns {string[]} - array of strings representing the expected screen reader output
  */
-export const ensureScreenRead = async (elements, args) => {
+export const getExpectedScreenText = (args) => {
   const expected = ['region, GitHub repository'];
 
   // uses `spokenDLItem` to create dt/dd spoken pairs
@@ -114,7 +117,14 @@ export const ensureScreenRead = async (elements, args) => {
   }
 
   expected.push('end of region, GitHub repository');
-  
+  return expected;
+}
+
+/**
+ * Ensure the screen reader reads the correct content
+ */
+export const ensureScreenRead = async (elements, args) => {
+  const expected = getExpectedScreenText(args);
   // Start virtual screen reader
   await virtual.start({ container: elements.container });
   while ((await virtual.lastSpokenPhrase()) !== expected[expected.length - 1]) {
