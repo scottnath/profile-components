@@ -72,7 +72,7 @@ export const Fetch = {
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
-      ...parseFetchedUser(userScottnath),
+      ...parseFetchedUser({...userScottnath}),
       ...args,
     };
     await ensureElements(elements, argsAfterFetch);
@@ -106,7 +106,7 @@ export const FetchOverides = {
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
-      ...parseFetchedUser(userScottnath),
+      ...parseFetchedUser({...userScottnath}),
       ...args,
     };
     await ensureElements(elements, argsAfterFetch);
@@ -143,7 +143,7 @@ export const ReposFetch = {
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
-      ...parseFetchedUser(userScottnath),
+      ...parseFetchedUser({...userScottnath}),
       ...args,
       repos: stringify([repoProfileComponents, repoStorydocker]),
     };
