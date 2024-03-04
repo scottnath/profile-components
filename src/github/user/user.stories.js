@@ -33,6 +33,7 @@ export const User  = {
 export const UserRepos = {
   args: {
     ...User.args,
+    name: 'Scoot Nerth',
     repos: stringify([{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)]),
   },
   play: async ({ args, canvasElement, step }) => {
