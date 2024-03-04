@@ -9,6 +9,7 @@ const config = {
     '@storybook/addon-interactions',
     '@storybook/addon-coverage',
     'storybook-addon-mock',
+    'storybook-addon-fetch-mock',
     '@chromaui/addon-visual-tests',
   ],
   framework: {

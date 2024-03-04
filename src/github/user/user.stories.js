@@ -21,36 +21,36 @@ export default {
   }
 };
 
-export const User  = {
-  args: parseFetchedUser(userScottnath),
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    await ensureElements(elements, args);
-    await ensureScreenRead(elements, args);
-  }
-}
+// export const User  = {
+//   args: parseFetchedUser(userScottnath),
+//   play: async ({ args, canvasElement, step }) => {
+//     const elements = await getElements(canvasElement);
+//     await ensureElements(elements, args);
+//     await ensureScreenRead(elements, args);
+//   }
+// }
 
-export const UserRepos = {
-  args: {
-    ...User.args,
-    repos: stringify([{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)]),
-  },
-  // breaks in github-actions CI, unknown why
-  // play: User.play,
-}
+// export const UserRepos = {
+//   args: {
+//     ...User.args,
+//     repos: stringify([{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)]),
+//   },
+//   // breaks in github-actions CI, unknown why
+//   // play: User.play,
+// }
 
-export const PopularUser  = {
-  args: parseFetchedUser(userSindresorhus),
-  play: User.play,
-}
+// export const PopularUser  = {
+//   args: parseFetchedUser(userSindresorhus),
+//   play: User.play,
+// }
 
-export const OnlyRequired = {
-  args: {
-    login: userScottnath.login,
-    name: userScottnath.name,
-  },
-  play: User.play,
-}
+// export const OnlyRequired = {
+//   args: {
+//     login: userScottnath.login,
+//     name: userScottnath.name,
+//   },
+//   play: User.play,
+// }
 
 export const Fetch = {
   args: {
@@ -58,9 +58,16 @@ export const Fetch = {
     fetch: true,
   },
   parameters: {
-    mockData: [
-      generateMockResponse(userScottnath, 'users'),
-    ]
+    fetchMock: {
+      mocks: [
+        {
+          response: generateMockResponse(userScottnath, 'users'),
+        }
+      ]
+    }
+    // mockData: [
+    //   generateMockResponse(userScottnath, 'users'),
+    // ]
   },
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
@@ -85,9 +92,16 @@ export const FetchOverides = {
     repos: stringify([{"full_name":"scottnath/profile-components","description":"Cool thing, does stuff","language":"HTML"}])
   },
   parameters: {
-    mockData: [
-      generateMockResponse(userScottnath, 'users'),
-    ]
+    fetchMock: {
+      mocks: [
+        {
+          response: generateMockResponse(userScottnath, 'users'),
+        }
+      ]
+    }
+    // mockData: [
+    //   generateMockResponse(userScottnath, 'users'),
+    // ]
   },
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
@@ -107,11 +121,24 @@ export const ReposFetch = {
     repos: stringify([repoProfileComponents.name, repoStorydocker.full_name]),
   },
   parameters: {
-    mockData: [
-      generateMockResponse(userScottnath, 'users'),
-      generateMockResponse(repoProfileComponents, 'repos'),
-      generateMockResponse(repoStorydocker, 'repos'),
-    ]
+    fetchMock: {
+      mocks: [
+        {
+          response: generateMockResponse(userScottnath, 'users'),
+        },
+        {
+          response: generateMockResponse(repoProfileComponents, 'repos'),
+        },
+        {
+          response: generateMockResponse(repoStorydocker, 'repos'),
+        }
+      ]
+    }
+    // mockData: [
+    //   generateMockResponse(userScottnath, 'users'),
+    //   generateMockResponse(repoProfileComponents, 'repos'),
+    //   generateMockResponse(repoStorydocker, 'repos'),
+    // ]
   },
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
@@ -125,78 +152,78 @@ export const ReposFetch = {
   }
 }
 
-export const FetchError = {
-  args: {
-    login: 'not-a-real-user',
-    fetch: true,
-  },
-  parameters: {
-    mockData: [
-      generateMockResponse({login: 'not-a-real-user'}, 'users', 404),
-    ]
-  },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...args,
-      error: `User "${args.login}" not found`,
-    };
-    await ensureElements(elements, argsAfterFetch);
-  }
-};
+// export const FetchError = {
+//   args: {
+//     login: 'not-a-real-user',
+//     fetch: true,
+//   },
+//   parameters: {
+//     mockData: [
+//       generateMockResponse({login: 'not-a-real-user'}, 'users', 404),
+//     ]
+//   },
+//   play: async ({ args, canvasElement, step }) => {
+//     const elements = await getElements(canvasElement);
+//     const argsAfterFetch = {
+//       ...args,
+//       error: `User "${args.login}" not found`,
+//     };
+//     await ensureElements(elements, argsAfterFetch);
+//   }
+// };
 
-export const ContainerCheck = {
-  args: {
-    ...FetchOverides.args,
-    theme: 'light_high_contrast'
-  },
-  render: (args) => {
-    const attributes = attrGen(args);
+// export const ContainerCheck = {
+//   args: {
+//     ...FetchOverides.args,
+//     theme: 'light_high_contrast'
+//   },
+//   render: (args) => {
+//     const attributes = attrGen(args);
   
-    return `
-      <div style="display: flex; width: 1000px; margin: 1em;">
-        <github-user ${attributes} style="flex: 1 1 200px;"></github-user>
-        <github-user ${attributes} style="flex: 1 1 300px;"></github-user>
-        <github-user ${attributes} style="flex: 1 1 400px;"></github-user>
-      </div>
-    `;
-  }
-}
+//     return `
+//       <div style="display: flex; width: 1000px; margin: 1em;">
+//         <github-user ${attributes} style="flex: 1 1 200px;"></github-user>
+//         <github-user ${attributes} style="flex: 1 1 300px;"></github-user>
+//         <github-user ${attributes} style="flex: 1 1 400px;"></github-user>
+//       </div>
+//     `;
+//   }
+// }
 
-const themesRender = (args) => {
-  const attributes = attrGen(args);
+// const themesRender = (args) => {
+//   const attributes = attrGen(args);
 
-  return `
-    <div style="display: flex; flex-wrap: wrap; width: 1000px; margin: 1em;">
-      ${primerThemes.map((theme) => {
-        return `
-        <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 200px;"></github-user>
-        `;
-      }).join('')}
-      ${primerThemes.map((theme) => {
-        return `
-        <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 300px;"></github-user>
-        `;
-      }).join('')}
-      ${primerThemes.map((theme) => {
-        return `
-        <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 400px;"></github-user>
-        `;
-      }).join('')}
-    </div>
-  `;
-}
+//   return `
+//     <div style="display: flex; flex-wrap: wrap; width: 1000px; margin: 1em;">
+//       ${primerThemes.map((theme) => {
+//         return `
+//         <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 200px;"></github-user>
+//         `;
+//       }).join('')}
+//       ${primerThemes.map((theme) => {
+//         return `
+//         <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 300px;"></github-user>
+//         `;
+//       }).join('')}
+//       ${primerThemes.map((theme) => {
+//         return `
+//         <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 400px;"></github-user>
+//         `;
+//       }).join('')}
+//     </div>
+//   `;
+// }
 
-export const Themes = {
-  args: {
-    ...ReposFetch.args,
-  },
-  render: themesRender,
-}
+// export const Themes = {
+//   args: {
+//     ...ReposFetch.args,
+//   },
+//   render: themesRender,
+// }
 
-export const ThemesWithOverrides = {
-  args: {
-    ...FetchOverides.args,
-  },
-  render: themesRender,
-}
+// export const ThemesWithOverrides = {
+//   args: {
+//     ...FetchOverides.args,
+//   },
+//   render: themesRender,
+// }

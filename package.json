@@ -55,6 +55,7 @@
     "esbuild-plugin-inline-import": "^1.0.4",
     "fs-extra": "^11.2.0",
     "jsdoc-to-markdown": "^8.0.1",
+    "storybook-addon-fetch-mock": "^1.0.1",
     "storydocker-storybook": "^0.0.22",
     "storydocker-utilities": "^0.0.16",
     "yaml": "^2.4.0"
