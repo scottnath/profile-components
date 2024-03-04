@@ -20,11 +20,6 @@ export default {
       <devto-user ${attributes}></devto-user>
     `;
   },
-  parameters: {
-    fetchMock: {
-      mocks: []
-    }
-  },
 };
 
 export const User = {

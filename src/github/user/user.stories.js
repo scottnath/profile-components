@@ -19,21 +19,17 @@ export default {
       <github-user ${attributes}></github-user>
     `;
   },
-  parameters: {
-    fetchMock: {
-      mocks: []
-    }
-  },
 };
 
-// export const User  = {
-//   args: parseFetchedUser(userScottnath),
-//   play: async ({ args, canvasElement, step }) => {
-//     const elements = await getElements(canvasElement);
-//     await ensureElements(elements, args);
-//     await ensureScreenRead(elements, args);
-//   }
-// }
+export const User  = {
+  args: parseFetchedUser(userScottnath),
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    console.log('UserUser = elms', elements.container.innerHTML)
+    await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
+  }
+}
 
 // export const UserRepos = {
 //   args: {

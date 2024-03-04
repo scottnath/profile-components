@@ -17,11 +17,6 @@ export default {
       <github-repository ${attributes}></github-repository>
     `;
   },
-  parameters: {
-    fetchMock: {
-      mocks: []
-    }
-  },
 };
 
 export const Repository = {

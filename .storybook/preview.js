@@ -39,6 +39,9 @@ const preview = {
           return code.replaceAll('&gt;', ">").replaceAll('&lt;', "<")
         }
       }
+    },
+    fetchMock: {
+      mocks: []
     }
   },
 };
