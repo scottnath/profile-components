@@ -31,27 +31,27 @@ export const User  = {
   }
 }
 
-// export const UserRepos = {
-//   args: {
-//     ...User.args,
-//     repos: stringify([{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)]),
-//   },
-//   // breaks in github-actions CI, unknown why
-//   // play: User.play,
-// }
+export const UserRepos = {
+  args: {
+    ...User.args,
+    repos: stringify([{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)]),
+  },
+  // breaks in github-actions CI, unknown why
+  // play: User.play,
+}
 
-// export const PopularUser  = {
-//   args: parseFetchedUser(userSindresorhus),
-//   play: User.play,
-// }
+export const PopularUser  = {
+  args: parseFetchedUser(userSindresorhus),
+  play: User.play,
+}
 
-// export const OnlyRequired = {
-//   args: {
-//     login: userScottnath.login,
-//     name: userScottnath.name,
-//   },
-//   play: User.play,
-// }
+export const OnlyRequired = {
+  args: {
+    login: userScottnath.login,
+    name: userScottnath.name,
+  },
+  play: User.play,
+}
 
 // export const Fetch = {
 //   args: {
