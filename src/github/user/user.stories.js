@@ -23,7 +23,7 @@ export default {
 export const User  = {
   args: parseFetchedUser(userScottnath),
   play: async ({ args, canvasElement, step }) => {
-    console.log('USER = elms', canvasElement.innerHTML)
+    console.log('USER = elms', canvasElement.closest('body').innerHTML)
     const elements = await getElements(canvasElement);
     await ensureElements(elements, args);
     await ensureScreenRead(elements, args);
@@ -36,6 +36,7 @@ export const UserRepos = {
     repos: stringify([{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)]),
   },
   play: async ({ args, canvasElement, step }) => {
+    console.log('UserRepos = canva', canvasElement.closest('body').innerHTML)
     const elements = await getElements(canvasElement);
     console.log('UserRepos = elms', elements.container.innerHTML)
     args.repositories = [{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)];
