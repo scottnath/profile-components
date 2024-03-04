@@ -29,6 +29,7 @@ import { styles } from '../styles/index.js';
  * <github-user login="scottnath" fetch="true"></github-user>
  */
 export class GitHubUser extends HTMLElement {
+  static #style = null;
   /**
    * @ignore
    */
@@ -52,8 +53,21 @@ export class GitHubUser extends HTMLElement {
     }
   }
 
+  /**
+  * @ignore
+  */
+  #adoptStyles() {
+    if (GitHubUser.#style === null) {
+      const sheet = new CSSStyleSheet();
+      sheet.replaceSync(styles);
+      GitHubUser.#style = sheet;
+    }
+    this.shadowRoot.adoptedStyleSheets = [GitHubUser.#style];
+  }
+
   async connectedCallback() {
-    let view = `<style>${styles}</style>`;
+    this.#adoptStyles();
+    let view = ``;
     this.content = await generateUserContent(this.attrs, this.attrs.fetch);
     view += html(this.content);
     this.shadowRoot.innerHTML = view;

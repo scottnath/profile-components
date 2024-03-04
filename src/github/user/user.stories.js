@@ -1,4 +1,3 @@
-import { expect } from '@storybook/jest';
 import { repoProfileComponents, repoStorydocker, userScottnath, userSindresorhus } from '../fixtures';
 import { generateMockResponse } from '../helpers/testing';
 import { parseFetchedUser } from './content';
@@ -6,7 +5,7 @@ import { parseFetchedRepo } from '../repository/content.js';
 import { getElements, ensureElements, ensureScreenRead } from './user.shared-spec';
 import { primerThemes } from '../../../.storybook/primer-preview.js';
 
-import '.';
+import './index.js';
 
 export default {
   title: 'GitHub/github-user',
@@ -24,6 +23,7 @@ export default {
 export const User  = {
   args: parseFetchedUser(userScottnath),
   play: async ({ args, canvasElement, step }) => {
+    console.log('USER = elms', canvasElement.innerHTML)
     const elements = await getElements(canvasElement);
     await ensureElements(elements, args);
     await ensureScreenRead(elements, args);
@@ -36,6 +36,7 @@ export const UserRepos = {
     repos: stringify([{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)]),
   },
   play: async ({ args, canvasElement, step }) => {
+    console.log('UserRepos = elms', canvasElement.innerHTML)
     const elements = await getElements(canvasElement);
     args.repositories = [{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)];
     await ensureElements(elements, args);
