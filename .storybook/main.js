@@ -1,5 +1,6 @@
 import path from 'path';
 import { mergeConfig } from 'vite';
+import turbosnap from 'vite-plugin-turbosnap';
 /** @type { import('@storybook/web-components-vite').StorybookConfig } */
 const config = {
   stories: ['../src/github/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
