@@ -57,33 +57,33 @@ export default {
 //   play: User.play,
 // }
 
-export const Fetch = {
-  args: {
-    login: userScottnath.login,
-    fetch: true,
-  },
-  parameters: {
-    fetchMock: {
-      mocks: [
-        {
-          response: generateMockResponse(userScottnath, 'users'),
-        }
-      ]
-    }
-    // mockData: [
-    //   generateMockResponse(userScottnath, 'users'),
-    // ]
-  },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...parseFetchedUser({...userScottnath}),
-      ...args,
-    };
-    await ensureElements(elements, argsAfterFetch);
-    await ensureScreenRead(elements, argsAfterFetch);
-  }
-};
+// export const Fetch = {
+//   args: {
+//     login: userScottnath.login,
+//     fetch: true,
+//   },
+//   parameters: {
+//     fetchMock: {
+//       mocks: [
+//         {
+//           response: generateMockResponse(userScottnath, 'users'),
+//         }
+//       ]
+//     }
+//     // mockData: [
+//     //   generateMockResponse(userScottnath, 'users'),
+//     // ]
+//   },
+//   play: async ({ args, canvasElement, step }) => {
+//     const elements = await getElements(canvasElement);
+//     const argsAfterFetch = {
+//       ...parseFetchedUser({...userScottnath}),
+//       ...args,
+//     };
+//     await ensureElements(elements, argsAfterFetch);
+//     await ensureScreenRead(elements, argsAfterFetch);
+//   }
+// };
 
 // export const FetchOverides = {
 //   args: {
