@@ -20,6 +20,7 @@ export default {
     }
     let attributes = attrGen({...args});
     if (repos) {
+      console.log('repos', repos)
       attributes += `\nrepos="${repos}"`;
     }
     console.log('ATTRIBUTES', attributes)
