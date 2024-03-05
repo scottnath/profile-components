@@ -68,6 +68,7 @@ export class GitHubUser extends HTMLElement {
   async connectedCallback() {
     this.#adoptStyles();
     let view = ``;
+    console.log('this.attrs', this.attrs);
     this.content = await generateUserContent(this.attrs, this.attrs.fetch);
     console.log('connectedCallback', this.content)
     view += html(this.content);
