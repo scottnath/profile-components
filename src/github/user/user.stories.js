@@ -19,6 +19,7 @@ export default {
       delete args.repos;
     }
     let attributes = attrGen({...args});
+    args.repos = repos;
     if (repos) {
       console.log('repos', repos)
       if (typeof repos !== 'string') repos = stringify(repos);
@@ -51,8 +52,6 @@ export const UserRepos = {
   play: async ({ args, canvasElement, step }) => {
     console.log('UserRepos = canva', canvasElement.closest('body').innerHTML)
     const elements = await getElements(canvasElement);
-    console.log('UserRepos = elms', elements.container.innerHTML)
-    args.repositories = [{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)];
     await ensureElements(elements, args);
     await ensureScreenRead(elements, args);
   }
@@ -96,39 +95,32 @@ export const Fetch = {
   }
 };
 
-// export const FetchOverides = {
-//   args: {
-//     login: userScottnath.login,
-//     fetch: true,
-//     name: "Meowy McMeowerstein",
-//     bio: "Spending time purring and sleepin",
-//     avatar_url: 'cat-square.jpeg',
-//     followers: "500000",
-//     following: "2980",
-//     repos: stringify([{"full_name":"scottnath/profile-components","description":"Cool thing, does stuff","language":"HTML"}])
-//   },
-//   parameters: {
-//     fetchMock: {
-//       mocks: [
-//         {
-//           response: generateMockResponse(userScottnath, 'users'),
-//         }
-//       ]
-//     }
-//     // mockData: [
-//     //   generateMockResponse(userScottnath, 'users'),
-//     // ]
-//   },
-//   play: async ({ args, canvasElement, step }) => {
-//     const elements = await getElements(canvasElement);
-//     const argsAfterFetch = {
-//       ...parseFetchedUser({...userScottnath}),
-//       ...args,
-//     };
-//     await ensureElements(elements, argsAfterFetch);
-//     await ensureScreenRead(elements, argsAfterFetch);
-//   }
-// }
+export const FetchOverides = {
+  args: {
+    login: userScottnath.login,
+    fetch: true,
+    name: "Meowy McMeowerstein",
+    bio: "Spending time purring and sleepin",
+    avatar_url: 'cat-square.jpeg',
+    followers: "500000",
+    following: "2980",
+    repos: stringify([{"full_name":"scottnath/profile-components","description":"Cool thing, does stuff","language":"HTML"}])
+  },
+  parameters: {
+    mockData: [
+      generateMockResponse(userScottnath, 'users'),
+    ]
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedUser({...userScottnath}),
+      ...args,
+    };
+    await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
+  }
+}
 
 export const ReposFetch = {
   args: {

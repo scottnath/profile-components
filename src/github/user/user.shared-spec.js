@@ -76,12 +76,12 @@ export const ensureElements = async (elements, args) => {
   }
   if (args?.repos) {
     let reps = [];
-    try {
+    if (typeof args.repos === 'string') {
       reps = parseify(args.repos);
-      await expect(elements.repos).toHaveLength(reps.length);
-    } catch (error) {
-      await expect(elements.repos).toHaveLength(0);
+    } else if (Array.isArray(args.repos)){
+      reps = args.repos;
     }
+    await expect(elements.repos).toHaveLength(reps.length);
   } else {
     await expect(elements.repos).toHaveLength(0);
   }
@@ -122,11 +122,16 @@ export const getExpectedScreenText = (args) => {
         expected.push(`following: ${args.following}`);
       }
     }
-    if (args.repositories) {
-      const repos = args.repositories;
-      if (Array.isArray(repos)) {
+    if (args?.repos) {
+      let reps = [];
+      if (typeof args.repos === 'string') {
+        reps = parseify(args.repos);
+      } else if (Array.isArray(args.repos)){
+        reps = args.repos;
+      }
+      if (Array.isArray(reps)) {
         expected.push('banner, Pinned repositories');
-        repos.forEach((repo) => {
+        reps.forEach((repo) => {
           const repoExpected = getRepoScreenText(repo);
           expected.push(...repoExpected);
         });
