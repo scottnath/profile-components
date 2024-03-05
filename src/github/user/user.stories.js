@@ -5,7 +5,7 @@ import { parseFetchedRepo } from '../repository/content.js';
 import { getElements, ensureElements, ensureScreenRead } from './user.shared-spec';
 import { primerThemes } from '../../../.storybook/primer-preview.js';
 import { within as shadowWithin } from 'shadow-dom-testing-library';
-// import { stringinator } from '../../utils/index.js';
+
 import './index.js';
 
 export default {

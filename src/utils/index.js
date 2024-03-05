@@ -45,11 +45,11 @@ export const stringify = (obj) => {
   console.log('FUCKING ughughugh222', ugh);
   return ugh;
 };
-export const stringinator = (obj) => JSON.stringify(obj).replace(/"/g, "||||");
+export const stringinator = (obj) => JSON.stringify(obj).replace(/"/g, "&quot;");
 
 /**
  * Parse a stringified object with quotes escaped
  * @param {string} str 
  * @returns {Object} parsed object
  */
-export const parseify = (str) => JSON.parse(str.replaceAll("||||", '"'));
+export const parseify = (str) => JSON.parse(str.replaceAll("&quot;", '"'));
