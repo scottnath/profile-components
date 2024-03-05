@@ -20,12 +20,12 @@ export default {
       delete args.repos2;
     }
     let attributes = attrGen({...args});
-    console.log('attributes', {...attributes})
+    console.log('attributes', attributes)
     args.repos = repos;
     if (repos) {
       console.log('repos', repos)
       console.log('typeofrepos', typeof repos)
-      if (typeof repos !== 'string') repos = stringify(repos);
+      if (typeof repos !== 'string') repos = stringinator(repos);
       console.log('repos>>2', repos)
       attributes += `\nrepos="${repos}"`;
     }
@@ -51,7 +51,7 @@ export const UserRepos = {
   args: {
     ...User.args,
     name: 'Scoot Nerth',
-    repos2: stringify([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]),
+    repos2: stringinator([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]),
   },
   play: async ({ args, canvasElement, step }) => {
     console.log('UserRepos = canva', canvasElement.closest('body').innerHTML)

@@ -45,6 +45,7 @@ export const stringify = (obj) => {
   console.log('FUCKING ughughugh222', ugh);
   return ugh;
 };
+export const stringinator = (obj) => JSON.stringify(obj).replace(/"/g, "||||");
 
 /**
  * Parse a stringified object with quotes escaped
