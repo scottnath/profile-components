@@ -13,7 +13,16 @@ export default {
   tags: ['autodocs'],
   render: (args) => {
     console.log({...args})
-    const attributes = attrGen(args);
+    let repos;
+    if (args.repos) {
+      repos = args.repos;
+      delete args.repos;
+    }
+    let attributes = attrGen({...args});
+    if (repos) {
+      attributes += `\nrepos="${repos}"`;
+    }
+    console.log('ATTRIBUTES', attributes)
   
     return `
       <github-user ${attributes}></github-user>
