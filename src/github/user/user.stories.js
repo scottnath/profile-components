@@ -13,21 +13,21 @@ export default {
   component: 'github-user',
   tags: ['autodocs'],
   render: (args) => {
-    let repos;
-    if (args.repos) {
-      repos = args.repos;
-      delete args.repos;
-    }
-    let attributes = attrGen({...args});
-    console.log('attributes', attributes)
-    args.repos = repos;
-    if (repos) {
-      console.log('repos', repos)
-      console.log('typeofrepos', typeof repos)
-      if (typeof repos !== 'string') repos = stringinator(repos);
-      console.log('repos>>2', repos)
-      attributes += `\nrepos="${repos}"`;
-    }
+    // let repos;
+    // if (args.repos) {
+    //   repos = args.repos;
+    //   delete args.repos;
+    // }
+    const attributes = attrGen({...args});
+    // console.log('attributes', attributes)
+    // args.repos = repos;
+    // if (repos) {
+    //   console.log('repos', repos)
+    //   console.log('typeofrepos', typeof repos)
+    //   if (typeof repos !== 'string') repos = stringinator(repos);
+    //   console.log('repos>>2', repos)
+    //   attributes += `\nrepos="${repos}"`;
+    // }
     console.log('ATTRIBUTES', attributes)
   
     return `
