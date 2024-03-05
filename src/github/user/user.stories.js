@@ -12,13 +12,15 @@ export default {
   component: 'github-user',
   tags: ['autodocs'],
   render: (args) => {
-    console.log({...args})
+    console.log('args1', {...args})
     let repos;
-    if (args.repos) {
-      repos = args.repos;
-      delete args.repos;
+    if (args.repos2) {
+      repos = args.repos2;
+      delete args.repos2;
     }
+    console.log('args2', {...args})
     let attributes = attrGen({...args});
+    console.log('attributes', {...attributes})
     args.repos = repos;
     if (repos) {
       console.log('repos', repos)
@@ -49,7 +51,7 @@ export const UserRepos = {
   args: {
     ...User.args,
     name: 'Scoot Nerth',
-    repos: stringify([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]),
+    repos2: stringify([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]),
   },
   play: async ({ args, canvasElement, step }) => {
     console.log('UserRepos = canva', canvasElement.closest('body').innerHTML)
