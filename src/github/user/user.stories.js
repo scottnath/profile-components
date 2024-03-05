@@ -13,23 +13,23 @@ export default {
   component: 'github-user',
   tags: ['autodocs'],
   render: (args) => {
-    console.log('args1', {...args})
-    let repos;
-    // console.log('args2!', JSON.stringify([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]).replace(/"/g, "||||"))
-    if (args.repos) {
-      repos = args.repos;
-      delete args.repos2;
-    }
+    // console.log('args1', {...args})
+    // let repos;
+    // // console.log('args2!', JSON.stringify([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]).replace(/"/g, "||||"))
+    // if (args.repos) {
+    //   repos = args.repos;
+    //   delete args.repos2;
+    // }
     let attributes = attrGen({...args});
     console.log('attributes', attributes)
-    args.repos = repos;
-    if (repos) {
-      console.log('repos', repos)
-      console.log('typeofrepos', typeof repos)
-      if (typeof repos !== 'string') repos = stringinator(repos);
-      console.log('repos>>2', repos)
-      attributes += `\nrepos="${repos}"`;
-    }
+    // args.repos = repos;
+    // if (repos) {
+    //   console.log('repos', repos)
+    //   console.log('typeofrepos', typeof repos)
+    //   if (typeof repos !== 'string') repos = stringinator(repos);
+    //   console.log('repos>>2', repos)
+    //   attributes += `\nrepos="${repos}"`;
+    // }
     console.log('ATTRIBUTES', attributes)
   
     return `
@@ -127,46 +127,46 @@ export const FetchOverides = {
   }
 }
 
-// export const ReposFetch = {
-//   args: {
-//     login: userScottnath.login,
-//     fetch: true,
-//     repos: stringify([repoProfileComponents.name, repoStorydocker.full_name]),
-//   },
-//   parameters: {
-//     fetchMock: {
-//       mocks: [
-//         {
-//           response: generateMockResponse(userScottnath, 'users'),
-//         },
-//         {
-//           response: generateMockResponse(repoProfileComponents, 'repos'),
-//         },
-//         {
-//           response: generateMockResponse(repoStorydocker, 'repos'),
-//         }
-//       ]
-//     }
-//     // mockData: [
-//     //   generateMockResponse(userScottnath, 'users'),
-//     //   generateMockResponse(repoProfileComponents, 'repos'),
-//     //   generateMockResponse(repoStorydocker, 'repos'),
-//     // ]
-//   },
-//   play: async ({ args, canvasElement, step }) => {
-//     const elements = await getElements(canvasElement);
-//     console.log('ReposFetchReposFetch = elms', elements.container.innerHTML)
-//     const argsAfterFetch = {
-//       ...parseFetchedUser({...userScottnath}),
-//       ...args,
-//       repos: stringify([repoProfileComponents, repoStorydocker]),
-//       repositories: [parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]
-//     };
-//     console.log('argsAfterFetch', argsAfterFetch)
-//     await ensureElements(elements, argsAfterFetch);
-//     await ensureScreenRead(elements, argsAfterFetch);
-//   }
-// }
+export const ReposFetch = {
+  args: {
+    login: userScottnath.login,
+    fetch: true,
+    repos: stringify([repoProfileComponents.name, repoStorydocker.full_name]),
+  },
+  parameters: {
+    // fetchMock: {
+    //   mocks: [
+    //     {
+    //       response: generateMockResponse(userScottnath, 'users'),
+    //     },
+    //     {
+    //       response: generateMockResponse(repoProfileComponents, 'repos'),
+    //     },
+    //     {
+    //       response: generateMockResponse(repoStorydocker, 'repos'),
+    //     }
+    //   ]
+    // }
+    mockData: [
+      generateMockResponse(userScottnath, 'users'),
+      generateMockResponse(repoProfileComponents, 'repos'),
+      generateMockResponse(repoStorydocker, 'repos'),
+    ]
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    console.log('ReposFetchReposFetch = elms', elements.container.innerHTML)
+    const argsAfterFetch = {
+      ...parseFetchedUser({...userScottnath}),
+      ...args,
+      repos: stringify([repoProfileComponents, repoStorydocker]),
+      repositories: [parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]
+    };
+    console.log('argsAfterFetch', argsAfterFetch)
+    await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
+  }
+}
 
 // // export const FetchError = {
 // //   args: {
