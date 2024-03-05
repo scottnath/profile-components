@@ -12,6 +12,7 @@ export default {
   component: 'github-user',
   tags: ['autodocs'],
   render: (args) => {
+    console.log(args)
     const attributes = attrGen(args);
   
     return `
@@ -37,7 +38,7 @@ export const UserRepos = {
     repos: stringify([{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)]),
   },
   play: async ({ args, canvasElement, step }) => {
-    console.log('UserRepos = canva', canvasElement.closest('body').innerHTML)
+    console.log('UserRepos = canva', canvasElement.closest('body'))
     const elements = await getElements(canvasElement);
     console.log('UserRepos = elms', elements.container.innerHTML)
     args.repositories = [{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)];
