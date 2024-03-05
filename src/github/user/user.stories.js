@@ -14,11 +14,11 @@ export default {
   render: (args) => {
     console.log('args1', {...args})
     let repos;
+    console.log('args2!', JSON.stringify([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]).replace(/"/g, "||||"))
     if (args.repos2) {
       repos = args.repos2;
       delete args.repos2;
     }
-    console.log('args2!', JSON.stringify(args.repos2).replace(/"/g, "||||"))
     let attributes = attrGen({...args});
     console.log('attributes', {...attributes})
     args.repos = repos;
