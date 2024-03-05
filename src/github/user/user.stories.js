@@ -21,6 +21,7 @@ export default {
     let attributes = attrGen({...args});
     if (repos) {
       console.log('repos', repos)
+      if (typeof repos !== 'string') repos = stringify(repos);
       attributes += `\nrepos="${repos}"`;
     }
     console.log('ATTRIBUTES', attributes)
