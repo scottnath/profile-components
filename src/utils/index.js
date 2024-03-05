@@ -37,7 +37,14 @@ export const intToString = (num) => {
  * @param {Object} obj 
  * @returns {string} stringified object with quotes escaped
  */
-export const stringify = (obj) => JSON.stringify(obj).replace(/"/g, "||||");
+export const stringify = (obj) => {
+  console.log('FUCKING STRINFIGY', obj);
+  let ugh = JSON.stringify(obj);
+  console.log('FUCKING ughughugh', ugh);
+  ugh = ugh.replace(/"/g, "||||");
+  console.log('FUCKING ughughugh222', ugh);
+  return ugh;
+};
 
 /**
  * Parse a stringified object with quotes escaped
