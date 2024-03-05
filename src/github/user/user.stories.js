@@ -62,70 +62,70 @@ export const UserRepos = {
   }
 }
 
-// export const PopularUser  = {
-//   args: parseFetchedUser(userSindresorhus),
-//   play: User.play,
-// }
+export const PopularUser  = {
+  args: parseFetchedUser(userSindresorhus),
+  play: User.play,
+}
 
-// export const OnlyRequired = {
-//   args: {
-//     login: userScottnath.login,
-//     name: userScottnath.name,
-//   },
-//   play: User.play,
-// }
+export const OnlyRequired = {
+  args: {
+    login: userScottnath.login,
+    name: userScottnath.name,
+  },
+  play: User.play,
+}
 
-// export const Fetch = {
-//   args: {
-//     login: userScottnath.login,
-//     fetch: true,
-//   },
-//   parameters: {
-//     fetchMock: {
-//       mocks: [
-//         {
-//           response: generateMockResponse(userScottnath, 'users'),
-//         }
-//       ]
-//     }
-//   },
-//   play: async ({ args, canvasElement, step }) => {
-//     const elements = await getElements(canvasElement);
-//     const argsAfterFetch = {
-//       ...parseFetchedUser({...userScottnath}),
-//       ...args,
-//     };
-//     await ensureElements(elements, argsAfterFetch);
-//     await ensureScreenRead(elements, argsAfterFetch);
-//   }
-// };
+export const Fetch = {
+  args: {
+    login: userScottnath.login,
+    fetch: true,
+  },
+  parameters: {
+    fetchMock: {
+      mocks: [
+        {
+          response: generateMockResponse(userScottnath, 'users'),
+        }
+      ]
+    }
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedUser({...userScottnath}),
+      ...args,
+    };
+    await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
+  }
+};
 
-// export const FetchOverides = {
-//   args: {
-//     login: userScottnath.login,
-//     fetch: true,
-//     name: "Meowy McMeowerstein",
-//     bio: "Spending time purring and sleepin",
-//     avatar_url: 'cat-square.jpeg',
-//     followers: "500000",
-//     following: "2980",
-//     repos: stringify([{"full_name":"scottnath/profile-components","description":"Cool thing, does stuff","language":"HTML"}])
-//   },
-//   parameters: {
-//     mockData: [
-//       generateMockResponse(userScottnath, 'users'),
-//     ]
-//   },
-//   play: async ({ args, canvasElement, step }) => {
-//     const elements = await getElements(canvasElement);
-//     const argsAfterFetch = {
-//       ...parseFetchedUser({...userScottnath}),
-//       ...args,
-//     };
-//     await ensureElements(elements, argsAfterFetch);
-//     await ensureScreenRead(elements, argsAfterFetch);
-//   }
-// }
+export const FetchOverides = {
+  args: {
+    login: userScottnath.login,
+    fetch: true,
+    name: "Meowy McMeowerstein",
+    bio: "Spending time purring and sleepin",
+    avatar_url: 'cat-square.jpeg',
+    followers: "500000",
+    following: "2980",
+    repos: stringinator([{"full_name":"scottnath/profile-components","description":"Cool thing, does stuff","language":"HTML"}])
+  },
+  parameters: {
+    mockData: [
+      generateMockResponse(userScottnath, 'users'),
+    ]
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...parseFetchedUser({...userScottnath}),
+      ...args,
+    };
+    await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
+  }
+}
 
 // export const ReposFetch = {
 //   args: {
