@@ -80,10 +80,8 @@ export const parseFetchedUser = (user = {}) => {
 export const parseReposString = (reposStr, owner) => {
   if (typeof reposStr !== 'string') return reposStr;
   let repos = [];
-  console.log(reposStr);
   try {
     repos = parseify(reposStr);
-    console.log('repos', repos);
   } catch (error) {
     console.error(error);
     return [];
@@ -119,7 +117,6 @@ export const cleanUserContent = (content = {}) => {
   if (content.username && !content.login) {
     content.login = content.username;
   }
-  console.log('content', content);
   const user = parseFetchedUser(content);
   if (!user.login) {
     user.error = 'Missing required attribute: `login` || `username`';

@@ -13,22 +13,7 @@ export default {
   component: 'github-user',
   tags: ['autodocs'],
   render: (args) => {
-    // let repos;
-    // if (args.repos) {
-    //   repos = args.repos;
-    //   delete args.repos;
-    // }
     const attributes = attrGen({...args});
-    // console.log('attributes', attributes)
-    // args.repos = repos;
-    // if (repos) {
-    //   console.log('repos', repos)
-    //   console.log('typeofrepos', typeof repos)
-    //   if (typeof repos !== 'string') repos = stringinator(repos);
-    //   console.log('repos>>2', repos)
-    //   attributes += `\nrepos="${repos}"`;
-    // }
-    console.log('ATTRIBUTES', attributes)
   
     return `
       <github-user ${attributes}></github-user>
@@ -39,7 +24,6 @@ export default {
 export const User  = {
   args: parseFetchedUser(userScottnath),
   play: async ({ args, canvasElement, step }) => {
-    console.log('USER = elms', canvasElement.closest('body').innerHTML)
     const elements = await getElements(canvasElement);
     await ensureElements(elements, args);
     await ensureScreenRead(elements, args);
@@ -49,11 +33,9 @@ export const User  = {
 export const UserRepos = {
   args: {
     ...parseFetchedUser(userScottnath),
-    name: 'Scoot Nerth',
     repos: stringinator([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]),
   },
   play: async ({ args, canvasElement, step }) => {
-    console.log('UserRepos = canva', canvasElement.closest('body').innerHTML)
     const elements = await getElements(canvasElement);
     await ensureElements(elements, args);
     await ensureScreenRead(elements, args);
@@ -80,7 +62,7 @@ export const Fetch = {
   },
   parameters: {
     mockData: [
-      response: generateMockResponse(userScottnath, 'users'),
+      generateMockResponse(userScottnath, 'users'),
     ]
   },
   play: async ({ args, canvasElement, step }) => {
@@ -136,13 +118,11 @@ export const ReposFetch = {
   },
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
-    console.log('ReposFetchReposFetch = elms', elements.container.innerHTML)
     const argsAfterFetch = {
       ...parseFetchedUser({...userScottnath}),
       ...args,
       repositories: [parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]
     };
-    console.log('argsAfterFetch', argsAfterFetch)
     await ensureElements(elements, argsAfterFetch);
     await ensureScreenRead(elements, argsAfterFetch);
   }
