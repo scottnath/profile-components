@@ -4,7 +4,7 @@ import assert from 'node:assert'
 import * as content from './content.js';
 import { parseFetchedPost } from '../post/content.js';
 import { generateMockResponse } from '../helpers/testing.js';
-import { stringify } from '../../utils/index.js';
+import { stringinator } from '../../utils/index.js';
 
 import { default as userScottnath } from '../fixtures/generated/user--scottnath.json' assert { type: 'json' };
 import { default as postBugfix } from '../fixtures/generated/post--bugfix-multi-vite.json' assert { type: 'json' };
@@ -85,7 +85,7 @@ describe('parseFetchedUser', () => {
 
 describe('parsePostString', () => {
   it('Should parse a stringified post', () => {
-    const testString = JSON.stringify(postBugfix);
+    const testString = stringinator(postBugfix);
     assert.deepEqual(content.parsePostString(testString), postBugfix);
   });
   it('Should fail gracefully', () => {
@@ -123,8 +123,8 @@ describe('cleanUserContent', () => {
   it('Parses post strings', () => {
     const cleaned = content.cleanUserContent({
       username: 'meow',
-      latest_post: JSON.stringify(parseFetchedPost(postBugfix)),
-      popular_post: JSON.stringify(parseFetchedPost(postDependabot)),
+      latest_post: stringinator(parseFetchedPost(postBugfix)),
+      popular_post: stringinator(parseFetchedPost(postDependabot)),
     });
     assert.deepEqual(cleaned.latest_post, parseFetchedPost(postBugfix));
     assert.deepEqual(cleaned.popular_post, parseFetchedPost(postDependabot));
@@ -132,8 +132,8 @@ describe('cleanUserContent', () => {
   it('Does not allow duplicate posts', () => {
     const cleaned = content.cleanUserContent({
       username: 'meow',
-      latest_post: JSON.stringify(parseFetchedPost(postDependabot)),
-      popular_post: JSON.stringify(parseFetchedPost(postDependabot)),
+      latest_post: stringinator(parseFetchedPost(postDependabot)),
+      popular_post: stringinator(parseFetchedPost(postDependabot)),
     });
     assert.deepEqual(cleaned.latest_post, parseFetchedPost(postDependabot));
     assert.deepEqual(cleaned.popular_post, undefined);
@@ -217,8 +217,8 @@ describe('generateUserContent', () => {
     
     const returned = await content.generateUserContent({
       username: testUser.username,
-      latest_post: stringify(postLatestUserDefined),
-      popular_post: stringify(postPopularUserDefined),
+      latest_post: stringinator(postLatestUserDefined),
+      popular_post: stringinator(postPopularUserDefined),
     }, true);
     assert.deepEqual(returned, expected);
   });

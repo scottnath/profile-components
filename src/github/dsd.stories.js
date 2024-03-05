@@ -72,7 +72,7 @@ export const User = {
   },
   args: {
     ...parseFetchedUser(userScottnath),
-    repos: stringify([
+    repos: stringinator([
       {
         ...parseFetchedRepo(repoProfileComponents),
         user_login: userScottnath.login

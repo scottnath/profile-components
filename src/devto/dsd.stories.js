@@ -75,8 +75,8 @@ export const User = {
   },
   args: {
     ...parseFetchedUser(userScottnath),
-    latest_post: stringify(parseFetchedPost(postDependabot)),
-    popular_post: stringify(parseFetchedPost(postBugfix)),
+    latest_post: stringinator(parseFetchedPost(postDependabot)),
+    popular_post: stringinator(parseFetchedPost(postBugfix)),
   },
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElementsUser(canvasElement);
