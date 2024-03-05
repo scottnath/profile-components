@@ -124,7 +124,9 @@ export const getExpectedScreenText = (args) => {
     }
     if (args?.repos) {
       let reps = [];
-      if (typeof args.repos === 'string') {
+      if (args.repositories) {
+        reps = args.repositories;
+      } else if (typeof args.repos === 'string') {
         reps = parseify(args.repos);
       } else if (Array.isArray(args.repos)){
         reps = args.repos;

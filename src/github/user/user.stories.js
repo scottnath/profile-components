@@ -131,7 +131,7 @@ export const ReposFetch = {
   args: {
     login: userScottnath.login,
     fetch: true,
-    repos: stringify([repoProfileComponents.name, repoStorydocker.full_name]),
+    repos: stringinator([repoProfileComponents.name, repoStorydocker.full_name]),
   },
   parameters: {
     // fetchMock: {
@@ -159,7 +159,6 @@ export const ReposFetch = {
     const argsAfterFetch = {
       ...parseFetchedUser({...userScottnath}),
       ...args,
-      repos: stringify([repoProfileComponents, repoStorydocker]),
       repositories: [parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]
     };
     console.log('argsAfterFetch', argsAfterFetch)
@@ -168,78 +167,78 @@ export const ReposFetch = {
   }
 }
 
-// // export const FetchError = {
-// //   args: {
-// //     login: 'not-a-real-user',
-// //     fetch: true,
-// //   },
-// //   parameters: {
-// //     mockData: [
-// //       generateMockResponse({login: 'not-a-real-user'}, 'users', 404),
-// //     ]
-// //   },
-// //   play: async ({ args, canvasElement, step }) => {
-// //     const elements = await getElements(canvasElement);
-// //     const argsAfterFetch = {
-// //       ...args,
-// //       error: `User "${args.login}" not found`,
-// //     };
-// //     await ensureElements(elements, argsAfterFetch);
-// //   }
-// // };
+export const FetchError = {
+  args: {
+    login: 'not-a-real-user',
+    fetch: true,
+  },
+  parameters: {
+    mockData: [
+      generateMockResponse({login: 'not-a-real-user'}, 'users', 404),
+    ]
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    const argsAfterFetch = {
+      ...args,
+      error: `User "${args.login}" not found`,
+    };
+    await ensureElements(elements, argsAfterFetch);
+  }
+};
 
-// // export const ContainerCheck = {
-// //   args: {
-// //     ...FetchOverides.args,
-// //     theme: 'light_high_contrast'
-// //   },
-// //   render: (args) => {
-// //     const attributes = attrGen(args);
+export const ContainerCheck = {
+  args: {
+    ...FetchOverides.args,
+    theme: 'light_high_contrast'
+  },
+  render: (args) => {
+    const attributes = attrGen(args);
   
-// //     return `
-// //       <div style="display: flex; width: 1000px; margin: 1em;">
-// //         <github-user ${attributes} style="flex: 1 1 200px;"></github-user>
-// //         <github-user ${attributes} style="flex: 1 1 300px;"></github-user>
-// //         <github-user ${attributes} style="flex: 1 1 400px;"></github-user>
-// //       </div>
-// //     `;
-// //   }
-// // }
+    return `
+      <div style="display: flex; width: 1000px; margin: 1em;">
+        <github-user ${attributes} style="flex: 1 1 200px;"></github-user>
+        <github-user ${attributes} style="flex: 1 1 300px;"></github-user>
+        <github-user ${attributes} style="flex: 1 1 400px;"></github-user>
+      </div>
+    `;
+  }
+}
 
-// // const themesRender = (args) => {
-// //   const attributes = attrGen(args);
+const themesRender = (args) => {
+  const attributes = attrGen(args);
 
-// //   return `
-// //     <div style="display: flex; flex-wrap: wrap; width: 1000px; margin: 1em;">
-// //       ${primerThemes.map((theme) => {
-// //         return `
-// //         <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 200px;"></github-user>
-// //         `;
-// //       }).join('')}
-// //       ${primerThemes.map((theme) => {
-// //         return `
-// //         <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 300px;"></github-user>
-// //         `;
-// //       }).join('')}
-// //       ${primerThemes.map((theme) => {
-// //         return `
-// //         <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 400px;"></github-user>
-// //         `;
-// //       }).join('')}
-// //     </div>
-// //   `;
-// // }
+  return `
+    <div style="display: flex; flex-wrap: wrap; width: 1000px; margin: 1em;">
+      ${primerThemes.map((theme) => {
+        return `
+        <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 200px;"></github-user>
+        `;
+      }).join('')}
+      ${primerThemes.map((theme) => {
+        return `
+        <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 300px;"></github-user>
+        `;
+      }).join('')}
+      ${primerThemes.map((theme) => {
+        return `
+        <github-user ${attributes} theme="${theme.value}" style="flex: 1 1 400px;"></github-user>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
 
-// // export const Themes = {
-// //   args: {
-// //     ...ReposFetch.args,
-// //   },
-// //   render: themesRender,
-// // }
+export const Themes = {
+  args: {
+    ...ReposFetch.args,
+  },
+  render: themesRender,
+}
 
-// // export const ThemesWithOverrides = {
-// //   args: {
-// //     ...FetchOverides.args,
-// //   },
-// //   render: themesRender,
-// // }
+export const ThemesWithOverrides = {
+  args: {
+    ...FetchOverides.args,
+  },
+  render: themesRender,
+}
