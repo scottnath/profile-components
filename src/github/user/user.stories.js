@@ -14,6 +14,7 @@ export default {
   render: (args) => {
     console.log('args1', {...args})
     let repos;
+    console.log('global stringify', stringify)
     if (args.repos2) {
       repos = args.repos2;
       delete args.repos2;
