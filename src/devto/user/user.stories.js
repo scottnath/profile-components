@@ -15,6 +15,7 @@ export default {
   tags: ['autodocs'],
   render: (args) => {
     const attributes = attrGen(args);
+    console.log('attributes', attributes)
   
     return `
       <devto-user ${attributes}></devto-user>
@@ -158,6 +159,7 @@ export const FetchOverides = {
         ...parseify(args.popular_post),
       },
     };
+    console.log(argsAfterFetch)
     await ensureElements(elements, argsAfterFetch);
     await ensureScreenRead(elements, argsAfterFetch);
   }
