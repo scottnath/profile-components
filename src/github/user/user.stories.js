@@ -38,15 +38,15 @@ export default {
   },
 };
 
-// export const User  = {
-//   args: parseFetchedUser(userScottnath),
-//   play: async ({ args, canvasElement, step }) => {
-//     console.log('USER = elms', canvasElement.closest('body').innerHTML)
-//     const elements = await getElements(canvasElement);
-//     await ensureElements(elements, args);
-//     await ensureScreenRead(elements, args);
-//   }
-// }
+export const User  = {
+  args: parseFetchedUser(userScottnath),
+  play: async ({ args, canvasElement, step }) => {
+    console.log('USER = elms', canvasElement.closest('body').innerHTML)
+    const elements = await getElements(canvasElement);
+    await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
+  }
+}
 
 export const UserRepos = {
   args: {
