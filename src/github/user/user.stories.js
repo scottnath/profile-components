@@ -16,8 +16,8 @@ export default {
     console.log('args1', {...args})
     let repos;
     // console.log('args2!', JSON.stringify([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]).replace(/"/g, "||||"))
-    if (args.repos2) {
-      repos = args.repos2;
+    if (args.repos) {
+      repos = args.repos;
       delete args.repos2;
     }
     let attributes = attrGen({...args});
@@ -52,7 +52,7 @@ export const UserRepos = {
   args: {
     ...parseFetchedUser(userScottnath),
     name: 'Scoot Nerth',
-    repos2: stringinator([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]),
+    repos: stringinator([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]),
   },
   play: async ({ args, canvasElement, step }) => {
     console.log('UserRepos = canva', canvasElement.closest('body').innerHTML)

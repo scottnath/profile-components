@@ -144,7 +144,7 @@ section[itemscope] {
       mask-image: var(--svg-people);
     }
 
-    div {
+    :is(div) {
       display: inline-flex;
       flex-direction: row-reverse;
       flex-wrap: nowrap;
