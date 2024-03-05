@@ -69,6 +69,7 @@ export class GitHubUser extends HTMLElement {
     this.#adoptStyles();
     let view = ``;
     this.content = await generateUserContent(this.attrs, this.attrs.fetch);
+    console.log('connectedCallback', this.content)
     view += html(this.content);
     this.shadowRoot.innerHTML = view;
     if (this.attrs.theme) {
