@@ -15,7 +15,7 @@ export default {
   render: (args) => {
     console.log('args1', {...args})
     let repos;
-    console.log('args2!', JSON.stringify([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]).replace(/"/g, "||||"))
+    // console.log('args2!', JSON.stringify([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]).replace(/"/g, "||||"))
     if (args.repos2) {
       repos = args.repos2;
       delete args.repos2;

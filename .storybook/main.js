@@ -3,7 +3,7 @@ import { mergeConfig } from 'vite';
 import turbosnap from 'vite-plugin-turbosnap';
 /** @type { import('@storybook/web-components-vite').StorybookConfig } */
 const config = {
-  stories: ['../src/github/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/github/*.mdx', '../src/github/user/user.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',
