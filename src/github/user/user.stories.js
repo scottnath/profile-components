@@ -22,7 +22,9 @@ export default {
     args.repos = repos;
     if (repos) {
       console.log('repos', repos)
+      console.log('typeofrepos', typeof repos)
       if (typeof repos !== 'string') repos = stringify(repos);
+      console.log('repos>>2', repos)
       attributes += `\nrepos="${repos}"`;
     }
     console.log('ATTRIBUTES', attributes)
