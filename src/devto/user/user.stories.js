@@ -5,7 +5,7 @@ import { parseFetchedPost } from '../post/content';
 import { default as userScottnath } from '../fixtures/generated/user--scottnath.json';
 import { default as postDependabot } from '../fixtures/generated/post--dependabot.json';
 import { default as postBugfix } from '../fixtures/generated/post--bugfix-multi-vite.json';
-import { getElements, ensureElements } from './user.shared-spec';
+import { getElements, ensureElements, ensureScreenRead } from './user.shared-spec';
 
 import './index.js';
 
@@ -19,9 +19,8 @@ export default {
     return `
       <devto-user ${attributes}></devto-user>
     `;
-  }
+  },
 };
-
 
 export const User = {
   args: {
@@ -30,26 +29,29 @@ export const User = {
   play: async ({ args, canvasElement }) => {
     const elements = await getElements(canvasElement);
     await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
   }
 }
 
 export const UserPosts = {
   args: {
     ...User.args,
-    latest_post: stringify(parseFetchedPost(postDependabot)),
-    popular_post: stringify(parseFetchedPost(postBugfix)),
+    post_count: 222,
+    latest_post: stringinator(parseFetchedPost(postDependabot)),
+    popular_post: stringinator(parseFetchedPost(postBugfix)),
   },
   // breaks in github-actions CI, unknown why
-  // play: async ({ args, canvasElement }) => {
-  //   const elements = await getElements(canvasElement);
+  play: async ({ args, canvasElement }) => {
+    const elements = await getElements(canvasElement);
 
-  //   const argsAfterFetch = {
-  //     ...args,
-  //     latest_post: parseFetchedPost(postDependabot),
-  //     popular_post: parseFetchedPost(postBugfix),
-  //   };
-  //   await ensureElements(elements, argsAfterFetch);
-  // }
+    const argsAfterFetch = {
+      ...args,
+      latest_post: parseFetchedPost(postDependabot),
+      popular_post: parseFetchedPost(postBugfix),
+    };
+    await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
+  }
 }
 
 export const OnlyRequired = {
@@ -61,6 +63,13 @@ export const OnlyRequired = {
 }
 
 export const Fetch = {
+  args: {
+    username: userScottnath.username,
+    fetch: true,
+  },
+}
+
+export const FetchMocked = {
   args: {
     username: userScottnath.username,
     fetch: true,
@@ -81,6 +90,7 @@ export const Fetch = {
       popular_post: parseFetchedPost(postBugfix),
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
@@ -105,6 +115,7 @@ export const FetchWithoutPosts = {
       popular_post: null,
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
@@ -117,11 +128,11 @@ export const FetchOverides = {
     profile_image: 'cat-square.jpeg',
     joined_at: 'Jan 1, 1979',
     post_count: 1000000,
-    popular_post: stringify({
+    popular_post: stringinator({
       title: 'Meow meow meow meow meow meow meow meow meow meow meow meow meow meow meow',
       cover_image: 'cat-1000-420.jpeg',
     }),
-    latest_post: stringify({
+    latest_post: stringinator({
       title: 'Mess? Make your human blame the dog',
       cover_image: 'cat-glasses-1000-420.jpeg'
     }),
@@ -148,6 +159,7 @@ export const FetchOverides = {
       },
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
@@ -168,12 +180,14 @@ export const FetchError = {
       error: 'Fetch Error: User "not-a-real-user" not found'
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
 export const ContainerCheck = {
   args: {
     ...FetchOverides.args,
+    fetch: false,
   },
 
   render: (args) => {

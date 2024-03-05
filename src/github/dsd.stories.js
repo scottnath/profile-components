@@ -2,6 +2,12 @@
 import { parseFetchedRepo } from './repository/content.js';
 import { parseFetchedUser } from './user/content.js';
 import { repoProfileComponents, repoStorydocker, userScottnath, repoFreeCodeCamp } from './fixtures';
+import { getElements, ensureElements, ensureScreenRead } from './repository/repository.shared-spec';
+import { 
+  getElements as getElementsUser,
+  ensureElements as ensureElementsUser,
+  ensureScreenRead as ensureScreenReadUser
+} from './user/user.shared-spec';
 import { repo, dsd } from './index.js';
 import docs from './dsd.docs.mdx';
 
@@ -45,6 +51,11 @@ export const Repository = {
   args: {
     ...parseFetchedRepo(repoFreeCodeCamp),
   },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
+  }
 }
 
 export const User = {
@@ -61,11 +72,16 @@ export const User = {
   },
   args: {
     ...parseFetchedUser(userScottnath),
-    repos: stringify([
+    repos: stringinator([
       {
         ...parseFetchedRepo(repoProfileComponents),
         user_login: userScottnath.login
       }, 
       parseFetchedRepo(repoStorydocker)]),
   },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElementsUser(canvasElement);
+    await ensureElementsUser(elements, args);
+    await ensureScreenReadUser(elements, args);
+  }
 }

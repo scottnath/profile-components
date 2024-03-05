@@ -4,7 +4,7 @@ import assert from 'node:assert'
 import * as content from './content.js';
 import { parseFetchedPost } from '../post/content.js';
 import { generateMockResponse } from '../helpers/testing.js';
-import { stringify } from '../../utils/index.js';
+import { stringinator } from '../../utils/index.js';
 
 import { default as userScottnath } from '../fixtures/generated/user--scottnath.json' assert { type: 'json' };
 import { default as postBugfix } from '../fixtures/generated/post--bugfix-multi-vite.json' assert { type: 'json' };
@@ -63,6 +63,7 @@ describe('parseFetchedUser', () => {
       summary: testUser.summary,
       joined_at: testUser.joined_at,
       profile_image: testUser.profile_image,
+      a11y: {}
     });
   })
   it('Should require a username', () => {
@@ -84,12 +85,30 @@ describe('parseFetchedUser', () => {
 
 describe('parsePostString', () => {
   it('Should parse a stringified post', () => {
-    const testString = JSON.stringify(postBugfix);
+    const testString = stringinator(postBugfix);
     assert.deepEqual(content.parsePostString(testString), postBugfix);
   });
   it('Should fail gracefully', () => {
     assert.deepEqual(content.parsePostString(postBugfix), postBugfix);
     assert.deepEqual(content.parsePostString('["postBugfix`]'), {});
+  });
+});
+
+describe('a11yContent', () => {
+  it('Should generate a11y content', () => {
+    const testUser = userScottnath;
+    const testContent = content.a11yContent(testUser);
+    assert.deepEqual(testContent.a11y, {
+      headerLabel: `dev.to user ${testUser.name}, username ${testUser.username}`
+    });
+  });
+  it('Should generate a11y content without name', () => {
+    const testUser = {...userScottnath};
+    delete testUser.name;
+    const testContent = content.a11yContent(testUser);
+    assert.deepEqual(testContent.a11y, {
+      headerLabel: `dev.to user ${testUser.username}`
+    });
   });
 });
 
@@ -104,8 +123,8 @@ describe('cleanUserContent', () => {
   it('Parses post strings', () => {
     const cleaned = content.cleanUserContent({
       username: 'meow',
-      latest_post: JSON.stringify(parseFetchedPost(postBugfix)),
-      popular_post: JSON.stringify(parseFetchedPost(postDependabot)),
+      latest_post: stringinator(parseFetchedPost(postBugfix)),
+      popular_post: stringinator(parseFetchedPost(postDependabot)),
     });
     assert.deepEqual(cleaned.latest_post, parseFetchedPost(postBugfix));
     assert.deepEqual(cleaned.popular_post, parseFetchedPost(postDependabot));
@@ -113,8 +132,8 @@ describe('cleanUserContent', () => {
   it('Does not allow duplicate posts', () => {
     const cleaned = content.cleanUserContent({
       username: 'meow',
-      latest_post: JSON.stringify(parseFetchedPost(postDependabot)),
-      popular_post: JSON.stringify(parseFetchedPost(postDependabot)),
+      latest_post: stringinator(parseFetchedPost(postDependabot)),
+      popular_post: stringinator(parseFetchedPost(postDependabot)),
     });
     assert.deepEqual(cleaned.latest_post, parseFetchedPost(postDependabot));
     assert.deepEqual(cleaned.popular_post, undefined);
@@ -135,6 +154,7 @@ describe('generateUserContent', () => {
       summary: testUser.summary,
       joined_at: testUser.joined_at,
       profile_image: testUser.profile_image,
+      a11y: content.a11yContent(testUser).a11y,
     });
   });
   it('Fetches and fails', async (t) => {
@@ -184,6 +204,7 @@ describe('generateUserContent', () => {
         ...postLatestUserDefined
       },
     }
+    expected.a11y = content.a11yContent(expected).a11y;
     const fn = t.mock.method(global,'fetch');
     const mockResUser = {
       json: () => generateMockResponse(testUser, 'users').response,
@@ -196,8 +217,8 @@ describe('generateUserContent', () => {
     
     const returned = await content.generateUserContent({
       username: testUser.username,
-      latest_post: stringify(postLatestUserDefined),
-      popular_post: stringify(postPopularUserDefined),
+      latest_post: stringinator(postLatestUserDefined),
+      popular_post: stringinator(postPopularUserDefined),
     }, true);
     assert.deepEqual(returned, expected);
   });
@@ -232,6 +253,7 @@ describe('generateUserContent', () => {
     fn.mock.mockImplementationOnce(async () => mockResPosts, 1)
     
     const returned = await content.generateUserContent({username: testUser.username}, 'no-posts');
+    expected.a11y = content.a11yContent(returned).a11y;
     assert.deepEqual(returned, expected);
   });
 });

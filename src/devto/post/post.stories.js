@@ -3,8 +3,7 @@ import { generateMockResponse } from '../helpers/testing';
 import { parseFetchedPost } from './content';
 import { default as postDependabot } from '../fixtures/generated/post--dependabot.json';
 import { default as postProfileComponents } from '../fixtures/generated/post--profile-components.json';
-
-import { getElements, ensureElements } from './post.shared-spec';
+import { getElements, ensureElements, ensureScreenRead } from './post.shared-spec';
 
 import './index.js';
 
@@ -18,7 +17,7 @@ export default {
     return `
       <devto-post ${attributes}></devto-post>
     `;
-  }
+  },
 };
 
 
@@ -29,6 +28,7 @@ export const Post = {
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
     await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
   }
 }
 
@@ -49,6 +49,7 @@ export const Fetch = {
       ...args,
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
@@ -70,6 +71,7 @@ export const FetchOverides = {
       ...args,
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
@@ -90,5 +92,6 @@ export const FetchError = {
       error: `Fetch Error: Post "${args.id}" not found`,
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }

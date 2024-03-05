@@ -21,17 +21,17 @@ function html(content) {
     
     return `
       <section aria-label="GitHub user profile" itemscope itemtype="http://schema.org/Person">
-        <header>
-          <span><span itemprop="memberOf">GitHub</span> user</span> 
-          <span itemprop="alternativeName">${content.login}</span>
+        <header aria-label="${content.a11y.headerLabel}">
+          <span itemprop="memberOf" aria-hidden="true">GitHub</span>
+          <span itemprop="alternativeName" aria-hidden="true">${content.login}</span>
         </header>
         <div part="main">
           <address>
-            <a href="https://github.com/${content.login}" aria-label="View @${content.login}'s profile on GitHub" itemprop="url">
+            <a href="https://github.com/${content.login}" aria-label="${content.name || content.login}'s profile on GitHub" itemprop="url">
               <span class="avatar" itemprop="image">
-                <img src="${content.avatar_url}" alt="Avatar for ${content.name | content.login}" loading="lazy" />
+                <img src="${content.avatar_url}" alt="Avatar for ${content.name || content.login}" loading="lazy" />
               </span>
-              <span itemprop="creator">
+              <span itemprop="creator" aria-hidden="true">
                 <span itemprop="name">${content.name}</span>
                 <span itemprop="alternativeName">${content.login}</span>
               </span>
@@ -39,30 +39,30 @@ function html(content) {
           </address>
           ${content.bio ? `<p itemprop="description">${content.bio}</p>` : ''}
           ${content.following || content.followers ? `
-            <dl>
+            <dl aria-label="GitHub user stats">
             ${content.followers ? `
-              <span><dt>followers</dt>
-              <dd itemprop="followee">
-                <span aria-hidden="true">${intToString(content.followers)}</span>
+              <div aria-label="followers: ${content.followers}">
+              <dt aria-hidden="true">followers</dt>
+              <dd itemprop="followee" aria-hidden="true">
+                <span>${intToString(content.followers)}</span>
                 <span class="sr-only">${content.followers}</span>
-              </dd></span>
+              </dd></div>
             ` : ''}
             ${content.following ? `
-              <span><dt>following</dt>
-              <dd itemprop="follows">
-                <span aria-hidden="true">${intToString(content.following)}</span>
+              <div aria-label="following: ${content.following}">
+              <dt aria-hidden="true">following</dt>
+              <dd itemprop="follows" aria-hidden="true">
+                <span>${intToString(content.following)}</span>
                 <span class="sr-only">${content.following}</span>
-              </dd></span>
+              </dd></div>
             ` : ''}
             </dl>
           ` : ''}
           ${Array.isArray(content.repositories) && content.repositories?.length ? `
-            <dl>
-              <dt>Pinned repositories</dt>
-              ${content.repositories.map((repo) => `
-                <dd>${repositoryHTML(repo)}</dd>
-              `).join('')}
-            </dl>
+            <header aria-label="Pinned repositories">Pinned repositories</header>
+            ${content.repositories.map((repo) => `
+              ${repositoryHTML(repo)}
+            `).join('')}
           ` : ''}
         </div>
       </section>

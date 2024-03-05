@@ -1,7 +1,12 @@
 
 import { expect } from '@storybook/jest';
 import { within as shadowWithin } from 'shadow-dom-testing-library';
+import { virtual } from '@guidepup/virtual-screen-reader';
+
+import { a11yContent } from './content.js';
+import { getExpectedScreenText as getPostScreenText } from '../post/post.shared-spec';
 import { formatDate } from "../helpers";
+import { spokenDLItem } from '../../utils/testing.js';
 
 /**
  * Extract elements from an shadow DOM element
@@ -14,15 +19,15 @@ export const getElements = async (canvasElement) => {
   let latest_post = null;
   let popular_post = null;
   let postList = null;
-  const terms = await screen.queryAllByShadowRole('term');
-  if (terms.length) {
-    postList = terms[0].parentElement;
-    terms.forEach((term) => {
-      if (term.textContent === 'Latest post') {
-        latest_post = term.nextElementSibling;
+  const banners = await screen.queryAllByShadowRole('banner');
+  if (banners.length > 1) {
+    postList = banners[1].parentElement;
+    banners.forEach((banner) => {
+      if (banner.textContent === 'Latest post') {
+        latest_post = banner.nextElementSibling;
       }
-      if (term.textContent === 'Popular post') {
-        popular_post = term.nextElementSibling;
+      if (banner.textContent === 'Popular post') {
+        popular_post = banner.nextElementSibling;
       }
     });
   }
@@ -92,4 +97,77 @@ export const ensureElements = async (elements, args) => {
   } else {
     await expect(elements.popular_post).not.toBeInTheDocument();
   }
+}
+
+/**
+ * Extract the expected screen reader spoken output
+ * @param {ForemUser} args - a content object representing a DEV user
+ * @returns {string[]} - array of strings representing the expected screen reader output
+ */
+export const getExpectedScreenText = (args) => {
+  const { a11y } = a11yContent(args);
+  const expected = ['region, dev.to user profile'];
+
+  // uses `spokenDLItem` to create dt/dd spoken pairs
+  const dlItem = new spokenDLItem(expected);
+
+  if (args.error) {
+    expected.push(args.error);
+  } else {
+    expected.push(`banner, ${a11y.headerLabel}`);
+    expected.push(`link, ${args.name || args.username}'s profile on dev.to`);
+    expected.push(`img, Avatar for ${args.name || args.username}`);
+    expected.push(`end of link, ${args.name || args.username}'s profile on dev.to`);
+    expected.push(`end of banner, ${a11y.headerLabel}`);
+    
+
+    if (args.summary) {
+      expected.push(args.summary.replace(/[\r\n]+/gm, ''))
+    }
+    if (args.joined_at) {
+      expected.push('Joined on');
+      expected.push(args.joined_at);
+    }
+    if (args.post_count) {
+      expected.push(`${args.post_count} posts published`);
+    }
+    if (args.latest_post) {
+      expected.push('banner, Latest post');
+      const postExpected1 = getPostScreenText(args.latest_post);
+      expected.push(...postExpected1);
+    }
+    if (args.popular_post) {
+      expected.push('banner, Popular post');
+      const postExpected2 = getPostScreenText(args.popular_post);
+      expected.push(...postExpected2);
+    }
+
+    // <footer>
+    expected.push('contentinfo');
+
+    expected.push(`link, View Profile on dev.to`);
+    expected.push('end of contentinfo');
+  }
+
+  expected.push('end of region, dev.to user profile');
+  return expected;
+}
+
+/**
+ * Ensure the screen reader reads the correct content
+ */
+export const ensureScreenRead = async (elements, args) => {
+  const expected = getExpectedScreenText(args);
+  
+  // Start virtual screen reader
+  await virtual.start({ container: elements.container });
+  while ((await virtual.lastSpokenPhrase()) !== expected[expected.length - 1]) {
+    await virtual.next();
+  }
+
+  // Compare spoken phrases to expected
+  expect(await virtual.spokenPhraseLog()).toEqual(expected);
+  
+  // Stop virtual screen reader
+  await virtual.stop();
 }

@@ -25,6 +25,7 @@ const blankPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1
  * @property {string} [following] - number of people user is following
  * @property {string} [followers] - number of followers
  * @property {string} [error] - error message, if any
+ * @property {Object} [a11y] - accessibility content
  * @property {Array<GitHubRepositoryHTML>} [repositories] - array of repositories
  */
 
@@ -62,6 +63,7 @@ export const parseFetchedUser = (user = {}) => {
     bio: user.bio,
     following: user.following,
     followers: user.followers,
+    a11y: user.a11y || {},
   }
 }
 
@@ -136,6 +138,18 @@ export const cleanUserContent = (content = {}) => {
   return c;
 };
 
+export const a11yContent = (content) => {
+  let headerLabel = `GitHub user ${content.login}`;
+  if (content.name) {
+    headerLabel = headerLabel.replace(content.login, `${content.name}, username ${content.login}`);
+  }
+  content.a11y = {
+    ...content.a11y,
+    headerLabel,
+  }
+  return content;
+}
+
 /**
  * Generates an object of content for the repository HTML
  * @param {GitHubUserHTML} content 
@@ -171,6 +185,6 @@ export const generateUserContent = async (content, fetch = false) => {
     }
     userFromContent.repositories = Array.from(repos);
   }
-  return Object.assign({}, fetched, userFromContent);
+  return a11yContent(Object.assign({}, fetched, userFromContent));
 }
   

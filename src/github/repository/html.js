@@ -12,18 +12,18 @@ import { intToString } from '../../utils/index.js';
 function html(content) {
   if (content.error) {
     return `
-      <div aria-label="GitHub repository" class="repo" itemscope itemtype="http://schema.org/Action">
+      <section aria-label="GitHub repository" class="repo" itemscope itemtype="http://schema.org/Action">
         <p itemprop="error">${content.error}</p>
-      </div>
+      </section>
     `
   }
   return `
-    <div aria-label="GitHub repository" class="repo" itemscope itemtype="http://schema.org/SoftwareSourceCode">
-      <a href="https://github.com/${content.full_name}" itemprop="codeRepository">
+    <section aria-label="GitHub repository" class="repo" itemscope itemtype="http://schema.org/SoftwareSourceCode">
+      <a href="https://github.com/${content.full_name}" itemprop="codeRepository" aria-label="${content.full_name} repository on GitHub">
         ${content.org ? `
-          <span itemprop="maintainer">${content.org} /</span>
+          <span itemprop="maintainer" aria-hidden="true">${content.org} /</span>
         ` : ''}
-        <span itemprop="name">${content.name}</span>
+        <span itemprop="name" aria-hidden="true">${content.name}</span>
       </a>
       ${content.description ? `
         <p itemprop="about">${content.description}</p>
@@ -46,7 +46,7 @@ function html(content) {
           <dd><span aria-hidden="true">${intToString(content.forks_count)}</span><span class="sr-only">${content.forks_count}</span></dd>
         ` : ''}
       </dl>
-    </div>
+    </section>
   `;
 }
 

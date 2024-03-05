@@ -2,22 +2,23 @@ import { repoProfileComponents, repoStorydocker, userScottnath, userSindresorhus
 import { generateMockResponse } from '../helpers/testing';
 import { parseFetchedUser } from './content';
 import { parseFetchedRepo } from '../repository/content.js';
-import { getElements, ensureElements } from './user.shared-spec';
+import { getElements, ensureElements, ensureScreenRead } from './user.shared-spec';
 import { primerThemes } from '../../../.storybook/primer-preview.js';
+import { within as shadowWithin } from 'shadow-dom-testing-library';
 
-import '.';
+import './index.js';
 
 export default {
   title: 'GitHub/github-user',
   component: 'github-user',
   tags: ['autodocs'],
   render: (args) => {
-    const attributes = attrGen(args);
+    const attributes = attrGen({...args});
   
     return `
       <github-user ${attributes}></github-user>
     `;
-  }
+  },
 };
 
 export const User  = {
@@ -25,15 +26,20 @@ export const User  = {
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
     await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
   }
 }
 
 export const UserRepos = {
   args: {
-    ...User.args,
-    repos: stringify([{ ...parseFetchedRepo(repoProfileComponents), user_login: userScottnath.login }, parseFetchedRepo(repoStorydocker)]),
+    ...parseFetchedUser(userScottnath),
+    repos: stringinator([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]),
   },
-  play: User.play,
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
+  }
 }
 
 export const PopularUser  = {
@@ -62,10 +68,11 @@ export const Fetch = {
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
-      ...parseFetchedUser(userScottnath),
+      ...parseFetchedUser({...userScottnath}),
       ...args,
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 };
 
@@ -78,7 +85,7 @@ export const FetchOverides = {
     avatar_url: 'cat-square.jpeg',
     followers: "500000",
     following: "2980",
-    repos: stringify([{"full_name":"scottnath/profile-components","description":"Cool thing, does stuff","language":"HTML"}])
+    repos: stringinator([{"full_name":"scottnath/profile-components","description":"Cool thing, does stuff","language":"HTML"}])
   },
   parameters: {
     mockData: [
@@ -88,10 +95,11 @@ export const FetchOverides = {
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
-      ...parseFetchedUser(userScottnath),
+      ...parseFetchedUser({...userScottnath}),
       ...args,
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
@@ -99,20 +107,24 @@ export const ReposFetch = {
   args: {
     login: userScottnath.login,
     fetch: true,
-    repos: stringify([repoProfileComponents.name, repoStorydocker.full_name]),
+    repos: stringinator([repoProfileComponents.name, repoStorydocker.full_name]),
   },
   parameters: {
     mockData: [
       generateMockResponse(userScottnath, 'users'),
+      generateMockResponse(repoProfileComponents, 'repos'),
+      generateMockResponse(repoStorydocker, 'repos'),
     ]
   },
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
     const argsAfterFetch = {
-      ...parseFetchedUser(userScottnath),
+      ...parseFetchedUser({...userScottnath}),
       ...args,
+      repositories: [parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]
     };
     await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 

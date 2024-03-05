@@ -1,5 +1,9 @@
 import { expect } from '@storybook/jest';
 import { within as shadowWithin } from 'shadow-dom-testing-library';
+import { virtual } from '@guidepup/virtual-screen-reader';
+
+import { spokenDLItem } from '../../utils/testing.js';
+
 
 /**
  * Extract elements from an shadow DOM element
@@ -44,4 +48,44 @@ export const ensureElements = async (elements, args) => {
   await expect(elements.title).toHaveTextContent(args.title);
   await expect(elements.image).toBeTruthy();
   await expect(elements.image).toHaveAttribute('src', args.cover_image);
+}
+
+/**
+ * Extract the expected screen reader spoken output
+ * @param {ForemPostHTML} args - a content object representing a DEV post
+ * @returns {string[]} - array of strings representing the expected screen reader output
+ */
+export const getExpectedScreenText = (args) => {
+  const expected = ['dev.to article'];
+
+  // uses `spokenDLItem` to create dt/dd spoken pairs
+  const dlItem = new spokenDLItem(expected);
+
+  if (args.error) {
+    expected.push(args.error);
+  } else {
+    expected.push(`link, article ${args.title}`);
+    expected.push(`img, Cover image for article ${args.title}`);
+    expected.push(`end of link, article ${args.title}`);
+  }
+
+  return expected;
+}
+
+/**
+ * Ensure the screen reader reads the correct content
+ */
+export const ensureScreenRead = async (elements, args) => {
+  const expected = getExpectedScreenText(args);
+  // Start virtual screen reader
+  await virtual.start({ container: elements.container });
+  while ((await virtual.lastSpokenPhrase()) !== expected[expected.length - 1]) {
+    await virtual.next();
+  }
+
+  // Compare spoken phrases to expected
+  expect(await virtual.spokenPhraseLog()).toEqual(expected);
+  
+  // Stop virtual screen reader
+  await virtual.stop();
 }
