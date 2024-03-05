@@ -2,7 +2,7 @@ import { setCustomElementsManifest } from '@storybook/web-components';
 import customElements from '../custom-elements.json';
 import { globalTypesPrimer, decoratorsPrimer } from './primer-preview';
 import { viewports } from './viewports';
-import { stringify, stringinator, parseify } from '../src/utils';
+import { stringinator, parseify } from '../src/utils';
 import "./storybook.css";
 
 setCustomElementsManifest(customElements);
@@ -15,7 +15,6 @@ global.attrGen = (args) => Object.entries(args)
 .map(([key, value]) => `\n  ${key}="${value}"`)
 .join(' ');
 
-global.stringify = stringify;
 global.stringinator = stringinator;
 global.parseify = parseify;
 
@@ -40,9 +39,6 @@ const preview = {
           return code.replaceAll('&gt;', ">").replaceAll('&lt;', "<")
         }
       }
-    },
-    fetchMock: {
-      mocks: []
     }
   },
 };

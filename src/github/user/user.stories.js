@@ -79,13 +79,9 @@ export const Fetch = {
     fetch: true,
   },
   parameters: {
-    fetchMock: {
-      mocks: [
-        {
-          response: generateMockResponse(userScottnath, 'users'),
-        }
-      ]
-    }
+    mockData: [
+      response: generateMockResponse(userScottnath, 'users'),
+    ]
   },
   play: async ({ args, canvasElement, step }) => {
     const elements = await getElements(canvasElement);
@@ -132,19 +128,6 @@ export const ReposFetch = {
     repos: stringinator([repoProfileComponents.name, repoStorydocker.full_name]),
   },
   parameters: {
-    // fetchMock: {
-    //   mocks: [
-    //     {
-    //       response: generateMockResponse(userScottnath, 'users'),
-    //     },
-    //     {
-    //       response: generateMockResponse(repoProfileComponents, 'repos'),
-    //     },
-    //     {
-    //       response: generateMockResponse(repoStorydocker, 'repos'),
-    //     }
-    //   ]
-    // }
     mockData: [
       generateMockResponse(userScottnath, 'users'),
       generateMockResponse(repoProfileComponents, 'repos'),
