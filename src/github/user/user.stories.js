@@ -5,7 +5,7 @@ import { parseFetchedRepo } from '../repository/content.js';
 import { getElements, ensureElements, ensureScreenRead } from './user.shared-spec';
 import { primerThemes } from '../../../.storybook/primer-preview.js';
 import { within as shadowWithin } from 'shadow-dom-testing-library';
-import { stringinator } from '../../utils/index.js';
+// import { stringinator } from '../../utils/index.js';
 import './index.js';
 
 export default {
@@ -13,23 +13,21 @@ export default {
   component: 'github-user',
   tags: ['autodocs'],
   render: (args) => {
-    // console.log('args1', {...args})
-    // let repos;
-    // // console.log('args2!', JSON.stringify([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]).replace(/"/g, "||||"))
-    // if (args.repos) {
-    //   repos = args.repos;
-    //   delete args.repos2;
-    // }
+    let repos;
+    if (args.repos) {
+      repos = args.repos;
+      delete args.repos;
+    }
     let attributes = attrGen({...args});
     console.log('attributes', attributes)
-    // args.repos = repos;
-    // if (repos) {
-    //   console.log('repos', repos)
-    //   console.log('typeofrepos', typeof repos)
-    //   if (typeof repos !== 'string') repos = stringinator(repos);
-    //   console.log('repos>>2', repos)
-    //   attributes += `\nrepos="${repos}"`;
-    // }
+    args.repos = repos;
+    if (repos) {
+      console.log('repos', repos)
+      console.log('typeofrepos', typeof repos)
+      if (typeof repos !== 'string') repos = stringinator(repos);
+      console.log('repos>>2', repos)
+      attributes += `\nrepos="${repos}"`;
+    }
     console.log('ATTRIBUTES', attributes)
   
     return `

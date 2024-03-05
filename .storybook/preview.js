@@ -16,7 +16,7 @@ global.attrGen = (args) => Object.entries(args)
 .join(' ');
 
 global.stringify = stringify;
-// global.stringinator = stringinator;
+global.stringinator = stringinator;
 global.parseify = parseify;
 
 /** @type { import('@storybook/web-components').Preview } */
