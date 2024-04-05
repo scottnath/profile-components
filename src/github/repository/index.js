@@ -19,9 +19,9 @@ import { repository as styles } from '../styles/index.js';
  * @property {string} [stargazers_count] - number of stars
  * @property {string} [forks_count] - number of forks
  * @property {string} [subscribers_count] - number of watchers
- * @property {string} [itemprop] - Itemprop content to go with a containing component's itemscope
  * @property {string} [no_org] - Do not include the repo owner or organization
  * @property {string} [theme] - color theme for the component
+ * @property {string} [schema_itemprop] - schema.org itemprop content on main element
  * 
  * @example
  * <!-- import the web component -->
@@ -59,9 +59,6 @@ export class GitHubRepository extends HTMLElement {
     this.repo = await generateRepoContent(this.attrs, this.attrs.fetch, this.attrs.no_org);
     view += html(this.repo);
     this.shadowRoot.innerHTML = view;
-    if (this.attrs.itemprop) {
-      this.setAttribute('itemprop', this.attrs.itemprop);
-    }
     if (this.attrs.theme) {
       this.setAttribute('data-theme', this.attrs.theme);
     }

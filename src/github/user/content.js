@@ -27,6 +27,7 @@ const blankPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1
  * @property {string} [error] - error message, if any
  * @property {Object} [a11y] - accessibility content
  * @property {Array<GitHubRepositoryHTML>} [repositories] - array of repositories
+ * @property {string} [schema_itemprop] - schema.org itemprop content on main element
  */
 
 /**
@@ -64,6 +65,7 @@ export const parseFetchedUser = (user = {}) => {
     following: user.following,
     followers: user.followers,
     a11y: user.a11y || {},
+    schema_itemprop: user.schema_itemprop || '',
   }
 }
 
@@ -101,7 +103,7 @@ export const parseReposString = (reposStr, owner) => {
         no_org: true,
       };
     }
-    repo.itemprop = repo.itemprop || 'maintainer';
+    repo.schema_itemprop = repo.schema_itemprop || 'workExample';
     return repo;
   }).filter((repo) => repo !== undefined);
 }

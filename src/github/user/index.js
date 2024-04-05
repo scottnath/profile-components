@@ -20,6 +20,7 @@ import { styles } from '../styles/index.js';
  * @property {string} [followers] - number of followers
  * @property {string} [repos] - JSON stringified array of repositories
  * @property {string} [theme] - color theme for the component
+ * @property {string} [schema_itemprop] - schema.org itemprop content on main element
  * 
  * @example
  * <!-- import the web component -->

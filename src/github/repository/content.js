@@ -14,6 +14,7 @@ const githubApi = 'https://api.github.com';
  * @property {string} [forks_count] - number of forks
  * @property {string} [subscribers_count] - number of watchers
  * @property {string} [error] - error message, if any
+ * @property {string} [schema_itemprop] - schema.org itemprop content on main element
  * @memberof GitHubUtils.repo
  */
 
@@ -52,6 +53,7 @@ export const parseFetchedRepo = (repo = {}) => {
     stargazers_count: repo.stargazers_count,
     forks_count: repo.forks_count,
     subscribers_count: repo.subscribers_count,
+    schema_itemprop: repo.schema_itemprop || '',
   }
 }
 

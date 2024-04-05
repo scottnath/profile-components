@@ -62,7 +62,7 @@ export const fetchUser = async (username, id) => {
  * Parses a string, which should be a JSON stringified array of DEV post 
  *  objects
  * @param {string} postStr - String of ForemPost data
- * @returns {ForemPost} content for a post
+ * @returns {ForemPostHTML} content for a post
  * @function
  * @ignore
  */

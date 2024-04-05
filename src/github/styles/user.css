@@ -10,7 +10,7 @@ section[itemscope] {
   overflow-wrap: anywhere;
   overflow: hidden;
 }
-:host header:first-child {
+:host header:has([itemprop="publisher"]) {
   background-color: var(--bg-color-light);
   padding: var(--row-spacing);
 
@@ -18,7 +18,7 @@ section[itemscope] {
   gap: var(--svg-gap);
   height: calc(var(--logo-size) + var(--logo-outline-offset) * 2);
 
-  [itemprop="memberOf"] {
+  [itemprop="publisher"] {
     background-color: var(--color-normal);
     width: var(--logo-size);
     height: var(--logo-size);
@@ -48,14 +48,14 @@ section[itemscope] {
     }
   }
 
-  [itemprop="alternativeName"] {
+  [itemprop="additionalName"] {
     flex: 1 0 auto;
     color: var(--color-normal);
     font-weight: var(--font-weight-bold);
     padding-inline: var(--row-spacing);
   }
 }
-[part="main"] {
+[itemprop="mainEntity"] {
   padding: var(--row-spacing);
 
   [itemprop="url"] {
@@ -79,7 +79,7 @@ section[itemscope] {
       }
     }
 
-    [itemprop="creator"] {
+    :has([itemprop="additionalName"]) {
       color: var(--color-normal);
 
       & span {
@@ -92,7 +92,7 @@ section[itemscope] {
         font-weight: var(--font-weight-bold);
       }
 
-      [itemprop="alternativeName"] {
+      [itemprop="additionalName"] {
         color: var(--color-light);
         font-size: var(--font-size-bold);
         font-style: normal;
@@ -114,7 +114,7 @@ section[itemscope] {
           height: 26cqw;
         }
       }
-      [itemprop="creator"] {
+      :has([itemprop="additionalName"]) {
         flex: 1 0 70%;
         text-align: left;
       }
@@ -125,11 +125,10 @@ section[itemscope] {
     margin-bottom: var(--row-spacing);
   }
 
-  & dl:has([itemprop="follows"]),
-  & dl:has([itemprop="followee"]) {
+  & dl:has([itemprop="interactionStatistic"]) {
 
     &::before,
-    [itemprop="follows"]::before {
+    .follows::before {
       content: " ";
       display: inline-block;
       vertical-align: text-top;
@@ -159,13 +158,13 @@ section[itemscope] {
         flex: 0 0 auto;
       }
     }
-    [itemprop="follows"]::before {
+    .follows::before {
       margin-right: .3em;
     }
   }
   @container user (min-width: 300px) {
-    & dl:has([itemprop="followee"]) {
-      [itemprop="follows"]::before {
+    & dl:has(.followee) {
+      .follows::before {
         content: ' · ';
         margin-right: 0;
         -webkit-mask-image: none;
@@ -176,6 +175,9 @@ section[itemscope] {
       }
     }
   }
+}
+div:has(.repo) {
+  padding: var(--row-spacing);
   & dl:has(.repo) {
     margin-top: .5em;
     

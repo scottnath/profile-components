@@ -57,12 +57,8 @@ export const UserPosts = {
 export const Schema = {
   args: {
     ...UserPosts.args,
-    latest_post: stringinator({
-      ...parseFetchedPost(postDependabot)
-    }),
-    popular_post: stringinator({
-      ...parseFetchedPost(postBugfix)
-    }),
+    latest_post: stringinator(parseFetchedPost(postDependabot)),
+    popular_post: stringinator(parseFetchedPost(postBugfix)),
     schema_itemprop: 'owns'
   },
   play: async ({ args, canvasElement }) => {

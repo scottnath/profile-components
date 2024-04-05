@@ -11,7 +11,7 @@ import postHTML from "../post/html.js";
 function html(content) {
   if (content.error) {
     return `
-      <section aria-label="dev.to user profile" itemscope itemtype="http://schema.org/Action">
+      <section aria-label="dev.to user profile" itemscope itemtype="https://schema.org/Action">
         <p itemprop="error">${content.error}</p>
       </section>
     `
@@ -20,7 +20,7 @@ function html(content) {
   const itemprop = content.schema_itemprop !== '' ? `itemprop=${content.schema_itemprop}` : '';
 
   return `
-    <section aria-label="dev.to user profile" ${itemprop} itemscope itemtype="http://schema.org/ProfilePage">
+    <section aria-label="dev.to user profile" ${itemprop} itemscope itemtype="https://schema.org/ProfilePage">
       <header aria-label="${content.a11y.headerLabel}">
         <span aria-hidden="true"><span itemprop="publisher">dev.to</span></span>
         <address>
