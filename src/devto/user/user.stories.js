@@ -58,12 +58,10 @@ export const Schema = {
   args: {
     ...UserPosts.args,
     latest_post: stringinator({
-      ...parseFetchedPost(postDependabot),
-      schema_itemprop: 'exampleOfWork'
+      ...parseFetchedPost(postDependabot)
     }),
     popular_post: stringinator({
-      ...parseFetchedPost(postBugfix),
-      schema_itemprop: 'exampleOfWork'
+      ...parseFetchedPost(postBugfix)
     }),
     schema_itemprop: 'owns'
   },

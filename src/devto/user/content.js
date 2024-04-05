@@ -75,6 +75,7 @@ export const parsePostString = (postStr) => {
     console.error(error);
     return {};
   }
+  post.schema_itemprop = post.schema_itemprop || 'exampleOfWork'
   return post;
 }
 
