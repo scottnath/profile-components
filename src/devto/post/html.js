@@ -15,8 +15,10 @@ function html(content) {
     `
   }
 
+  const itemprop = content.schema_itemprop !== '' ? `itemprop=${content.schema_itemprop}` : '';
+
   return `
-    <span aria-label="dev.to article" class="post" itemscope itemtype="http://schema.org/Article">
+    <span aria-label="dev.to article" class="post" ${itemprop} itemscope itemtype="http://schema.org/Article">
       <a href="${content.url}" itemprop="url" aria-label="article ${content.title}">
         <img src="${content.cover_image}" itemprop="image" alt="Cover image for article ${content.title}" />
         <span itemprop="name" aria-hidden="true">${content.title}</span>

@@ -31,6 +31,7 @@ const blankPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1
  * @property {ForemPostHTML} [latest_post] - User's latest post
  * @property {ForemPostHTML} [popular_post] - User's most popular post
  * @property {Object} [a11y] - accessibility content
+ * @property {string} [schema_itemprop] - schema.org itemprop content on main element
  * @memberof DEVUtils.user
  */
 
@@ -100,6 +101,7 @@ export const parseFetchedUser = (user = {}) => {
     latest_post: parsePostString(user.latest_post),
     popular_post: parsePostString(user.popular_post),
     a11y: user.a11y || {},
+    schema_itemprop: user.schema_itemprop || '',
   }
   const usr = {};
   // remove `undefined` values

@@ -1,4 +1,4 @@
-import { expect } from '@storybook/jest';
+import { expect } from '@storybook/test';
 import { within as shadowWithin } from 'shadow-dom-testing-library';
 import { virtual } from '@guidepup/virtual-screen-reader';
 

@@ -16,6 +16,7 @@ import { styles } from '../styles/index.js';
  * @property {string} cover_image - Post cover image URL
  * @property {string} social_image - Post social image URL
  * @property {boolean} [fetch] - when true, fetches post from the [Forem API](https://developers.forem.com/api/v0#tag/articles/operation/getArticleById)
+ * @property {string} [schema_itemprop] - schema.org itemprop content on main element
  * 
  * @example
  * <!-- import the web component -->

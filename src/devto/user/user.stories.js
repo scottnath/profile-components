@@ -54,6 +54,26 @@ export const UserPosts = {
   }
 }
 
+export const Schema = {
+  args: {
+    ...UserPosts.args,
+    latest_post: stringinator({
+      ...parseFetchedPost(postDependabot),
+      schema_itemprop: 'exampleOfWork'
+    }),
+    popular_post: stringinator({
+      ...parseFetchedPost(postBugfix),
+      schema_itemprop: 'exampleOfWork'
+    }),
+    schema_itemprop: 'owns'
+  },
+  play: async ({ args, canvasElement }) => {
+    const elements = await getElements(canvasElement);
+    await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
+  }
+}
+
 export const OnlyRequired = {
   args: {
     username: userScottnath.username,

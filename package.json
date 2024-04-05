@@ -47,19 +47,31 @@
     "@chromaui/addon-visual-tests": "^1.0.0",
     "@custom-elements-manifest/analyzer": "^0.9.3",
     "@custom-elements-manifest/to-markdown": "^0.1.0",
-    "@guidepup/virtual-screen-reader": "^0.21.0",
+    "@guidepup/virtual-screen-reader": "^0.23.0",
     "@primer/octicons": "^19.8.0",
-    "@primer/primitives": "^7.15.9",
+    "@primer/primitives": "^7.15.10",
     "commander": "^12.0.0",
     "esbuild": "^0.20.1",
     "esbuild-plugin-inline-import": "^1.0.4",
     "fs-extra": "^11.2.0",
     "jsdoc-to-markdown": "^8.0.1",
     "storybook-addon-fetch-mock": "^1.0.1",
-    "storydocker-storybook": "^0.0.22",
-    "storydocker-utilities": "^0.0.16",
+    "storydocker-storybook": "^0.0.23",
+    "storydocker-utilities": "^0.0.17",
     "vite-plugin-turbosnap": "^1.0.3",
-    "yaml": "^2.4.0"
+    "yaml": "^2.4.1"
   },
-  "customElements": "custom-elements.json"
+  "customElements": "custom-elements.json",
+  "overrides": {
+    "storybook-addon-fetch-mock": {
+      "@storybook/addons": "^8.0.0",
+      "@storybook/blocks": "^8.0.0",
+      "@storybook/channels": "^8.0.0",
+      "@storybook/components": "^8.0.0",
+      "@storybook/core-events": "^8.0.0",
+      "@storybook/manager-api": "^8.0.0",
+      "@storybook/theming": "^8.0.0",
+      "storybook": "^8.0.0"
+    }
+  }
 }
