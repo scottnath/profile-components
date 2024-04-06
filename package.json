@@ -57,7 +57,6 @@
     "jsdoc-to-markdown": "^8.0.1",
     "storydocker-storybook": "^0.0.24",
     "storydocker-utilities": "^0.0.18",
-    "vite-plugin-turbosnap": "^1.0.3",
     "yaml": "^2.4.1"
   }
 }
