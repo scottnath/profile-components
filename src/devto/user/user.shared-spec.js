@@ -6,7 +6,7 @@ import { virtual } from '@guidepup/virtual-screen-reader';
 import { a11yContent } from './content.js';
 import { getExpectedScreenText as getPostScreenText } from '../post/post.shared-spec';
 import { formatDate } from "../helpers";
-import { spokenDLItem } from '../../utils/testing.js';
+import { spokenDLItem, spokenItemWrapper } from '../../utils/testing.js';
 
 /**
  * Extract elements from an shadow DOM element
@@ -38,9 +38,9 @@ export const getElements = async (canvasElement) => {
     error: await container?.querySelector('[itemprop="error"]'),
     mainLink: mainLink !== undefined ? mainLink : null,
     avatar,
-    name: await mainLink?.querySelector('[itemprop="name"]'),
-    summary: await container?.querySelector('[itemprop="description"]'),
-    joined_at: await container?.querySelector('[itemprop="startDate"]'),
+    name: await mainLink?.querySelector('[itemprop="author"]'),
+    summary: await container?.querySelector('[itemprop="headline"]'),
+    joined_at: await container?.querySelector('[itemprop="dateCreated"]'),
     post_count: await container?.querySelector('.post_count'),
     postList,
     latest_post,
@@ -110,6 +110,7 @@ export const getExpectedScreenText = (args) => {
 
   // uses `spokenDLItem` to create dt/dd spoken pairs
   const dlItem = new spokenDLItem(expected);
+  const itemWrapper = new spokenItemWrapper(expected);
 
   if (args.error) {
     expected.push(args.error);
@@ -122,14 +123,16 @@ export const getExpectedScreenText = (args) => {
     
 
     if (args.summary) {
-      expected.push(args.summary.replace(/[\r\n]+/gm, ''))
+      itemWrapper.spoken(args.summary.replace(/[\r\n]+/gm, ''), 'paragraph')
     }
     if (args.joined_at) {
+      expected.push('paragraph');
       expected.push('Joined on');
-      expected.push(args.joined_at);
+      itemWrapper.spoken(args.joined_at, 'time')
+      expected.push('end of paragraph');
     }
     if (args.post_count) {
-      expected.push(`${args.post_count} posts published`);
+      itemWrapper.spoken(`${args.post_count} posts published`, 'paragraph');
     }
     if (args.latest_post) {
       expected.push('banner, Latest post');
@@ -145,7 +148,7 @@ export const getExpectedScreenText = (args) => {
     // <footer>
     expected.push('contentinfo');
 
-    expected.push(`link, View Profile on dev.to`);
+    itemWrapper.spoken(`link, View Profile on dev.to`, 'group')
     expected.push('end of contentinfo');
   }
 
@@ -160,7 +163,7 @@ export const ensureScreenRead = async (elements, args) => {
   const expected = getExpectedScreenText(args);
   
   // Start virtual screen reader
-  await virtual.start({ container: elements.container });
+  await virtual.start({ container: elements.container, window: elements.container.closest('window') });
   while ((await virtual.lastSpokenPhrase()) !== expected[expected.length - 1]) {
     await virtual.next();
   }

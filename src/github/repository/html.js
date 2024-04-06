@@ -53,7 +53,7 @@ function html(content) {
         ${content.forks_count ? `
           <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
             <dt data-detail="forks"><meta itemprop="interactionType" content="https://schema.org/CreateAction"><span class="sr-only" itemprop="location">Forks</span></dt>
-            <dd><span aria-hidden="true">${intToString(content.forks_count)}</  span><span class="sr-only" itemprop="userInteractionCount">${content.forks_count}</span></dd>
+            <dd><span aria-hidden="true">${intToString(content.forks_count)}</span><span class="sr-only" itemprop="userInteractionCount">${content.forks_count}</span></dd>
           </div>
         ` : ''}
       </dl>

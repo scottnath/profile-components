@@ -23,14 +23,12 @@ function html(content) {
     <section aria-label="dev.to user profile" ${itemprop} itemscope itemtype="https://schema.org/ProfilePage">
       <header aria-label="${content.a11y.headerLabel}">
         <span aria-hidden="true"><span itemprop="publisher">dev.to</span></span>
-        <address>
-          <a href="https://dev.to/${content.username}" aria-label="${content.name || content.username}'s profile on dev.to" itemprop="significantLink">
-            <span itemprop="thumbnail">
-              <img src="${content.profile_image}" alt="Avatar for ${content.name || content.username}" loading="lazy" />
-            </span>
-            <span itemprop="author" aria-hidden="true">${content.name}</span>
-          </a>
-        </address>
+        <a href="https://dev.to/${content.username}" aria-label="${content.name || content.username}'s profile on dev.to" itemprop="significantLink">
+          <span itemprop="thumbnail">
+            <img src="${content.profile_image}" alt="Avatar for ${content.name || content.username}" loading="lazy" />
+          </span>
+          <span itemprop="author" aria-hidden="true">${content.name}</span>
+        </a>
       </header>
       <div part="main">
         ${content.summary ? `<p itemprop="headline">${content.summary}</p>` : ''}

@@ -6,7 +6,7 @@ import { virtual } from '@guidepup/virtual-screen-reader';
 import { a11yContent } from './content.js';
 import { getExpectedScreenText as getRepoScreenText } from '../repository/repository.shared-spec';
 import { intToString } from '../../utils/index.js';
-import { spokenDLItem } from '../../utils/testing.js';
+import { spokenDLItem, spokenItemWrapper } from '../../utils/testing.js';
 
 /**
  * Extract elements from an shadow DOM element
@@ -14,7 +14,7 @@ import { spokenDLItem } from '../../utils/testing.js';
 export const getElements = async (canvasElement) => {
   const screen = shadowWithin(canvasElement);
   const container = await screen.findByShadowLabelText(/GitHub user profile/i);
-  const [headerName] = await container?.querySelectorAll('[itemprop="alternativeName"]');
+  const [headerName] = await container?.querySelectorAll('[itemprop="additionalName"]');
   const [mainLink] = await screen.queryAllByShadowRole('link');
   const [ avatar ] = await screen.queryAllByShadowRole('img');
   const [ bio ] = await container?.querySelectorAll('[itemprop="description"]');
@@ -27,10 +27,10 @@ export const getElements = async (canvasElement) => {
     mainLink,
     avatar,
     name: await mainLink?.querySelector('[itemprop="name"]'),
-    login: await mainLink?.querySelector('[itemprop="alternativeName"]'),
+    login: await mainLink?.querySelector('[itemprop="additionalName"]'),
     bio,
-    followers: await container?.querySelector('[itemprop="followee"]'),
-    following: await container?.querySelector('[itemprop="follows"]'),
+    followers: await container?.querySelector('.followee'),
+    following: await container?.querySelector('.follows'),
     repos: await Array.from(container?.querySelectorAll('[itemscope].repo')),
   };
 }
@@ -98,6 +98,7 @@ export const getExpectedScreenText = (args) => {
 
   // uses `spokenDLItem` to create dt/dd spoken pairs
   const dlItem = new spokenDLItem(expected);
+  const itemWrapper = new spokenItemWrapper(expected);
 
   if (args.error) {
     expected.push(args.error);
@@ -109,7 +110,7 @@ export const getExpectedScreenText = (args) => {
     
 
     if (args.bio) {
-      expected.push(args.bio)
+      itemWrapper.spoken(args.bio, 'paragraph')
     }
     if (args.followers || args.following) {
       expected.push('GitHub user stats');

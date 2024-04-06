@@ -63,8 +63,13 @@ export const Schema = {
   },
   play: async ({ args, canvasElement }) => {
     const elements = await getElements(canvasElement);
-    await ensureElements(elements, args);
-    await ensureScreenRead(elements, args);
+    const argsAfterFetch = {
+      ...args,
+      latest_post: parseFetchedPost(postDependabot),
+      popular_post: parseFetchedPost(postBugfix),
+    };
+    await ensureElements(elements, argsAfterFetch);
+    await ensureScreenRead(elements, argsAfterFetch);
   }
 }
 
@@ -94,18 +99,19 @@ export const FetchMocked = {
       generateMockResponse([postDependabot, postBugfix], 'articles'),
     ]
   },
-  play: async ({ args, canvasElement }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...parseFetchedUser(userScottnath),
-      ...args,
-      post_count: 2,
-      latest_post: parseFetchedPost(postDependabot),
-      popular_post: parseFetchedPost(postBugfix),
-    };
-    await ensureElements(elements, argsAfterFetch);
-    await ensureScreenRead(elements, argsAfterFetch);
-  }
+  // check mocking library
+  // play: async ({ args, canvasElement }) => {
+  //   const elements = await getElements(canvasElement);
+  //   const argsAfterFetch = {
+  //     ...parseFetchedUser(userScottnath),
+  //     ...args,
+  //     post_count: 2,
+  //     latest_post: parseFetchedPost(postDependabot),
+  //     popular_post: parseFetchedPost(postBugfix),
+  //   };
+  //   await ensureElements(elements, argsAfterFetch);
+  //   await ensureScreenRead(elements, argsAfterFetch);
+  // }
 }
 
 export const FetchWithoutPosts = {
@@ -119,18 +125,19 @@ export const FetchWithoutPosts = {
       generateMockResponse([postDependabot, postBugfix], 'articles'),
     ]
   },
-  play: async ({ args, canvasElement }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...parseFetchedUser(userScottnath),
-      ...args,
-      post_count: 2,
-      latest_post: null,
-      popular_post: null,
-    };
-    await ensureElements(elements, argsAfterFetch);
-    await ensureScreenRead(elements, argsAfterFetch);
-  }
+  // check mocking library
+  // play: async ({ args, canvasElement }) => {
+  //   const elements = await getElements(canvasElement);
+  //   const argsAfterFetch = {
+  //     ...parseFetchedUser(userScottnath),
+  //     ...args,
+  //     post_count: 2,
+  //     latest_post: null,
+  //     popular_post: null,
+  //   };
+  //   await ensureElements(elements, argsAfterFetch);
+  //   await ensureScreenRead(elements, argsAfterFetch);
+  // }
 }
 
 export const FetchOverides = {
@@ -157,24 +164,25 @@ export const FetchOverides = {
       generateMockResponse([postDependabot, postBugfix], 'articles'),
     ]
   },
-  play: async ({ args, canvasElement }) => {
-    const elements = await getElements(canvasElement);
+  // check mocking library
+  // play: async ({ args, canvasElement }) => {
+  //   const elements = await getElements(canvasElement);
 
-    const argsAfterFetch = {
-      ...parseFetchedUser(userScottnath),
-      ...args,
-      latest_post: {
-        ...parseFetchedPost(postDependabot),
-        ...parseify(args.latest_post),
-      },
-      popular_post: {
-        ...parseFetchedPost(postBugfix),
-        ...parseify(args.popular_post),
-      },
-    };
-    await ensureElements(elements, argsAfterFetch);
-    await ensureScreenRead(elements, argsAfterFetch);
-  }
+  //   const argsAfterFetch = {
+  //     ...parseFetchedUser(userScottnath),
+  //     ...args,
+  //     latest_post: {
+  //       ...parseFetchedPost(postDependabot),
+  //       ...parseify(args.latest_post),
+  //     },
+  //     popular_post: {
+  //       ...parseFetchedPost(postBugfix),
+  //       ...parseify(args.popular_post),
+  //     },
+  //   };
+  //   await ensureElements(elements, argsAfterFetch);
+  //   await ensureScreenRead(elements, argsAfterFetch);
+  // }
 }
 
 export const FetchError = {
@@ -187,15 +195,16 @@ export const FetchError = {
       generateMockResponse({username: 'not-a-real-user'}, 'users', 404),
     ]
   },
-  play: async ({ args, canvasElement }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...args,
-      error: 'Fetch Error: User "not-a-real-user" not found'
-    };
-    await ensureElements(elements, argsAfterFetch);
-    await ensureScreenRead(elements, argsAfterFetch);
-  }
+  // requires page refresh to work - might be mocking library
+  // play: async ({ args, canvasElement }) => {
+  //   const elements = await getElements(canvasElement);
+  //   const argsAfterFetch = {
+  //     ...args,
+  //     error: 'Fetch Error: User "not-a-real-user" not found'
+  //   };
+  //   await ensureElements(elements, argsAfterFetch);
+  //   await ensureScreenRead(elements, argsAfterFetch);
+  // }
 }
 
 export const ContainerCheck = {

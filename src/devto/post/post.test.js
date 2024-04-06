@@ -77,6 +77,7 @@ describe('parseFetchedPost', () => {
       url: testPost.url,
       cover_image: testPost.cover_image,
       social_image: testPost.social_image,
+      schema_itemprop: testPost.schema_itemprop || '',
     });
   })
 })
@@ -88,6 +89,7 @@ describe('cleanPostContent', () => {
       url: testPost.url,
       cover_image: testPost.cover_image,
       social_image: testPost.social_image,
+      schema_itemprop: testPost.schema_itemprop || '',
     });
   })
   it('Error on missing content', () => {
@@ -110,6 +112,7 @@ describe('generatePostContent', () => {
       url: testPost.url,
       cover_image: testPost.cover_image,
       social_image: testPost.social_image,
+      schema_itemprop: testPost.schema_itemprop || '',
     });
   });
   it('Errors before fetch on missing content', async () => {
@@ -137,6 +140,7 @@ describe('generatePostContent', () => {
       url: testPost.url,
       cover_image: testPost.cover_image,
       social_image: testPost.social_image,
+      schema_itemprop: testPost.schema_itemprop || '',
     }
     const fn = t.mock.method(global, 'fetch');
     const mockRes = {

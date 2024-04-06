@@ -10,7 +10,7 @@ function html(content) {
   if (content.error) {
     return `
       <div aria-label="dev.to article" class="post" itemscope itemtype="https://schema.org/Action">
-        <p itemprop="error">${content.error}</p>
+        <span itemprop="error">${content.error}</span>
       </div>
     `
   }

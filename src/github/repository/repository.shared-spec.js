@@ -2,7 +2,7 @@ import { expect } from '@storybook/test';
 import { within as shadowWithin } from 'shadow-dom-testing-library';
 import { virtual } from '@guidepup/virtual-screen-reader';
 
-import { spokenDLItem } from '../../utils/testing.js';
+import { spokenDLItem, spokenItemWrapper } from '../../utils/testing.js';
 
 /**
  * Extract elements from an shadow DOM element
@@ -21,7 +21,7 @@ export const getElements = async (canvasElement) => {
     error: await container?.querySelector('[itemprop="error"]'),
     org: await container?.querySelector('[itemprop="maintainer"]'),
     name: await container?.querySelector('[itemprop="name"]'),
-    description: await container?.querySelector('[itemprop="about"]'),
+    description: await container?.querySelector('[itemprop="description"]'),
     langDetails,
     langTerm,
   };
@@ -90,14 +90,15 @@ export const getExpectedScreenText = (args) => {
 
   // uses `spokenDLItem` to create dt/dd spoken pairs
   const dlItem = new spokenDLItem(expected);
+  const itemWrapper = new spokenItemWrapper(expected);
 
   if (args.error) {
-    expected.push(args.error);
+    itemWrapper.spoken(args.error, 'paragraph')
   } else {
     expected.push(`link, ${args.full_name} repository on GitHub`);
 
     if (args.description) {
-      expected.push(args.description)
+      itemWrapper.spoken(args.description, 'paragraph')
     }
     // start of description list
     expected.push('Repository details');

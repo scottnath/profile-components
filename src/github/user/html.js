@@ -29,17 +29,15 @@ function html(content) {
         </header>
         <meta itemprop="significantLink" content="https://github.com/${content.login}">
         <div part="main" itemprop="mainEntity" itemscope itemtype="https://schema.org/Person">
-          <address>
-            <a href="https://github.com/${content.login}" itemprop="url" aria-label="${content.name || content.login}'s profile on GitHub">
-              <span class="avatar" itemprop="image">
-                <img src="${content.avatar_url}" alt="Avatar for ${content.name || content.login}" loading="lazy" />
-              </span>
-              <span aria-hidden="true">
-                <span itemprop="name">${content.name}</span>
-                <span itemprop="additionalName">${content.login}</span>
-              </span>
-            </a>
-          </address>
+          <a href="https://github.com/${content.login}" itemprop="url" aria-label="${content.name || content.login}'s profile on GitHub">
+            <span class="avatar" itemprop="image">
+              <img src="${content.avatar_url}" alt="Avatar for ${content.name || content.login}" loading="lazy" />
+            </span>
+            <span aria-hidden="true">
+              <span itemprop="name">${content.name}</span>
+              <span itemprop="additionalName">${content.login}</span>
+            </span>
+          </a>
           ${content.bio ? `<p itemprop="description">${content.bio}</p>` : ''}
           ${content.following || content.followers ? `
             <dl aria-label="GitHub user stats">
