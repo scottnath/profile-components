@@ -46,7 +46,7 @@ section[itemscope] {
       background-color: var(--color-profile);
       height: var(--heading-height);
     }
-    span:has([itemprop="memberOf"]) {
+    span:has([itemprop="publisher"]) {
       display: inline-block;
       background: var(--svg-dev-logo) no-repeat white;
       background-position: center -2px;
@@ -68,7 +68,7 @@ section[itemscope] {
       }
     }
 
-    [itemprop="url"] {
+    [itemprop="significantLink"] {
       margin-top: -1em;
       display: flex;
       flex-direction: column;
@@ -76,7 +76,7 @@ section[itemscope] {
       text-align: center;
       color: var(--color-bold);
 
-      [itemprop="image"] {
+      [itemprop="thumbnail"] {
         display: inline-block;
         width: 100%;
         overflow: hidden;
@@ -99,7 +99,7 @@ section[itemscope] {
         }
       }
 
-      [itemprop="name"] {
+      [itemprop="author"] {
         display: inline-block;
         width: 100%;
         font-size: var(--font-size-title);
@@ -112,13 +112,13 @@ section[itemscope] {
     }
 
     @container user (min-width: 400px) {
-      [itemprop="url"] {
+      [itemprop="significantLink"] {
         display: flex;
         flex-direction: row;
         column-gap: .25em;
         text-align: left;
 
-        [itemprop="image"] {
+        [itemprop="thumbnail"] {
           width: auto;
           flex: 1 0 4em;
           text-align: center;
@@ -130,7 +130,7 @@ section[itemscope] {
           }
         }
 
-        [itemprop="name"] {
+        [itemprop="author"] {
           flex: 1 1 70%;
           width: auto;
           margin-top: 1.25em;
@@ -196,7 +196,7 @@ section[itemscope] {
   & footer {
     padding: var(--row-spacing) var(--side-spacing);
 
-    [itemprop="url"] {
+    [itemprop="significantLink"] {
       border: 1px solid;
       outline: 0;
       text-align: center;

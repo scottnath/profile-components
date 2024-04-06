@@ -68,6 +68,10 @@ export const generateFixtures = async () => {
     {
       id: 1631825,
       slug: 'profile-components-github',
+    },
+    {
+      id: 1777607,
+      slug: 'simple-screen-reader'
     }
   ];
   const users = [

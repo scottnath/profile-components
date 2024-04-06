@@ -31,6 +31,7 @@ const blankPng = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1
  * @property {ForemPostHTML} [latest_post] - User's latest post
  * @property {ForemPostHTML} [popular_post] - User's most popular post
  * @property {Object} [a11y] - accessibility content
+ * @property {string} [schema_itemprop] - schema.org itemprop content on main element
  * @memberof DEVUtils.user
  */
 
@@ -61,7 +62,7 @@ export const fetchUser = async (username, id) => {
  * Parses a string, which should be a JSON stringified array of DEV post 
  *  objects
  * @param {string} postStr - String of ForemPost data
- * @returns {ForemPost} content for a post
+ * @returns {ForemPostHTML} content for a post
  * @function
  * @ignore
  */
@@ -74,6 +75,7 @@ export const parsePostString = (postStr) => {
     console.error(error);
     return {};
   }
+  post.schema_itemprop = post.schema_itemprop || 'exampleOfWork'
   return post;
 }
 
@@ -100,6 +102,7 @@ export const parseFetchedUser = (user = {}) => {
     latest_post: parsePostString(user.latest_post),
     popular_post: parsePostString(user.popular_post),
     a11y: user.a11y || {},
+    schema_itemprop: user.schema_itemprop || '',
   }
   const usr = {};
   // remove `undefined` values

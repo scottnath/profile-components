@@ -78,8 +78,7 @@ address {
   white-space: nowrap;
 }
 
-section[itemscope],
-div[itemscope] {
+section[itemscope] {
   background-color: var(--bg-color-normal);
   border-color: var(--border-color);
   border-style: solid;

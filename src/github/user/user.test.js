@@ -50,6 +50,7 @@ describe('parseFetchedUser', () => {
       following: testUser.following,
       followers: testUser.followers,
       a11y: {},
+      schema_itemprop: testUser.schema_itemprop || '',
     });
   })
 });
@@ -161,6 +162,7 @@ describe('generateUserContent', () => {
       org: testRepo.organization.login,
       stargazers_count: testRepo.stargazers_count,
       subscribers_count: testRepo.subscribers_count,
+      schema_itemprop: 'exampleOfWork'
     }
     const testUser = {
       ...userSindresorhus,
@@ -168,6 +170,7 @@ describe('generateUserContent', () => {
       username: userSindresorhus.login,
       login: undefined,
       repos: stringinator([testRepo.full_name]),
+      schema_itemprop: '',
     };
     const expected = {
       login: userSindresorhus.login,
@@ -184,7 +187,7 @@ describe('generateUserContent', () => {
       json: () => generateMockResponse(testUser, 'users').response,
     };
     const mockResRepo = {
-      json: () => generateMockResponse(repoFreeCodeCamp, 'repos').response,
+      json: () => generateMockResponse({...repoFreeCodeCamp, schema_itemprop: 'exampleOfWork'}, 'repos').response,
     };
     fn.mock.mockImplementationOnce(async () => mockResUser, 0)
     fn.mock.mockImplementationOnce(async () => mockResRepo, 1)

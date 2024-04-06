@@ -63,7 +63,7 @@ describe('parseFetchedUser', () => {
       summary: testUser.summary,
       joined_at: testUser.joined_at,
       profile_image: testUser.profile_image,
-      a11y: {}
+      a11y: {},
     });
   })
   it('Should require a username', () => {
@@ -86,7 +86,7 @@ describe('parseFetchedUser', () => {
 describe('parsePostString', () => {
   it('Should parse a stringified post', () => {
     const testString = stringinator(postBugfix);
-    assert.deepEqual(content.parsePostString(testString), postBugfix);
+    assert.deepEqual(content.parsePostString(testString), {...postBugfix, schema_itemprop: 'exampleOfWork'});
   });
   it('Should fail gracefully', () => {
     assert.deepEqual(content.parsePostString(postBugfix), postBugfix);
@@ -126,8 +126,8 @@ describe('cleanUserContent', () => {
       latest_post: stringinator(parseFetchedPost(postBugfix)),
       popular_post: stringinator(parseFetchedPost(postDependabot)),
     });
-    assert.deepEqual(cleaned.latest_post, parseFetchedPost(postBugfix));
-    assert.deepEqual(cleaned.popular_post, parseFetchedPost(postDependabot));
+    assert.deepEqual(cleaned.latest_post, parseFetchedPost({...postBugfix, schema_itemprop: 'exampleOfWork'}));
+    assert.deepEqual(cleaned.popular_post, parseFetchedPost({...postDependabot, schema_itemprop: 'exampleOfWork'}));
   })
   it('Does not allow duplicate posts', () => {
     const cleaned = content.cleanUserContent({
@@ -135,7 +135,7 @@ describe('cleanUserContent', () => {
       latest_post: stringinator(parseFetchedPost(postDependabot)),
       popular_post: stringinator(parseFetchedPost(postDependabot)),
     });
-    assert.deepEqual(cleaned.latest_post, parseFetchedPost(postDependabot));
+    assert.deepEqual(cleaned.latest_post, parseFetchedPost({...postDependabot, schema_itemprop: 'exampleOfWork'}));
     assert.deepEqual(cleaned.popular_post, undefined);
   });
 });
@@ -197,11 +197,13 @@ describe('generateUserContent', () => {
       post_count: 2,
       popular_post: {
         ...parseFetchedPost(postPopular),
-        ...postPopularUserDefined
+        ...postPopularUserDefined,
+        schema_itemprop: 'exampleOfWork',
       },
       latest_post: {
         ...parseFetchedPost(postLatest),
-        ...postLatestUserDefined
+        ...postLatestUserDefined,
+        schema_itemprop: 'exampleOfWork',
       },
     }
     expected.a11y = content.a11yContent(expected).a11y;

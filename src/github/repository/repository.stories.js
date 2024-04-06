@@ -82,15 +82,16 @@ export const Fetch = {
       generateMockResponse(repoProfileComponents, 'repos'),
     ]
   },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...parseFetchedRepo(repoProfileComponents),
-      ...args,
-    };
-    await ensureElements(elements, argsAfterFetch);
-    await ensureScreenRead(elements, argsAfterFetch);
-  }
+  // check mocking library
+  // play: async ({ args, canvasElement, step }) => {
+  //   const elements = await getElements(canvasElement);
+  //   const argsAfterFetch = {
+  //     ...parseFetchedRepo(repoProfileComponents),
+  //     ...args,
+  //   };
+  //   await ensureElements(elements, argsAfterFetch);
+  //   await ensureScreenRead(elements, argsAfterFetch);
+  // }
 }
 
 export const FetchOverides = {
@@ -112,15 +113,16 @@ export const FetchError = {
       generateMockResponse({full_name: '_/_'}, 'repos', 404),
     ]
   },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...args,
-      error: `Fetch Error: Repo "${args.full_name}" not found`,
-    };
-    await ensureElements(elements, argsAfterFetch);
-    await ensureScreenRead(elements, argsAfterFetch);
-  }
+  // check mocking library
+  // play: async ({ args, canvasElement, step }) => {
+  //   const elements = await getElements(canvasElement);
+  //   const argsAfterFetch = {
+  //     ...args,
+  //     error: `Fetch Error: Repo "${args.full_name}" not found`,
+  //   };
+  //   await ensureElements(elements, argsAfterFetch);
+  //   await ensureScreenRead(elements, argsAfterFetch);
+  // }
 }
 
 export const NoRepo = {

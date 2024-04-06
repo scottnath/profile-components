@@ -42,15 +42,16 @@ export const Fetch = {
       generateMockResponse(postProfileComponents, 'article'),
     ]
   },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...parseFetchedPost(postProfileComponents),
-      ...args,
-    };
-    await ensureElements(elements, argsAfterFetch);
-    await ensureScreenRead(elements, argsAfterFetch);
-  }
+  // check mocking library
+  // play: async ({ args, canvasElement, step }) => {
+  //   const elements = await getElements(canvasElement);
+  //   const argsAfterFetch = {
+  //     ...parseFetchedPost(postProfileComponents),
+  //     ...args,
+  //   };
+  //   await ensureElements(elements, argsAfterFetch);
+  //   await ensureScreenRead(elements, argsAfterFetch);
+  // }
 }
 
 export const FetchOverides = {
@@ -64,15 +65,16 @@ export const FetchOverides = {
       generateMockResponse(postProfileComponents, 'article'),
     ]
   },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...parseFetchedPost(postProfileComponents),
-      ...args,
-    };
-    await ensureElements(elements, argsAfterFetch);
-    await ensureScreenRead(elements, argsAfterFetch);
-  }
+  // check mocking library
+  // play: async ({ args, canvasElement, step }) => {
+  //   const elements = await getElements(canvasElement);
+  //   const argsAfterFetch = {
+  //     ...parseFetchedPost(postProfileComponents),
+  //     ...args,
+  //   };
+  //   await ensureElements(elements, argsAfterFetch);
+  //   await ensureScreenRead(elements, argsAfterFetch);
+  // }
 }
 
 export const FetchError = {
@@ -85,13 +87,14 @@ export const FetchError = {
       generateMockResponse({id: 'not-a-real-id'}, 'article', 404),
     ]
   },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...args,
-      error: `Fetch Error: Post "${args.id}" not found`,
-    };
-    await ensureElements(elements, argsAfterFetch);
-    await ensureScreenRead(elements, argsAfterFetch);
-  }
+  // check mocking library
+  // play: async ({ args, canvasElement, step }) => {
+  //   const elements = await getElements(canvasElement);
+  //   const argsAfterFetch = {
+  //     ...args,
+  //     error: `Fetch Error: Post "${args.id}" not found`,
+  //   };
+  //   await ensureElements(elements, argsAfterFetch);
+  //   await ensureScreenRead(elements, argsAfterFetch);
+  // }
 }

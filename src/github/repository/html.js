@@ -12,13 +12,16 @@ import { intToString } from '../../utils/index.js';
 function html(content) {
   if (content.error) {
     return `
-      <section aria-label="GitHub repository" class="repo" itemscope itemtype="http://schema.org/Action">
+      <section aria-label="GitHub repository" class="repo" itemscope itemtype="https://schema.org/Action">
         <p itemprop="error">${content.error}</p>
       </section>
     `
   }
+
+  const itemprop = content.schema_itemprop !== '' ? `itemprop=${content.schema_itemprop}` : '';
+
   return `
-    <section aria-label="GitHub repository" class="repo" itemscope itemtype="http://schema.org/SoftwareSourceCode">
+    <section aria-label="GitHub repository" class="repo" ${itemprop} itemscope itemtype="https://schema.org/SoftwareSourceCode">
       <a href="https://github.com/${content.full_name}" itemprop="codeRepository" aria-label="${content.full_name} repository on GitHub">
         ${content.org ? `
           <span itemprop="maintainer" aria-hidden="true">${content.org} /</span>
@@ -26,24 +29,32 @@ function html(content) {
         <span itemprop="name" aria-hidden="true">${content.name}</span>
       </a>
       ${content.description ? `
-        <p itemprop="about">${content.description}</p>
+        <p itemprop="description">${content.description}</p>
       ` : ''}
       <dl aria-label="Repository details">
         ${content.language ? `
-          <dt data-detail="language" data-language="${content.language}"><span class="sr-only">Language</span></dt>
-          <dd itemprop="programmingLanguage">${content.language}</dd>
+          <div>
+            <dt data-detail="language" data-language="${content.language}"><span class="sr-only">Language</span></dt>
+            <dd itemprop="programmingLanguage">${content.language}</dd>
+          </div>
         ` : ''}
         ${content.stargazers_count ? `
-          <dt data-detail="stars"><span class="sr-only">Stars</span></dt>
-          <dd><span aria-hidden="true">${intToString(content.stargazers_count)}</span><span class="sr-only">${content.stargazers_count}</span></dd>
+          <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
+            <dt data-detail="stars"><meta itemprop="interactionType" content="https://schema.org/LikeAction"><span class="sr-only">Stars</span></dt>
+            <dd><span aria-hidden="true">${intToString(content.stargazers_count)} </span><span class="sr-only" itemprop="userInteractionCount">${content.stargazers_count}</span></dd>
+          </div>
         ` : ''}
         ${content.subscribers_count ? `
-          <dt data-detail="watchers"><span class="sr-only">Watchers</span></dt>
-          <dd><span aria-hidden="true">${intToString(content.subscribers_count)}</span><span class="sr-only">${content.subscribers_count}</span></dd>
+          <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
+            <dt data-detail="watchers"><meta itemprop="interactionType" content="https://schema.org/FollowAction"><span class="sr-only">Watchers</span></dt>
+            <dd><span aria-hidden="true">${intToString(content.subscribers_count)}</span><span class="sr-only" itemprop="userInteractionCount">${content.subscribers_count}</span></dd>
+          </div>
         ` : ''}
         ${content.forks_count ? `
-          <dt data-detail="forks"><span class="sr-only">Forks</span></dt>
-          <dd><span aria-hidden="true">${intToString(content.forks_count)}</span><span class="sr-only">${content.forks_count}</span></dd>
+          <div itemprop="interactionStatistic" itemscope itemtype="https://schema.org/InteractionCounter">
+            <dt data-detail="forks"><meta itemprop="interactionType" content="https://schema.org/CreateAction"><span class="sr-only" itemprop="location">Forks</span></dt>
+            <dd><span aria-hidden="true">${intToString(content.forks_count)}</span><span class="sr-only" itemprop="userInteractionCount">${content.forks_count}</span></dd>
+          </div>
         ` : ''}
       </dl>
     </section>

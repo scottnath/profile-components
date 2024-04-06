@@ -49,6 +49,7 @@ describe('parseFetchedRepo', () => {
       org: testRepo.organization.login,
       stargazers_count: testRepo.stargazers_count,
       subscribers_count: testRepo.subscribers_count,
+      schema_itemprop: testRepo.schema_itemprop || '',
     });
   })
   it('Should know owner', () => {
@@ -62,6 +63,7 @@ describe('parseFetchedRepo', () => {
       org: testRepo.owner.login,
       stargazers_count: testRepo.stargazers_count,
       subscribers_count: testRepo.subscribers_count,
+      schema_itemprop: testRepo.schema_itemprop || '',
     });
   })
   it('Should allow using just org', () => {
@@ -76,6 +78,7 @@ describe('parseFetchedRepo', () => {
       org: 'meow',
       stargazers_count: testRepo.stargazers_count,
       subscribers_count: testRepo.subscribers_count,
+      schema_itemprop: testRepo.schema_itemprop || '',
     });
   })
 });

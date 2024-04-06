@@ -21,6 +21,8 @@ import { styles } from '../styles/index.js';
  * @property {string} [latest_post] - User's latest post content, JSON stringified 
  * @property {string} [popular_post] - User's most popular post content, JSON stringified 
  * @property {string} [theme] - color theme for the component
+ * @property {Object} [a11y] - accessibility content
+ * @property {string} [schema_itemprop] - schema.org itemprop content on main element
  * 
  * @example
  * <!-- import the web component -->

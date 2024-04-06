@@ -1,15 +1,5 @@
 /** styles for the GitHub repository web component */
 
-div[itemscope] {
-  padding: var(--row-spacing);
-}
-
-@container (min-width: 300px) {
-  div[itemscope] {
-    padding: calc(var(--row-spacing) * 2);
-  }
-}
-
 [itemprop="codeRepository"] {
   display: block;
 
@@ -37,7 +27,7 @@ div[itemscope] {
   }
 }
 
-[itemprop="about"] {
+[itemprop="description"] {
   margin-top: var(--row-spacing);
   color: var(--color-light);
 }
@@ -49,8 +39,13 @@ div[itemscope] {
   gap: var(--svg-gap);
   color: var(--color-light);
   margin-top: var(--row-spacing);
-
-  > dt {
+  div {
+    flex: 1 1 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--svg-gap);
+  }
+  dt {
     flex: 0 0 var(--svg-size);
     background-color: var(--color-light);
     -webkit-mask-repeat: no-repeat;
@@ -78,7 +73,7 @@ div[itemscope] {
       mask-image: var(--svg-repo-forked);
     }
   }
-  > dd {
+  dd {
     /* margin-right: 1em; */
     flex: 0 0 calc(100% - calc(var(--svg-size) + var(--svg-gap)));
 
@@ -88,13 +83,13 @@ div[itemscope] {
   }
 
   @container (min-width: 300px) {
-    > dd:not([itemprop="programmingLanguage"]) {
+    div:has(dd:not([itemprop="programmingLanguage"])) {
       flex: 1 0 auto;
     }
   }
 
   @container (min-width: 400px) {
-    > dd {
+    div {
       flex: 1 0 auto;
     }
   }

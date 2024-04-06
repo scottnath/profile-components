@@ -11,29 +11,29 @@ import postHTML from "../post/html.js";
 function html(content) {
   if (content.error) {
     return `
-      <section aria-label="dev.to user profile" itemscope itemtype="http://schema.org/Action">
+      <section aria-label="dev.to user profile" itemscope itemtype="https://schema.org/Action">
         <p itemprop="error">${content.error}</p>
       </section>
     `
   }
 
+  const itemprop = content.schema_itemprop !== '' ? `itemprop=${content.schema_itemprop}` : '';
+
   return `
-    <section aria-label="dev.to user profile" itemscope itemtype="http://schema.org/Person">
+    <section aria-label="dev.to user profile" ${itemprop} itemscope itemtype="https://schema.org/ProfilePage">
       <header aria-label="${content.a11y.headerLabel}">
-        <span aria-hidden="true"><span itemprop="memberOf">dev.to</span></span> 
-        <address>
-          <a href="https://dev.to/${content.username}" aria-label="${content.name || content.username}'s profile on dev.to" itemprop="url">
-            <span itemprop="image">
-              <img src="${content.profile_image}" alt="Avatar for ${content.name || content.username}" loading="lazy" />
-            </span>
-            <span itemprop="name" aria-hidden="true">${content.name}</span>
-          </a>
-        </address>
+        <span aria-hidden="true"><span itemprop="publisher">dev.to</span></span>
+        <a href="https://dev.to/${content.username}" aria-label="${content.name || content.username}'s profile on dev.to" itemprop="significantLink">
+          <span itemprop="thumbnail">
+            <img src="${content.profile_image}" alt="Avatar for ${content.name || content.username}" loading="lazy" />
+          </span>
+          <span itemprop="author" aria-hidden="true">${content.name}</span>
+        </a>
       </header>
       <div part="main">
-        ${content.summary ? `<p itemprop="description">${content.summary}</p>` : ''}
-        ${content.joined_at ? `<p>Joined on <time itemprop="startDate" datetime="${formatDate(content.joined_at)}">${content.joined_at}</time></p>` : ''}
-        ${content.post_count ? `<p class="post_count">${content.post_count} posts published</p>` : ''}
+        ${content.summary ? `<p itemprop="headline">${content.summary}</p>` : ''}
+        ${content.joined_at ? `<p>Joined on <time itemprop="dateCreated" datetime="${formatDate(content.joined_at)}">${content.joined_at}</time></p>` : ''}
+        ${content.post_count ? `<p class="post_count" itemprop="size">${content.post_count} posts published</p>` : ''}
         ${content.latest_post || content.popular_post ? `
           <div>
             ${content.latest_post ? `
@@ -49,7 +49,7 @@ function html(content) {
       </div>
       <footer>
         <address>
-          <a href="https://dev.to/${content.username}" part="cta branded" itemprop="url">View Profile on dev.to</a>
+          <a href="https://dev.to/${content.username}" part="cta branded" itemprop="significantLink">View Profile on dev.to</a>
         </address>
       </footer>
     </section>

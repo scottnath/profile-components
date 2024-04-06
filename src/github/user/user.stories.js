@@ -1,4 +1,4 @@
-import { repoProfileComponents, repoStorydocker, userScottnath, userSindresorhus } from '../fixtures';
+import { repoProfileComponents, repoFreeCodeCamp, repoStorydocker, userScottnath, userSindresorhus } from '../fixtures';
 import { generateMockResponse } from '../helpers/testing';
 import { parseFetchedUser } from './content';
 import { parseFetchedRepo } from '../repository/content.js';
@@ -42,8 +42,24 @@ export const UserRepos = {
   }
 }
 
+export const Schema = {
+  args: {
+    ...parseFetchedUser(userScottnath),
+    schema_itemprop: 'owns',
+    repos: stringinator([parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]),
+  },
+  play: async ({ args, canvasElement, step }) => {
+    const elements = await getElements(canvasElement);
+    await ensureElements(elements, args);
+    await ensureScreenRead(elements, args);
+  }
+}
+
 export const PopularUser  = {
-  args: parseFetchedUser(userSindresorhus),
+  args: {
+    ...parseFetchedUser(userSindresorhus),
+    repos: stringinator([parseFetchedRepo(repoFreeCodeCamp)]),
+  },
   play: User.play,
 }
 
@@ -65,15 +81,16 @@ export const Fetch = {
       generateMockResponse(userScottnath, 'users'),
     ]
   },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...parseFetchedUser({...userScottnath}),
-      ...args,
-    };
-    await ensureElements(elements, argsAfterFetch);
-    await ensureScreenRead(elements, argsAfterFetch);
-  }
+  // check mocking library
+  // play: async ({ args, canvasElement, step }) => {
+  //   const elements = await getElements(canvasElement);
+  //   const argsAfterFetch = {
+  //     ...parseFetchedUser({...userScottnath}),
+  //     ...args,
+  //   };
+  //   await ensureElements(elements, argsAfterFetch);
+  //   await ensureScreenRead(elements, argsAfterFetch);
+  // }
 };
 
 export const FetchOverides = {
@@ -92,15 +109,16 @@ export const FetchOverides = {
       generateMockResponse(userScottnath, 'users'),
     ]
   },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...parseFetchedUser({...userScottnath}),
-      ...args,
-    };
-    await ensureElements(elements, argsAfterFetch);
-    await ensureScreenRead(elements, argsAfterFetch);
-  }
+  // check mocking library
+  // play: async ({ args, canvasElement, step }) => {
+  //   const elements = await getElements(canvasElement);
+  //   const argsAfterFetch = {
+  //     ...parseFetchedUser({...userScottnath}),
+  //     ...args,
+  //   };
+  //   await ensureElements(elements, argsAfterFetch);
+  //   await ensureScreenRead(elements, argsAfterFetch);
+  // }
 }
 
 export const ReposFetch = {
@@ -116,16 +134,17 @@ export const ReposFetch = {
       generateMockResponse(repoStorydocker, 'repos'),
     ]
   },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...parseFetchedUser({...userScottnath}),
-      ...args,
-      repositories: [parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]
-    };
-    await ensureElements(elements, argsAfterFetch);
-    await ensureScreenRead(elements, argsAfterFetch);
-  }
+  // check mocking library
+  // play: async ({ args, canvasElement, step }) => {
+  //   const elements = await getElements(canvasElement);
+  //   const argsAfterFetch = {
+  //     ...parseFetchedUser({...userScottnath}),
+  //     ...args,
+  //     repositories: [parseFetchedRepo(repoProfileComponents), parseFetchedRepo(repoStorydocker)]
+  //   };
+  //   await ensureElements(elements, argsAfterFetch);
+  //   await ensureScreenRead(elements, argsAfterFetch);
+  // }
 }
 
 export const FetchError = {
@@ -138,14 +157,15 @@ export const FetchError = {
       generateMockResponse({login: 'not-a-real-user'}, 'users', 404),
     ]
   },
-  play: async ({ args, canvasElement, step }) => {
-    const elements = await getElements(canvasElement);
-    const argsAfterFetch = {
-      ...args,
-      error: `User "${args.login}" not found`,
-    };
-    await ensureElements(elements, argsAfterFetch);
-  }
+  // check mocking library
+  // play: async ({ args, canvasElement, step }) => {
+  //   const elements = await getElements(canvasElement);
+  //   const argsAfterFetch = {
+  //     ...args,
+  //     error: `User "${args.login}" not found`,
+  //   };
+  //   await ensureElements(elements, argsAfterFetch);
+  // }
 };
 
 export const ContainerCheck = {

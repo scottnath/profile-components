@@ -16,6 +16,7 @@ import { getApiUrl } from '../helpers/index.js';
  * Forem post content, ready for HTML
  * @typedef {ForemPost} ForemPostHTML
  * @property {string} [error] - An error message
+ * @property {string} [schema_itemprop] - schema.org itemprop content on main element
  * @memberof DEVUtils.post
  */
 
@@ -88,6 +89,7 @@ export const parseFetchedPost = (post = {}) => {
     url: post.url,
     cover_image: post.cover_image,
     social_image: post.social_image,
+    schema_itemprop: post.schema_itemprop || '',
   }
 }
 
