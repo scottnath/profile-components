@@ -15,7 +15,7 @@ function html(content) {
     `
   }
 
-  const itemprop = content.schema_itemprop !== '' ? `itemprop=${content.schema_itemprop}` : '';
+  const itemprop = content.schema_itemprop && content.schema_itemprop !== '' ? `itemprop=${content.schema_itemprop}` : '';
 
   return `
     <span aria-label="dev.to article" class="post" ${itemprop} itemscope itemtype="https://schema.org/Article">

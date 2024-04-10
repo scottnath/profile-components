@@ -18,7 +18,7 @@ function html(content) {
     `
   }
 
-  const itemprop = content.schema_itemprop !== '' ? `itemprop=${content.schema_itemprop}` : '';
+  const itemprop = content.schema_itemprop && content.schema_itemprop !== '' ? `itemprop=${content.schema_itemprop}` : '';
 
   return `
     <section aria-label="GitHub repository" class="repo" ${itemprop} itemscope itemtype="https://schema.org/SoftwareSourceCode">

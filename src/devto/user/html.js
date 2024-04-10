@@ -17,7 +17,7 @@ function html(content) {
     `
   }
 
-  const itemprop = content.schema_itemprop !== '' ? `itemprop=${content.schema_itemprop}` : '';
+  const itemprop = content.schema_itemprop && content.schema_itemprop !== '' ? `itemprop=${content.schema_itemprop}` : '';
 
   return `
     <section aria-label="dev.to user profile" ${itemprop} itemscope itemtype="https://schema.org/ProfilePage">
