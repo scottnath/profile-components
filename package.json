@@ -58,5 +58,6 @@
     "storydocker-storybook": "^0.0.24",
     "storydocker-utilities": "^0.0.18",
     "yaml": "^2.4.1"
-  }
+  },
+  "customElements": "custom-elements.json"
 }
